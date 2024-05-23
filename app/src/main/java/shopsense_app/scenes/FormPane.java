@@ -1,4 +1,4 @@
-package shopsense_app;
+package shopsense_app.scenes;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,35 +25,35 @@ public class FormPane {
 
     public void show(){
         Label label = new Label("Sustainability");
-        label.setFont(Font.font("Arial", FontWeight.BOLD, 50));
-        label.setTextFill(Color.LIGHTGREEN);
+        label.getStyleClass().add("depan");
+
         
         Label label2 = new Label("Plans");
-        label2.setFont(Font.font("Arial", FontWeight.BOLD, 50));
-        label2.setTextFill(Color.LIGHTGREEN);
+        label2.getStyleClass().add("depan");
+
 
         Label shopscene = new Label("ShopSense");
-        shopscene.setFont(Font.font("Arial", 15 ));
-        shopscene.setTextFill(Color.WHITE);
+        shopscene.getStyleClass().add("depan2");
         
         Label greet = new Label("Managing Sustainable Business Finance");
-        greet.setFont(Font.font("Arial", 15));
-        greet.setTextFill(Color.WHITE);
+        greet.getStyleClass().add("depan2");
 
         Button button = new Button("START");
-        button.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(10), null)));
-        button.setTextFill(Color.BLACK);
+        // button.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(10), null)));
+        // button.setTextFill(Color.BLACK);
+        button.getStyleClass().add("buton");
         button.setAlignment(Pos.CENTER);
         button.setPrefWidth(100);
         button.setOnAction(e -> {
-            dua adu = new dua(stage);
-            adu.show();
+            Menuisi menu = new Menuisi(stage);
+            menu.show();
         });
 
         Button buttonToStoreName = new Button("STORE NAME");
-        buttonToStoreName.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(10), null)));
-        buttonToStoreName.setTextFill(Color.BLACK);
-        buttonToStoreName.setAlignment(Pos.CENTER);
+        // buttonToStoreName.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(10), null)));
+        // buttonToStoreName.setTextFill(Color.BLACK);
+        // buttonToStoreName.setAlignment(Pos.CENTER);
+        buttonToStoreName.getStyleClass().add("buton");
         buttonToStoreName.setPrefWidth(100);
         buttonToStoreName.setOnAction(e -> {
             StoreNme name = new StoreNme(stage);
@@ -80,11 +80,14 @@ public class FormPane {
         all.setSpacing(20);
         all.setAlignment(Pos.TOP_CENTER);
         all.setPadding(new Insets(10, 10, 10, 10));
+        all.getStyleClass().add("background");
         
-        all.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(10), null)));
+        // all.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(10), null)));
 
         Scene scene = new Scene(all, 500, 500);
+        scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene);
+
         stage.show();
     }
     

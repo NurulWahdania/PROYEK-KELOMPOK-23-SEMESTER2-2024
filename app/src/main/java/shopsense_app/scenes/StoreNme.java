@@ -1,4 +1,4 @@
-package shopsense_app;
+package shopsense_app.scenes;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;

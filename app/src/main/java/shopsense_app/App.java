@@ -9,11 +9,13 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import shopsense_app.scenes.FormPane;
 
 public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        
 
         // Button button = new Button("Next");
         // button.setStyle("-fx-background-color: #0000ff");

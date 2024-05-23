@@ -1,0 +1,92 @@
+.background{
+    -fx-background-color: #182527;
+}
+
+.background2{
+    -fx-background-color: #20CD8D;
+
+}
+
+.home{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+    -fx-background-color: #A6A6A6;
+    -fx-background-radius: 25px ;
+    /* -fx-pref-width: 100px;
+    -fx-pref-height: 30px; */
+
+}
+
+.judul{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 50px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
+.buton{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 10px;
+    -fx-background-color: #20CD8D;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffff;
+    -fx-background-radius: 25px ; 
+}
+
+
+.depan{
+    -fx-font-family: "Poppins";
+    -fx-font-size: 50px;
+    -fx-text-fill: #20CD8D;
+    -fx-font-weight: bold;
+
+}
+
+.depan2{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-text-fill: #ffff;
+    -fx-font-weight: bold;
+    /* -fx-font-weight: bold; */
+
+}
+
+.depan3{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-text-fill: #ffff;
+
+}
+
+.buton2{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+    -fx-background-color: #fff;
+    -fx-background-radius: 25px ;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 45px;
+
+}
+
+.keuangan{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+
+}
+
+.buton3{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+    -fx-background-color: #A6A6A6;
+    -fx-background-radius: 25px ;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 30px;
+}
