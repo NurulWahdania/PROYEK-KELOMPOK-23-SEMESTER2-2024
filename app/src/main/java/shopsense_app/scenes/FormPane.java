@@ -43,7 +43,8 @@ public class FormPane {
         // button.setTextFill(Color.BLACK);
         button.getStyleClass().add("buton");
         button.setAlignment(Pos.CENTER);
-        button.setPrefWidth(100);
+        button.setPrefWidth(300);
+        button.setPrefHeight(50);
         button.setOnAction(e -> {
             Menuisi menu = new Menuisi(stage);
             menu.show();
@@ -54,7 +55,8 @@ public class FormPane {
         // buttonToStoreName.setTextFill(Color.BLACK);
         // buttonToStoreName.setAlignment(Pos.CENTER);
         buttonToStoreName.getStyleClass().add("buton");
-        buttonToStoreName.setPrefWidth(100);
+        buttonToStoreName.setPrefWidth(300);
+        buttonToStoreName.setPrefHeight(50);
         buttonToStoreName.setOnAction(e -> {
             StoreNme name = new StoreNme(stage);
             name.show();
@@ -77,14 +79,14 @@ public class FormPane {
         buttonbox.setAlignment(Pos.CENTER);
 
         VBox all = new VBox(fifty, buttonbox);
-        all.setSpacing(20);
+        all.setSpacing(40);
         all.setAlignment(Pos.TOP_CENTER);
         all.setPadding(new Insets(10, 10, 10, 10));
         all.getStyleClass().add("background");
         
         // all.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(10), null)));
 
-        Scene scene = new Scene(all, 500, 500);
+        Scene scene = new Scene(all, 1368, 700);
         scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene);
 

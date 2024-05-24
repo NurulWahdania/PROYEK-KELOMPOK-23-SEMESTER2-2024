@@ -2,7 +2,7 @@ package shopsense_app.scenes;
 
 import org.checkerframework.checker.units.qual.h;
 
-// import shopsense_app.controller.MahasiswaController;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -43,6 +43,8 @@ public class Menuisi {
 
         Button keuangan = new Button("Laporan Keuangan");
         keuangan.getStyleClass().add("buton2");
+        // keuangan.setPrefWidth(10);
+        // keuangan.setPrefHeight(100);
         keuangan.setOnAction(e -> {
             Keuangan uang = new Keuangan(stage);
             uang.show();
@@ -70,8 +72,8 @@ public class Menuisi {
         HBox isi = new HBox(home);
         isi.setAlignment(Pos.BOTTOM_RIGHT);
 
-        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, isi);
-        fungsi.setSpacing(20);
+        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil,isi);
+        fungsi.setSpacing(40);
         fungsi.setAlignment(Pos.CENTER);
         fungsi.setPrefHeight(200);
 
@@ -83,8 +85,10 @@ public class Menuisi {
         vbox.getStyleClass().add("background2");
         vbox.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         vbox.setAlignment(Pos.CENTER);
+        vbox.setSpacing(80);
+        vbox.setPadding(new Insets(10,10,10,10));
 
-        Scene scene = new Scene(vbox, 500, 500);
+        Scene scene = new Scene(vbox, 1368, 700);
         stage.setScene(scene); 
 
 
