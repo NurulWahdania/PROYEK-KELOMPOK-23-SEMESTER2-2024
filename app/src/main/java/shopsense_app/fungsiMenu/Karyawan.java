@@ -12,10 +12,21 @@ import javafx.stage.Stage;
 import shopsense_app.scenes.Menuisi;
 
 public class Karyawan {
+    String nama ;
+    int id;
+    String posisi;
+    int tanggal;
     Stage stage;
 
     public Karyawan(Stage stage){
         this.stage = stage;
+    }
+
+    public Karyawan(String nama, int id, String posisi, int tanggal) {
+        this.nama = nama;
+        this.id = id;
+        this.posisi = posisi;
+        this.tanggal = tanggal;
     }
 
     public void  show(){
@@ -87,5 +98,45 @@ public class Karyawan {
         all.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         Scene scene = new Scene(all, 800,600);
         stage.setScene(scene);
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPosisi() {
+        return posisi;
+    }
+
+    public void setPosisi(String posisi) {
+        this.posisi = posisi;
+    }
+
+    public int getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(int tanggal) {
+        this.tanggal = tanggal;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }
