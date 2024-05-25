@@ -20,31 +20,19 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         
-
-        // Button button = new Button("Next");
-        // button.setStyle("-fx-background-color: #0000ff");
-        // button.setTextFill(Color.BLACK);
-        // button.setAlignment(Pos.CENTER);
-        // button.setPrefWidth(200);
-        // button.setOnAction(e -> {
         FormPane form = new FormPane(stage);
         form.show();
        
-        ListPane2 listPane = new ListPane2();
-        FromPane2 fromPane2 = new FromPane2(listPane);
+        // ListPane2 listPane = new ListPane2();
+        // FromPane2 fromPane2 = new FromPane2(listPane);
 
-        VBox hBox = new VBox(fromPane2.getFormPane());
-        hBox.setPadding(new Insets(40));
-        hBox.setStyle("-fx-background-color: #ccf4e5");
+        // VBox hBox = new VBox(fromPane2.getFormPane());
+        // hBox.setPadding(new Insets(40));
+        // hBox.setStyle("-fx-background-color: #ccf4e5");
 
-        Scene scene = new Scene(hBox, 800, 600);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-
-        // Scene scene = new Scene(500, 500);
+        // Scene scene = new Scene(hBox, 800, 600);
         // stage.setScene(scene);
-        // // stage.setResizable(false);
+        // stage.setResizable(false);
         // stage.show();
 
     }

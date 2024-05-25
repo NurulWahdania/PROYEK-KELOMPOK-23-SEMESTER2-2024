@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -24,7 +25,7 @@ public class Karyawan {
         Label nama = new Label("Nama");
         nama.getStyleClass().add("karyawan");
         nama.setPadding(new Insets(0, 0, 0, 20));
-        Button bNama = new Button();
+        TextField bNama = new TextField();
         bNama.getStyleClass().add("buton4");
 
         VBox nama1 = new VBox(nama,bNama);
@@ -33,7 +34,7 @@ public class Karyawan {
         Label karyawan = new Label("ID Karyawan");
         karyawan.getStyleClass().add("karyawan");
         karyawan.setPadding(new Insets(0, 0, 0, 20));
-        Button bKaryawan = new Button();
+        TextField bKaryawan = new TextField();
         bKaryawan.getStyleClass().add("buton4");
 
         VBox karyawan1 = new VBox(karyawan, bKaryawan);
@@ -41,7 +42,7 @@ public class Karyawan {
         Label posis = new Label("Posis");
         posis.getStyleClass().add("karyawan");
         posis.setPadding(new Insets(0, 0, 0, 20));
-        Button bPosis = new Button();
+        TextField bPosis = new TextField();
         bPosis.getStyleClass().add("buton4");
 
         VBox posisi1 = new VBox(posis, bPosis);
@@ -49,7 +50,7 @@ public class Karyawan {
         Label tanggal = new Label("Tanggal Masuk");
         tanggal.getStyleClass().add("karyawan");
         tanggal.setPadding(new Insets(0, 0, 0, 20));
-        Button bTanggal = new Button();
+        TextField bTanggal = new TextField();
         bTanggal.getStyleClass().add("buton4");
 
         VBox tanggal1 = new VBox(tanggal, bTanggal);

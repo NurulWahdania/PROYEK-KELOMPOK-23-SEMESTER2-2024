@@ -3,6 +3,10 @@ package shopsense_app.fungsi1;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import shopsense_app.Data.DatabaseConnection2;
 import shopsense_app.fungsiMenu.Barang;
+import shopsense_app.scenes.FromPane2;
+import shopsense_app.scenes.ListPane2;
 
 
 
@@ -29,6 +35,7 @@ public class BarangController{
     	} catch (SQLException e) {
         	System.out.println(e.getMessage());
     	}
+
 	}
 
 	public void insert(String nama, String harga, String stok) {
@@ -95,6 +102,8 @@ public class BarangController{
         	System.out.println(e.getMessage());
     	}
 	}
+
+	
 
 	
 }

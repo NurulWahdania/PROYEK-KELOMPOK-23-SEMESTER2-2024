@@ -12,6 +12,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import shopsense_app.fungsi1.BarangController;
+import shopsense_app.fungsiMenu.Barang;
 import shopsense_app.fungsiMenu.Hasil;
 import shopsense_app.fungsiMenu.Karyawan;
 import shopsense_app.fungsiMenu.Keuangan;
@@ -55,6 +57,10 @@ public class Menuisi {
 
         Button barang = new Button("Barang");
         barang.getStyleClass().add("buton2");
+        barang.setOnAction(e -> {
+            Barang brg = new Barang(stage);
+            brg.show();
+        });
 
         Button karyawan = new Button("Karyawan");
         karyawan.getStyleClass().add("buton2");

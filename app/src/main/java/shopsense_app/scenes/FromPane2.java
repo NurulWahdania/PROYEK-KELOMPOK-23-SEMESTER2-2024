@@ -31,6 +31,8 @@ public class FromPane2 {
         this.listPane = listPane;
     }
 
+    
+
     public VBox getFormPane() {
 
         add = new Button("Add");
@@ -117,6 +119,7 @@ public class FromPane2 {
         res.setPadding(new Insets(20));
         res.setMaxHeight(600);
         res.setAlignment(Pos.CENTER);
+        
 
         VBox last = new VBox(40, barang, res);
         last.setAlignment(Pos.CENTER);
@@ -278,5 +281,7 @@ public class FromPane2 {
         }
     }
 
+
 }
+
 
