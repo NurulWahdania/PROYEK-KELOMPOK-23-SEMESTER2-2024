@@ -86,7 +86,7 @@ public class FormPane {
         
         // all.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(10), null)));
 
-        Scene scene = new Scene(all, 1368, 700);
+        Scene scene = new Scene(all, 800, 600);
         scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene);
 

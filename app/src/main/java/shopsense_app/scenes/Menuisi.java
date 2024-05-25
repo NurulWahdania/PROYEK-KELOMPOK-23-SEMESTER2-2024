@@ -12,7 +12,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import shopsense_app.fungsiMenu.Hasil;
+import shopsense_app.fungsiMenu.Karyawan;
 import shopsense_app.fungsiMenu.Keuangan;
+import shopsense_app.fungsiMenu.Tranksaksi;
 
 public class Menuisi {
     Stage stage;
@@ -55,12 +58,25 @@ public class Menuisi {
 
         Button karyawan = new Button("Karyawan");
         karyawan.getStyleClass().add("buton2");
+        karyawan.setOnAction(e -> {
+            Karyawan kar = new Karyawan(stage);
+            kar.show();
+
+        });
 
         Button tranksaksi = new Button("Transaksi");
         tranksaksi.getStyleClass().add("buton2");
+        tranksaksi.setOnAction(e -> {
+            Tranksaksi kasir = new Tranksaksi(stage);
+            kasir.show();
+        });
 
         Button hasil = new Button("Cetak Hasil");
         hasil.getStyleClass().add("buton2");
+        hasil.setOnAction(e -> {
+            Hasil cetak = new Hasil(stage);
+            cetak.show();
+        });
 
         Button home = new Button("Home");
         home.getStyleClass().add("home");
@@ -69,10 +85,10 @@ public class Menuisi {
             pane.show();
         });
 
-        HBox isi = new HBox(home);
-        isi.setAlignment(Pos.BOTTOM_RIGHT);
+        HBox home2 = new HBox(home);
+        home2.setAlignment(Pos.BOTTOM_RIGHT);
 
-        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil,isi);
+        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home2);
         fungsi.setSpacing(40);
         fungsi.setAlignment(Pos.CENTER);
         fungsi.setPrefHeight(200);
@@ -88,7 +104,7 @@ public class Menuisi {
         vbox.setSpacing(80);
         vbox.setPadding(new Insets(10,10,10,10));
 
-        Scene scene = new Scene(vbox, 1368, 700);
+        Scene scene = new Scene(vbox, 800, 600);
         stage.setScene(scene); 
 
 
