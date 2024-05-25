@@ -1,7 +1,6 @@
 package shopsense_app.fungsiMenu;
 
 import org.checkerframework.checker.units.qual.g;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -22,28 +21,24 @@ public class Keuangan {
     public void show() {
         Label keuangan = new Label("Laporan Keuangan");
         keuangan.getStyleClass().add("judul2");
-        // keuangan.setStyle("-fx-font-size: 50px");
 
         Label pemasukan = new Label("Pemasukan Rp:\t");
         pemasukan.getStyleClass().add("keuangan");
         Button bPemasukan = new Button();
         bPemasukan.getStyleClass().add("buton3");
-        // VBox vpemasukan = new VBox(pemasukan, bPemasukan);
-        // vpemasukan.setAlignment(Pos.CENTER);
     
+
         Label pengeluaran = new Label("Pengeluaran Rp:\t");
         pengeluaran.getStyleClass().add("keuangan");
         Button bPengeluaran = new Button();
         bPengeluaran.getStyleClass().add("buton3");
-        // VBox vPengwluaran = new VBox(pengeluaran, bPengeluaran);
-        // vPengwluaran.setAlignment(Pos.CENTER);
     
+
         Label laba = new Label("Laba Rp:\t");
         laba.getStyleClass().add("keuangan");
         Button bLaba = new Button();
         bLaba.getStyleClass().add("buton3");
-        // VBox vlaba = new VBox(laba, bLaba);
-        // vlaba.setAlignment(Pos.CENTER);
+
 
         Button ceklaba = new Button("Cek Laba");
         ceklaba.setAlignment(Pos.CENTER);
@@ -63,8 +58,7 @@ public class Keuangan {
 
         HBox hjudul = new HBox(keuangan);
         hjudul.setAlignment(Pos.CENTER);
-        // hjudul.setLayoutX(200);
-        // hjudul.setLayoutY(200);
+
 
         VBox label = new VBox(pemasukan, pengeluaran,laba);
         label.setSpacing(50);

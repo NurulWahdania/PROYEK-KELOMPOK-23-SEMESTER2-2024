@@ -1,17 +1,14 @@
 package shopsense_app.scenes;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class StoreNme {
@@ -28,8 +25,8 @@ public class StoreNme {
         
         Rectangle rec1 = new Rectangle(80, 20);
         rec1.setFill(Color.web("#20CD8D"));
-        rec1.setArcWidth(25); // Set radius horizontal (X-axis)
-        rec1.setArcHeight(25); // Set radius vertical (Y-axis)
+        rec1.setArcWidth(25); 
+        rec1.setArcHeight(25); 
         
         Rectangle rec2 = new Rectangle(60, 20);
         rec2.setFill(Color.web("#20CD8D"));
@@ -47,9 +44,6 @@ public class StoreNme {
         rec4.setArcHeight(25);
         
         VBox rectangel = new VBox(10, rec1, rec2, rec3, rec4);
-        
-
-
 
         Button home = new Button("Home");
         home.getStyleClass().add("home2");
@@ -62,16 +56,13 @@ public class StoreNme {
         home2.setAlignment(Pos.BOTTOM_RIGHT);
         home2.setPadding(new Insets(0, 0, 0, 370));
 
-
         HBox vbox = new HBox(rectangel,label, home2);
         vbox. setPadding(new Insets(20));
         vbox.getStyleClass().add("backgroundB");
         vbox.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 
-
         Scene scene = new Scene(vbox, 800, 600);
         stage.setScene(scene);
         stage.show();
-
     }
 }

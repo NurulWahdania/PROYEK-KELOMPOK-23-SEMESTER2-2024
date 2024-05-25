@@ -1,20 +1,17 @@
 package shopsense_app.scenes;
 
-import shopsense_app.fungsi1.BarangController;
-import shopsense_app.fungsiMenu.Barang;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.TableView;
+import javafx.scene.control.ScrollPane;
 import shopsense_app.fungsiMenu.Barang;
+import javafx.collections.FXCollections;
+import javafx.scene.control.TableColumn;
+import javafx.collections.ObservableList;
+import shopsense_app.fungsi1.BarangController;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 public class ListPane2 {
-
-
-
     TableView<shopsense_app.fungsiMenu.Barang> tableView;
     BarangController barangController = new BarangController();
 
@@ -27,6 +24,8 @@ public class ListPane2 {
         hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
         TableColumn<Barang, String> stokColum = new TableColumn<>("STOK BARANG");
         stokColum.setCellValueFactory(new PropertyValueFactory<>("stok"));
+        ObservableList<Barang> data = FXCollections.observableArrayList();
+        tableView.setItems(data);
 
         tableView.getColumns().add(namaColum);
         tableView.getColumns().add(hargaColum);
@@ -43,9 +42,7 @@ public class ListPane2 {
         vbox.setMinHeight(200);
         vbox.setMinWidth(400);
         vbox.setAlignment(Pos.CENTER_LEFT);
-        // vbox.setAlignment(Pos.CENTER);
         
-
         loadData();
         return vbox;
     }

@@ -1,23 +1,15 @@
 package shopsense_app.fungsi1;
 
 
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import shopsense_app.fungsiMenu.Barang;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import shopsense_app.Data.DatabaseConnection2;
-import shopsense_app.fungsiMenu.Barang;
-import shopsense_app.scenes.FromPane2;
-import shopsense_app.scenes.ListPane2;
-
-
 
 public class BarangController{
 
@@ -52,7 +44,6 @@ public class BarangController{
         	System.out.println(e.getMessage());
     	}
 	}
-
 
 	public ObservableList<Barang> selectAll() {
     	String sql = "SELECT nama, harga, stok FROM barang";
@@ -101,10 +92,6 @@ public class BarangController{
     	} catch (SQLException e) {
         	System.out.println(e.getMessage());
     	}
-	}
-
-	
-
-	
+	}	
 }
 

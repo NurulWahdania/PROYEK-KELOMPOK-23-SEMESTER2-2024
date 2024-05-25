@@ -1,20 +1,15 @@
 package shopsense_app.scenes;
 
-import org.checkerframework.checker.units.qual.h;
-
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import shopsense_app.fungsi1.BarangController;
-import shopsense_app.fungsiMenu.Barang;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import shopsense_app.fungsiMenu.Hasil;
+import shopsense_app.fungsiMenu.Barang;
 import shopsense_app.fungsiMenu.Karyawan;
 import shopsense_app.fungsiMenu.Keuangan;
 import shopsense_app.fungsiMenu.Tranksaksi;
@@ -27,29 +22,11 @@ public class Menuisi {
     }
 
     public void show(){
-
-        // Button button = new Button("Back");
-        // button.setTextFill(Color.BLACK);
-        // button.setAlignment(Pos.CENTER);
-        // button.setPrefWidth(200);
-        // button.setOnAction(e -> {
-        //     FormPane form = new FormPane(stage);
-        //     form.show();
-        // });
-
-        // VBox vbox = new VBox(button);
-        // vbox.setAlignment(Pos.CENTER);
-
-        // Scene scene = new Scene(vbox, 500, 500);
-        // stage.setScene(scene); 
-
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
 
         Button keuangan = new Button("Laporan Keuangan");
         keuangan.getStyleClass().add("buton2");
-        // keuangan.setPrefWidth(10);
-        // keuangan.setPrefHeight(100);
         keuangan.setOnAction(e -> {
             Keuangan uang = new Keuangan(stage);
             uang.show();
@@ -112,10 +89,6 @@ public class Menuisi {
 
         Scene scene = new Scene(vbox, 800, 600);
         stage.setScene(scene); 
-
-
-
-
     }
     
 }

@@ -22,19 +22,6 @@ public class App extends Application {
         
         FormPane form = new FormPane(stage);
         form.show();
-       
-        // ListPane2 listPane = new ListPane2();
-        // FromPane2 fromPane2 = new FromPane2(listPane);
-
-        // VBox hBox = new VBox(fromPane2.getFormPane());
-        // hBox.setPadding(new Insets(40));
-        // hBox.setStyle("-fx-background-color: #ccf4e5");
-
-        // Scene scene = new Scene(hBox, 800, 600);
-        // stage.setScene(scene);
-        // stage.setResizable(false);
-        // stage.show();
-
     }
 
     public static void main(String[] args) {

@@ -1,27 +1,28 @@
 package shopsense_app.scenes;
 
-import shopsense_app.fungsiMenu.Barang;
-import shopsense_app.fungsi1.BarangController;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import shopsense_app.fungsiMenu.Barang;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.collections.ObservableList;
+import shopsense_app.fungsi1.DataProvider;
+import javafx.scene.control.TextFormatter;
+import shopsense_app.fungsi1.BarangController;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 public class FromPane2 {
-
-
-
     Button add, update, delete, submit, cancel;
     VBox content;
+    TextField tf_nama, tf_harga, tf_stok;
     BarangController barangController = new BarangController();
 
     ListPane2 listPane;
@@ -30,8 +31,6 @@ public class FromPane2 {
     public FromPane2(ListPane2 listPane) {
         this.listPane = listPane;
     }
-
-    
 
     public VBox getFormPane() {
 
@@ -43,6 +42,7 @@ public class FromPane2 {
             setActive(1);
             setForm(1);
             setSubmit(1);
+
         });
 
         update = new Button("Update");
@@ -119,7 +119,6 @@ public class FromPane2 {
         res.setPadding(new Insets(20));
         res.setMaxHeight(600);
         res.setAlignment(Pos.CENTER);
-        
 
         VBox last = new VBox(40, barang, res);
         last.setAlignment(Pos.CENTER);
@@ -127,6 +126,7 @@ public class FromPane2 {
 
         return last;
     }
+
     public void loadData() {
         ObservableList<Barang> barang = barangController.selectAll();
         tableView.setItems(barang);
@@ -145,15 +145,14 @@ public class FromPane2 {
         }
     }
 
-    
     void setForm(int type) {
         switch (type) {
             case 1 -> {
                 content.getChildren().clear();
-                
+
                 Label lb_nama = new Label("Nama Barang");
                 lb_nama.setPrefSize(100, 20);
-                TextField tf_nama = new TextField();
+                tf_nama = new TextField();
                 tf_nama.setPrefSize(200, 20);
                 tf_nama.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
                 tf_nama.setMinWidth(300);
@@ -162,17 +161,33 @@ public class FromPane2 {
 
                 Label lb_harga = new Label("Harga Barang");
                 lb_harga.setPrefSize(100, 20);
-                TextField tf_harga = new TextField();
+                tf_harga = new TextField();
                 tf_harga.setPrefSize(200, 20);
                 tf_harga.setMinWidth(300);
+                TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
+                    String newText = change.getControlNewText();
+                    if (newText.matches("\\d*")) {
+                        return change;
+                    }
+                    return null;
+                });
+                tf_harga.setTextFormatter(textFormatter);
                 tf_harga.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
 
                 HBox harga = new HBox(lb_harga, tf_harga);
 
                 Label lb_stok = new Label("Stok Barang");
                 lb_stok.setPrefSize(100, 20);
-                TextField tf_stok = new TextField();
+                tf_stok = new TextField();
                 tf_stok.setPrefSize(200, 20);
+                TextFormatter<String> textFormatter1 = new TextFormatter<>(change -> {
+                    String newText = change.getControlNewText();
+                    if (newText.matches("\\d*")) {
+                        return change;
+                    }
+                    return null;
+                });
+                tf_stok.setTextFormatter(textFormatter1);
                 tf_stok.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
                 tf_stok.setMinWidth(300);
 
@@ -185,7 +200,7 @@ public class FromPane2 {
 
                 Label lb_nama = new Label("Nama Barang");
                 lb_nama.setPrefSize(100, 20);
-                TextField tf_nama = new TextField();
+                tf_nama = new TextField();
                 tf_nama.setPrefSize(200, 20);
                 tf_nama.setMinWidth(300);
                 tf_nama.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
@@ -194,7 +209,7 @@ public class FromPane2 {
 
                 Label lb_harga = new Label("Harga Barang");
                 lb_harga.setPrefSize(100, 20);
-                TextField tf_harga = new TextField();
+                tf_harga = new TextField();
                 tf_harga.setPrefSize(200, 20);
                 tf_harga.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
                 tf_harga.setMinWidth(300);
@@ -203,7 +218,7 @@ public class FromPane2 {
 
                 Label lb_stok = new Label("Stok Barang");
                 lb_stok.setPrefSize(100, 20);
-                TextField tf_stok = new TextField();
+                tf_stok = new TextField();
                 tf_stok.setPrefSize(200, 20);
                 tf_stok.setMinWidth(300);
                 tf_stok.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
@@ -218,7 +233,7 @@ public class FromPane2 {
 
                 Label lb_nama = new Label("Nama Barang");
                 lb_nama.setPrefSize(100, 20);
-                TextField tf_nama = new TextField();
+                tf_nama = new TextField();
                 tf_nama.setPrefSize(200, 20);
                 tf_nama.setMinWidth(300);
                 tf_nama.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
@@ -230,7 +245,6 @@ public class FromPane2 {
             }
         }
     }
-    
 
     void setSubmit(int type) {
         switch (type) {
@@ -241,9 +255,20 @@ public class FromPane2 {
                     String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText();
                     String stok = ((TextField) ((HBox) content.getChildren().get(2)).getChildren().get(1)).getText();
                     barangController.insert(nama, harga, stok);
+                    if (!nama.isEmpty() || !harga.isEmpty() || !stok.isEmpty()) {
+                        Barang barang = new Barang(nama, harga, stok);
+                        DataProvider dataProvider = new DataProvider();
+                        dataProvider.addBarang(barang);
+                        tf_nama.clear();
+                        tf_harga.clear();
+                        tf_stok.clear();
+                    }
+                    tf_nama.setText("");
+                    tf_harga.setText("");
+                    tf_stok.setText("");
                     loadData();
                 });
-                
+
             }
             case 2 -> {
                 submit.setText("Update Data");
@@ -252,6 +277,17 @@ public class FromPane2 {
                     String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText();
                     String stok = ((TextField) ((HBox) content.getChildren().get(2)).getChildren().get(1)).getText();
                     barangController.update(nama, harga, stok);
+                    if (!nama.isEmpty() || !harga.isEmpty() || !stok.isEmpty()) {
+                        Barang barang = new Barang(nama, harga, stok);
+                        DataProvider dataProvider = new DataProvider();
+                        dataProvider.addBarang(barang);
+                        tf_nama.clear();
+                        tf_harga.clear();
+                        tf_stok.clear();
+                    }
+                    tf_nama.setText("");
+                    tf_harga.setText("");
+                    tf_stok.setText("");
                     loadData();
                 });
             }
@@ -276,12 +312,10 @@ public class FromPane2 {
                     stage.setScene(scene);
                     stage.setResizable(false);
                     stage.show();
+                    tf_nama.setText("");
                 });
             }
         }
     }
 
-
 }
-
-
