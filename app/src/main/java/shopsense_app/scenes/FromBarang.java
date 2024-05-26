@@ -86,14 +86,17 @@ public class FromBarang {
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
         namaColum.setCellValueFactory(new PropertyValueFactory<>("nama"));
+        namaColum.setPrefWidth(170);
         TableColumn<Barang, String> hargaColum = new TableColumn<>("HARGA BARANG");
         hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
+        namaColum.setPrefWidth(160);
         TableColumn<Barang, String> stokColum = new TableColumn<>("STOK BARANG");
         stokColum.setCellValueFactory(new PropertyValueFactory<>("stok"));
+        stokColum.setPrefWidth(115);
 
         VBox tab = new VBox(10, add, update, delete, submit);
         tab.setAlignment(Pos.TOP_CENTER);
-        tab.maxWidth(150);
+        tab.maxWidth(160);
 
         tableView.getColumns().add(namaColum);
         tableView.getColumns().add(hargaColum);

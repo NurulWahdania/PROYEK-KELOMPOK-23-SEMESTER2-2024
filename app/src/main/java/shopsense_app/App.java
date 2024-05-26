@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,6 +20,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        stage.setResizable(false);
+        stage.setTitle("ShopSense");
+        Image imageIcon = new Image(getClass().getClassLoader().getResourceAsStream("image/Logo.jpg"));
+        stage.getIcons().add(imageIcon);
         
         FormPane form = new FormPane(stage);
         form.show();
