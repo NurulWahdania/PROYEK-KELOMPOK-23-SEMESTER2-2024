@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,7 +22,6 @@ public class StoreNme {
     public void show(){
         Label label = new Label("STORE NAME");
         label.getStyleClass().add("judul2");
-        label.setAlignment(Pos.CENTER);
         
         Rectangle rec1 = new Rectangle(80, 20);
         rec1.setFill(Color.web("#20CD8D"));
@@ -45,8 +45,32 @@ public class StoreNme {
         
         VBox rectangel = new VBox(10, rec1, rec2, rec3, rec4);
 
+        Label store = new Label("Enter Your Store Name");
+        store.getStyleClass().add("name");
+        // store.setPadding(new Insets(0,0,0,300));
+        store.setAlignment(Pos.CENTER);
+
+        TextField text = new TextField();
+        text.getStyleClass().add("text1");
+        text.setMaxSize(300, 0);
+        text.setAlignment(Pos.CENTER);
+
+        VBox bawah = new VBox(20, store, text);
+        bawah.setAlignment(Pos.CENTER);
+
+        Button add = new Button("\tAdd\t\t");
+        add.getStyleClass().add("butonn");
+        Button delete = new Button("\tDelete\t");
+        delete.getStyleClass().add("butonn");
+
+        HBox buton = new HBox(10, add, delete);
+        buton.setAlignment(Pos.CENTER);
+
+        VBox all = new VBox(20, bawah, buton);
+        all.setAlignment(Pos.CENTER);
+
         Button home = new Button("Home");
-        home.getStyleClass().add("home2");
+        home.getStyleClass().add("home");
         home.setOnAction(e -> {
             Menuisi menu = new Menuisi(stage);
             menu.show();
@@ -54,10 +78,15 @@ public class StoreNme {
 
         VBox home2 = new VBox(home);
         home2.setAlignment(Pos.BOTTOM_RIGHT);
-        home2.setPadding(new Insets(0, 0, 0, 370));
+        home2.setPadding(new Insets(90, 0, 0, 0));
+        
+        HBox yo = new HBox(label);
+        yo.setPadding(new Insets(0, 0, 0, 150));
 
-        HBox vbox = new HBox(rectangel,label, home2);
-        vbox. setPadding(new Insets(20));
+        HBox hbo = new HBox(rectangel, yo);
+        
+        VBox vbox = new VBox(100, hbo, all, home2);
+        vbox.setPadding(new Insets(20));
         vbox.getStyleClass().add("backgroundB");
         vbox.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 

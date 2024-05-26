@@ -19,7 +19,7 @@ import javafx.scene.control.TextFormatter;
 import shopsense_app.fungsi1.BarangController;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class FromPane2 {
+public class FromBarang {
     Button add, update, delete, submit, cancel;
     VBox content;
     TextField tf_nama, tf_harga, tf_stok;
@@ -28,7 +28,7 @@ public class FromPane2 {
     ListPane2 listPane;
     TableView<shopsense_app.fungsiMenu.Barang> tableView;
 
-    public FromPane2(ListPane2 listPane) {
+    public FromBarang(ListPane2 listPane) {
         this.listPane = listPane;
     }
 

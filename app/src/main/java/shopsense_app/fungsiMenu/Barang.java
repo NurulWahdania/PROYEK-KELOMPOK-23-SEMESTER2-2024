@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import shopsense_app.scenes.Menuisi;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import shopsense_app.scenes.FromPane2;
+import shopsense_app.scenes.FromBarang;
 import shopsense_app.scenes.ListPane2;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -63,7 +63,7 @@ public class Barang {
 
     public void show() {
         ListPane2 listPane = new ListPane2();
-        FromPane2 fromPane2 = new FromPane2(listPane);
+        FromBarang fromPane2 = new FromBarang(listPane);
 
         Pane formPaneContainer = new Pane(fromPane2.getFormPane());
         formPaneContainer.setPadding(new Insets(40));

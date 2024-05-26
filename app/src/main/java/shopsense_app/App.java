@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import shopsense_app.scenes.FormPane;
-import shopsense_app.scenes.FromPane2;
+import shopsense_app.scenes.FromBarang;
 import shopsense_app.scenes.ListPane2;
 
 public class App extends Application {
