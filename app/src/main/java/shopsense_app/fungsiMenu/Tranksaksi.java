@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import shopsense_app.fungsi1.BarangController;
 import shopsense_app.scenes.Menuisi;
 
+
 public class Tranksaksi {
     Stage stage;
 
@@ -46,7 +47,7 @@ public class Tranksaksi {
         TableColumn<Barang, String> stokColum = new TableColumn<>("STOK BARANG");
         stokColum.setCellValueFactory(new PropertyValueFactory<>("stok"));
         stokColum.setPrefWidth(100);
-        
+
         tableView.getColumns().add(namaColum);
         tableView.getColumns().add(hargaColum);
         tableView.getColumns().add(stokColum);
@@ -64,8 +65,8 @@ public class Tranksaksi {
         TableColumn<BarangWithStock, Integer> stokColumRight = new TableColumn<>("JUMLAH");
         stokColumRight.setCellValueFactory(new PropertyValueFactory<>("stock"));
         stokColumRight.setPrefWidth(100);
-        
-        
+
+
         rightTableView.getColumns().add(namaColumRight);
         rightTableView.getColumns().add(hargaColumRight);
         rightTableView.getColumns().add(stokColumRight);
@@ -113,7 +114,6 @@ public class Tranksaksi {
         totalLabel = new Label("Total: 0");
         totalLabel.setMinWidth(0);
         totalLabel.getStyleClass().add("total-label");
-        
 
         VBox totalBox = new VBox(buton, totalLabel);
         totalBox.setAlignment(Pos.CENTER);
@@ -121,13 +121,15 @@ public class Tranksaksi {
 
         Rectangle rectangle3 = new Rectangle(340, 35);
         rectangle3.setFill(Color.web("#D9D9D9"));
-        
+
         HBox rec2 = new HBox(rectangle3);
         rec2.setPadding(new Insets(485,0, 0, 440));
+
 
         VBox rec = new VBox(20, label2, rightTableView, totalBox);
         rec.setPadding(new Insets(40, 0, 0, 30));
         rec.setAlignment(Pos.CENTER);
+        rec.setSpacing(10);
 
         VBox menu1 = new VBox(20, label, main, tableView);
         HBox sejajar = new HBox(menu1, rec);
@@ -141,7 +143,6 @@ public class Tranksaksi {
         Scene scene = new Scene(root, 800, 600);
         stage.setScene(scene);
 
-        // Load data into left table
         loadData();
 
         // Add selection listener to left table

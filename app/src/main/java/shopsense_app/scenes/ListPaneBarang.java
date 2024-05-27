@@ -1,5 +1,4 @@
 package shopsense_app.scenes;
-
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.TableView;
@@ -16,7 +15,6 @@ public class ListPaneBarang {
     BarangController barangController = new BarangController();
 
     public VBox getListPane() {
-
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
         namaColum.setCellValueFactory(new PropertyValueFactory<>("nama"));
@@ -26,7 +24,6 @@ public class ListPaneBarang {
         stokColum.setCellValueFactory(new PropertyValueFactory<>("stok"));
         ObservableList<Barang> data = FXCollections.observableArrayList();
         tableView.setItems(data);
-
         tableView.getColumns().add(namaColum);
         tableView.getColumns().add(hargaColum);
         tableView.getColumns().add(stokColum);
@@ -35,7 +32,7 @@ public class ListPaneBarang {
         // ScrollPane scrollPane = new ScrollPane(tableView);
         // scrollPane.setMaxHeight(200);
         // scrollPane.setMinWidth(400);
- 
+
         VBox vbox = new VBox(tableView);
         vbox.setMaxHeight(200);
         vbox.setMaxWidth(400);
@@ -46,11 +43,8 @@ public class ListPaneBarang {
         loadData();
         return vbox;
     }
-
      public void loadData() {
         ObservableList<Barang> barang = barangController.selectAll();
         tableView.setItems(barang);
     }
-
 }
-

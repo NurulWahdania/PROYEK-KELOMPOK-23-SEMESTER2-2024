@@ -1,5 +1,4 @@
 package shopsense_app.fungsiMenu;
-
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.geometry.Pos;
@@ -11,14 +10,9 @@ import javafx.scene.control.TextField;
 import shopsense_app.scenes.Menuisi;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-<<<<<<< HEAD
 import shopsense_app.scenes.FormPane;
 import shopsense_app.scenes.FromBarang;
 import shopsense_app.scenes.ListPaneBarang;
-=======
-import shopsense_app.scenes.FromBarang;
-import shopsense_app.scenes.ListPane2;
->>>>>>> a29ef94c755ff97e566de0a44b2786b7fd4813c1
 import javafx.beans.property.SimpleStringProperty;
 
 public class Barang {
@@ -26,73 +20,57 @@ public class Barang {
     private SimpleStringProperty harga;
     private SimpleStringProperty stok;
     Stage stage;
-
     public Barang(String nama, String harga, String stok, Stage stage) {
         this.nama = new SimpleStringProperty(nama);
         this.harga = new SimpleStringProperty(harga);
         this.stok = new SimpleStringProperty(stok);
         this.stage = stage;
     }
-
     public Barang(String nama, String harga, String stok) {
         this.nama = new SimpleStringProperty(nama);
         this.harga = new SimpleStringProperty(harga);
         this.stok = new SimpleStringProperty(stok);
     }
-
     public Barang(Stage stage) {
         this.stage = stage;
     }
-
     public String getNama() {
         return nama.get();
     }
-
     public void setNama(String nama) {
         this.nama.set(nama);
     }
-
     public String getHarga() {
         return harga.get();
     }
-
     public void setHarga(String harga) {
         this.harga.set(harga);
     }
-
     public String getStok() {
         return stok.get();
     }
-
     public void setStok(String stok) {
         this.stok.set(stok);
     }
 
     public void show() {
-<<<<<<< HEAD
         ListPaneBarang listPane = new ListPaneBarang();
-=======
-        ListPane2 listPane = new ListPane2();
->>>>>>> a29ef94c755ff97e566de0a44b2786b7fd4813c1
         FromBarang fromPane2 = new FromBarang(listPane);
 
         Pane formPaneContainer = new Pane(fromPane2.getFormPane());
         formPaneContainer.setPadding(new Insets(40));
         formPaneContainer.setStyle("-fx-background-color: #ccf4e5");
-
         Button home = new Button("Home");
         home.getStyleClass().add("home");
         home.setOnAction(e -> {
             Menuisi menu = new Menuisi(stage);
             menu.show();
         });
-
         // Create a VBox to stack formPaneContainer and the home button vertically
         VBox vBox = new VBox(10); // 10 is the spacing between elements
         vBox.getChildren().addAll(formPaneContainer, home);
         vBox.setPadding(new Insets(40));
         vBox.setStyle("-fx-background-color: #ccf4e5");
-
         // Align the home button to the bottom-right
         VBox.setVgrow(formPaneContainer, Priority.ALWAYS);
         vBox.setAlignment(Pos.TOP_CENTER);
@@ -105,11 +83,8 @@ public class Barang {
 
         Scene scene = new Scene(stackPane, 800, 600);
         stackPane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
-
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-
     }
-
 }

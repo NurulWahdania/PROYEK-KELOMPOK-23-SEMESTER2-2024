@@ -9,11 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-<<<<<<< HEAD
 // import javafx.scene.control.TableView;
-=======
-import javafx.scene.control.TableView;
->>>>>>> a29ef94c755ff97e566de0a44b2786b7fd4813c1
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.HBox;
@@ -30,11 +26,9 @@ public class Karyawan {
     String posisi;
     int tanggal;
     Stage stage;
-
     public Karyawan(Stage stage){
         this.stage = stage;
     }
-
     public Karyawan(String nama, int id, String posisi, int tanggal) {
         this.nama = nama;
         this.id = id;
@@ -54,10 +48,8 @@ public class Karyawan {
         nama.setPadding(new Insets(0, 0, 0, 20));
         TextField bNama = new TextField();
         bNama.getStyleClass().add("buton4");
-
         VBox nama1 = new VBox(nama,bNama);
         
-
         Label karyawan = new Label("ID Karyawan");
         karyawan.getStyleClass().add("karyawan");
         karyawan.setPadding(new Insets(0, 0, 0, 20));
@@ -79,9 +71,7 @@ public class Karyawan {
         posis.setPadding(new Insets(0, 0, 0, 20));
         TextField bPosis = new TextField();
         bPosis.getStyleClass().add("buton4");
-
         VBox posisi1 = new VBox(posis, bPosis);
-
         Label tanggal = new Label("Tanggal Masuk");
         tanggal.getStyleClass().add("karyawan");
         tanggal.setPadding(new Insets(0, 0, 0, 20));
@@ -102,7 +92,7 @@ public class Karyawan {
             int idKaryawan = Integer.parseInt(bKaryawan.getText());
             String posisiKaryawan = bPosis.getText();
             int tanggalMasuk = Integer.parseInt(bTanggal.getText());
-        
+
             addKaryawan(namaKaryawan, idKaryawan, posisiKaryawan, tanggalMasuk);
         });
 
@@ -112,20 +102,16 @@ public class Karyawan {
             Menuisi menu = new Menuisi(stage);
             menu.show();
         });
-
-
         HBox home2 = new HBox(10, add,home);
         home2.setAlignment(Pos.CENTER);
-        
+
         VBox all2 = new VBox(20, home2);
         all2.setAlignment(Pos.CENTER);
         all2.setPadding(new Insets(10, 0, 0, 100));
 
         VBox gabung = new VBox(40,nama1, karyawan1, posisi1, tanggal1);
-
         VBox all1 = new VBox( judul, gabung);
         all1. setSpacing(50);
-
         HBox all = new HBox(20,all1, all2);
         all.setPadding(new Insets(20));
         all.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
@@ -155,41 +141,32 @@ public class Karyawan {
     public String getNama() {
         return nama;
     }
-
     public void setNama(String nama) {
         this.nama = nama;
     }
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getPosisi() {
         return posisi;
     }
-
     public void setPosisi(String posisi) {
         this.posisi = posisi;
     }
-
     public int getTanggal() {
         return tanggal;
     }
-
     public void setTanggal(int tanggal) {
         this.tanggal = tanggal;
     }
-
     public Stage getStage() {
         return stage;
     }
-
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
 }
+

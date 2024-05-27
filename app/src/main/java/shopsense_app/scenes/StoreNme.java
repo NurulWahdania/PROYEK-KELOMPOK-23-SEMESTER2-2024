@@ -1,5 +1,4 @@
 package shopsense_app.scenes;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,18 +10,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
 public class StoreNme {
     Stage stage;
-
     public StoreNme(Stage stage){
         this.stage = stage;
     }
-
     public void show(){
         Label label = new Label("STORE NAME");
         label.getStyleClass().add("judul2");
-        
+
         Rectangle rec1 = new Rectangle(80, 20);
         rec1.setFill(Color.web("#20CD8D"));
         rec1.setArcWidth(25); 
@@ -42,7 +38,7 @@ public class StoreNme {
         rec4.setFill(Color.web("#20CD8D"));
         rec4.setArcWidth(25);
         rec4.setArcHeight(25);
-        
+
         VBox rectangel = new VBox(10, rec1, rec2, rec3, rec4);
 
         Label store = new Label("Enter Your Store Name");
@@ -79,12 +75,12 @@ public class StoreNme {
         VBox home2 = new VBox(home);
         home2.setAlignment(Pos.BOTTOM_RIGHT);
         home2.setPadding(new Insets(90, 0, 0, 0));
-        
+
         HBox yo = new HBox(label);
         yo.setPadding(new Insets(0, 0, 0, 150));
 
         HBox hbo = new HBox(rectangel, yo);
-        
+
         VBox vbox = new VBox(100, hbo, all, home2);
         vbox.setPadding(new Insets(20));
         vbox.getStyleClass().add("backgroundB");
