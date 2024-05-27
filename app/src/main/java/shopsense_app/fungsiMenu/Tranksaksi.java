@@ -16,9 +16,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import shopsense_app.fungsi1.BarangController;
+import shopsense_app.scenes.FormPane;
 import shopsense_app.scenes.Menuisi;
 
 
@@ -30,12 +32,24 @@ public class Tranksaksi {
     }
 
     TableView<shopsense_app.fungsiMenu.Barang> tableView;
-    TableView<BarangWithStock> rightTableView;
+    TableView<Stokbarang> rightTableView;
     BarangController barangController = new BarangController();
-    private ObservableList<BarangWithStock> selectedItems = FXCollections.observableArrayList();
+    private ObservableList<Stokbarang> selectedItems = FXCollections.observableArrayList();
     private Label totalLabel;
 
     public void show() {
+
+        Label nmToko = new Label(FormPane.namaToko);
+        nmToko.getStyleClass().add("tokok");
+        Line line = new Line();
+        line.setStartY(0);
+        line.setStartX(20);
+        line.setEndY(20);
+        line.setEndX(20);
+        line.setStrokeWidth(2);
+        line.setStroke(Color.BLACK);
+        HBox lin2 = new HBox(line);
+
         // Initialize left table view
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
@@ -56,13 +70,13 @@ public class Tranksaksi {
 
         // Initialize right table view
         rightTableView = new TableView<>();
-        TableColumn<BarangWithStock, String> namaColumRight = new TableColumn<>("NAMA BARANG");
+        TableColumn<Stokbarang, String> namaColumRight = new TableColumn<>("NAMA BARANG");
         namaColumRight.setCellValueFactory(new PropertyValueFactory<>("nama"));
         namaColumRight.setPrefWidth(130);
-        TableColumn<BarangWithStock, String> hargaColumRight = new TableColumn<>("HARGA BARANG");
+        TableColumn<Stokbarang, String> hargaColumRight = new TableColumn<>("HARGA BARANG");
         hargaColumRight.setCellValueFactory(new PropertyValueFactory<>("harga"));
         hargaColumRight.setPrefWidth(120);
-        TableColumn<BarangWithStock, Integer> stokColumRight = new TableColumn<>("JUMLAH");
+        TableColumn<Stokbarang, Integer> stokColumRight = new TableColumn<>("JUMLAH");
         stokColumRight.setCellValueFactory(new PropertyValueFactory<>("stock"));
         stokColumRight.setPrefWidth(100);
 
@@ -98,7 +112,7 @@ public class Tranksaksi {
         delet.getStyleClass().add("buton8");
         delet.setOnAction(e -> deleteSelectedItem());
 
-        Button home = new Button("Home");
+        Button home = new Button("Menu");
         home.getStyleClass().add("home2");
         home.setOnAction(e -> {
             Menuisi menu = new Menuisi(stage);
@@ -107,6 +121,7 @@ public class Tranksaksi {
 
         VBox home2 = new VBox(home);
         home2.setAlignment(Pos.BOTTOM_RIGHT);
+        home2.setPadding(new Insets(-20,0,0,0));
 
         HBox buton = new HBox(10, add,delet, hasil, less);
         buton.setAlignment(Pos.CENTER);
@@ -127,7 +142,7 @@ public class Tranksaksi {
 
 
         VBox rec = new VBox(20, label2, rightTableView, totalBox);
-        rec.setPadding(new Insets(40, 0, 0, 30));
+        rec.setPadding(new Insets(20, 0, 0, 30));
         rec.setAlignment(Pos.CENTER);
         rec.setSpacing(10);
 
@@ -135,7 +150,9 @@ public class Tranksaksi {
         HBox sejajar = new HBox(menu1, rec);
 
         sejajar.setSpacing(30);
-        VBox all = new VBox(sejajar, home2);
+        HBox all2 = new HBox(10, lin2, nmToko);
+        all2.setAlignment(Pos.CENTER);
+        VBox all = new VBox(all2, sejajar, home2);
         Pane root = new Pane(rec2, all);
         all.setPadding(new Insets(20));
         root.getStyleClass().add("background2");
@@ -160,19 +177,19 @@ public class Tranksaksi {
 
     public void addItemToRightTable(Barang barang) {
         // Cek apakah barang sudah ada di daftar selectedItems
-        BarangWithStock existingItem = findItemInRightTable(barang);
+        Stokbarang existingItem = findItemInRightTable(barang);
         if (existingItem != null) {
             existingItem.incrementStock();
         } else {
-            selectedItems.add(new BarangWithStock(barang.getNama(), barang.getHarga(), barang.getStok(), 0));
+            selectedItems.add(new Stokbarang(barang.getNama(), barang.getHarga(), barang.getStok(), 0));
         }
         rightTableView.setItems(selectedItems);
         rightTableView.refresh(); // Refresh the table view to update the displayed stock
         updateTotal();
     }
 
-    public BarangWithStock findItemInRightTable(Barang barang) {
-        for (BarangWithStock item : selectedItems) {
+    public Stokbarang findItemInRightTable(Barang barang) {
+        for (Stokbarang item : selectedItems) {
             if (item.getNama().equals(barang.getNama())) {
                 return item;
             }
@@ -181,7 +198,7 @@ public class Tranksaksi {
     }
 
     public void incrementStock() {
-        BarangWithStock selectedItem = rightTableView.getSelectionModel().getSelectedItem();
+        Stokbarang selectedItem = rightTableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             selectedItem.incrementStock();
             rightTableView.refresh(); // Refresh the table view to update the displayed stock
@@ -190,7 +207,7 @@ public class Tranksaksi {
     }
 
     public void decrementStock() {
-        BarangWithStock selectedItem = rightTableView.getSelectionModel().getSelectedItem();
+        Stokbarang selectedItem = rightTableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null && selectedItem.getStock() > 0) {
             selectedItem.decrementStock();
             rightTableView.refresh(); // Refresh the table view to update the displayed stock
@@ -199,7 +216,7 @@ public class Tranksaksi {
     }
 
     public void deleteSelectedItem() {
-        BarangWithStock selectedItem = rightTableView.getSelectionModel().getSelectedItem();
+        Stokbarang selectedItem = rightTableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             selectedItems.remove(selectedItem);
             rightTableView.refresh(); // Refresh the table view to remove the item from the display
@@ -209,7 +226,7 @@ public class Tranksaksi {
 
     public void processTransaction() {
         // Mengurangi stok pada tabel kiri dan database
-        for (BarangWithStock item : selectedItems) {
+        for (Stokbarang item : selectedItems) {
             Barang barang = findItemInLeftTable(item.getNama());
             if (barang != null) {
                 int newStock = Integer.parseInt(barang.getStok()) - item.getStock();
@@ -237,16 +254,16 @@ public class Tranksaksi {
 
     public void updateTotal() {
         int total = 0;
-        for (BarangWithStock item : selectedItems) {
+        for (Stokbarang item : selectedItems) {
             total += Integer.parseInt(item.getHarga()) * item.getStock();
         }
         totalLabel.setText("Total: " + total);
     }
 
-    public static class BarangWithStock extends shopsense_app.fungsiMenu.Barang {
+    public static class Stokbarang extends shopsense_app.fungsiMenu.Barang {
         private final SimpleIntegerProperty stock;
 
-        public BarangWithStock(String nama, String harga, String stok, int initialStock) {
+        public Stokbarang(String nama, String harga, String stok, int initialStock) {
             super(nama, harga, stok);
             this.stock = new SimpleIntegerProperty(initialStock);
         }

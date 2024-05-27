@@ -3,9 +3,13 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import shopsense_app.scenes.Menuisi;
 import javafx.scene.layout.Priority;
@@ -54,13 +58,24 @@ public class Barang {
     }
 
     public void show() {
+
+        Label nmToko = new Label(FormPane.namaToko);
+        nmToko.getStyleClass().add("tokok2");
+        Line line = new Line();
+        line.setStartY(0);
+        line.setStartX(20);
+        line.setEndY(20);
+        line.setEndX(20);
+        line.setStrokeWidth(2);
+        line.setStroke(Color.BLACK);
+        HBox lin2 = new HBox(line);
+
         ListPaneBarang listPane = new ListPaneBarang();
         FromBarang fromPane2 = new FromBarang(listPane);
 
         Pane formPaneContainer = new Pane(fromPane2.getFormPane());
         formPaneContainer.setPadding(new Insets(40));
-        formPaneContainer.setStyle("-fx-background-color: #ccf4e5");
-        Button home = new Button("Home");
+        Button home = new Button("menu");
         home.getStyleClass().add("home");
         home.setOnAction(e -> {
             Menuisi menu = new Menuisi(stage);
@@ -75,14 +90,21 @@ public class Barang {
         VBox.setVgrow(formPaneContainer, Priority.ALWAYS);
         vBox.setAlignment(Pos.TOP_CENTER);
 
+        HBox all2 = new HBox(10, lin2, nmToko);
+        all2.setPadding(new Insets(10,0,0,20));
+
+        VBox box = new VBox(all2,vBox);
+
         // Wrap the VBox in another layout to control the overall alignment and padding
-        StackPane stackPane = new StackPane(vBox, home);
+        StackPane stackPane = new StackPane(box, home);
         // StackPane.setMargin(nmToko1, new Insets(-540, 0, 0, -760));
         StackPane.setAlignment(home, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(home, new Insets(10));
+        stackPane.getStyleClass().add("backgroundB");
 
         Scene scene = new Scene(stackPane, 800, 600);
-        stackPane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
+        
+        scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

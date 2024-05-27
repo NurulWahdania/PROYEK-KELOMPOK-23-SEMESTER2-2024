@@ -5,12 +5,14 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class FormPane {
-    static String namaToko;
+    public static String namaToko;
     Stage stage;
 
     public FormPane(Stage stage){
@@ -24,6 +26,16 @@ public class FormPane {
         label2.getStyleClass().add("depan");
         Label shopscene = new Label("ShopSense");
         shopscene.getStyleClass().add("depan2");
+        Line line = new Line();
+        line.setStartY(0);
+        line.setStartX(20);
+        line.setEndY(20);
+        line.setEndX(20);
+        line.setStrokeWidth(2);
+        line.setStroke(Color.web("#20CD8D"));
+        HBox lin2 = new HBox(line);
+        HBox sence = new HBox(10, lin2, shopscene);
+        sence.setAlignment(Pos.CENTER);
         
         Label greet = new Label("Managing Sustainable Business Finance");
         greet.getStyleClass().add("depan2");
@@ -45,13 +57,14 @@ public class FormPane {
             menu.show();
         });
 
+
         VBox tittle = new VBox(label, label2);
         tittle.setSpacing(5);
         tittle.setAlignment(Pos.CENTER);
         VBox tittlegreet = new VBox(tittle, greet);
         tittlegreet.setSpacing(10);
         tittlegreet.setAlignment(Pos.CENTER);
-        VBox fifty = new VBox(shopscene, tittlegreet);
+        VBox fifty = new VBox(sence, tittlegreet);
         fifty.setSpacing(150);
         fifty.setAlignment(Pos.CENTER);
         HBox buttonbox = new HBox(button, buttonToStoreName);

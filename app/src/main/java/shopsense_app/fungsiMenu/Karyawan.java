@@ -14,8 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import shopsense_app.Data.DatabaseConnection2;
+import shopsense_app.scenes.FormPane;
 // import shopsense_app.fungsi1.DataProvider;
 // import shopsense_app.fungsi1.KaryawanController;
 import shopsense_app.scenes.Menuisi;
@@ -37,6 +40,20 @@ public class Karyawan {
     }
 
     public void  show(){
+
+        Label nmToko = new Label(FormPane.namaToko);
+        nmToko.getStyleClass().add("tokok2");
+        Line line = new Line();
+        line.setStartY(0);
+        line.setStartX(20);
+        line.setEndY(20);
+        line.setEndX(20);
+        line.setStrokeWidth(2);
+        line.setStroke(Color.BLACK);
+        HBox lin2 = new HBox(line);
+        HBox alll = new HBox(10, lin2, nmToko);
+        alll.setAlignment(Pos.CENTER);
+        // alll.setPadding(new Insets(10,0,0,20));
 
 
 
@@ -96,7 +113,7 @@ public class Karyawan {
             addKaryawan(namaKaryawan, idKaryawan, posisiKaryawan, tanggalMasuk);
         });
 
-        Button home = new Button("Home");
+        Button home = new Button("Menu");
         home.getStyleClass().add("home2");
         home.setOnAction(e -> {
             Menuisi menu = new Menuisi(stage);
@@ -114,8 +131,10 @@ public class Karyawan {
         all1. setSpacing(50);
         HBox all = new HBox(20,all1, all2);
         all.setPadding(new Insets(20));
-        all.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
-        Scene scene = new Scene(all, 800,600);
+    
+        VBox gbg = new VBox(alll, all);
+        Scene scene = new Scene(gbg, 800,600);
+        scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene);
     }
 

@@ -8,7 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
+import shopsense_app.scenes.FormPane;
 import shopsense_app.scenes.Menuisi;
 
 public class Keuangan {
@@ -19,6 +22,20 @@ public class Keuangan {
     }
 
     public void show() {
+
+        Label nmToko = new Label(FormPane.namaToko);
+        nmToko.getStyleClass().add("tokok2");
+        Line line = new Line();
+        line.setStartY(0);
+        line.setStartX(20);
+        line.setEndY(20);
+        line.setEndX(20);
+        line.setStrokeWidth(2);
+        line.setStroke(Color.BLACK);
+        HBox lin2 = new HBox(line);
+        HBox alll = new HBox(10, lin2, nmToko);
+        alll.setPadding(new Insets(10,0,0,20));
+
         Label keuangan = new Label("Laporan Keuangan");
         keuangan.getStyleClass().add("judul2");
 
@@ -46,7 +63,7 @@ public class Keuangan {
         ceklaba.setMaxSize(200, 0);
         
 
-        Button home = new Button("Home");
+        Button home = new Button("Menu");
         home.getStyleClass().add("home2");
         home.setOnAction(e -> {
             Menuisi menu = new Menuisi(stage);
@@ -55,6 +72,7 @@ public class Keuangan {
 
         VBox home2 = new VBox(home);
         home2.setAlignment(Pos.BOTTOM_RIGHT);
+        home2.setPadding(new Insets(-20,0,0,0));
 
         HBox hjudul = new HBox(keuangan);
         hjudul.setAlignment(Pos.CENTER);
@@ -74,11 +92,13 @@ public class Keuangan {
         VBox gabung = new VBox( hjudul, hbox,ceklaba, home2);
         gabung.setSpacing(80);
         gabung.setPadding(new Insets(10,10,10,10));
-        gabung.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         gabung.setAlignment(Pos.CENTER);
-        gabung.getStyleClass().add("backgroundK");
 
-        Scene scene = new Scene(gabung, 800,600);
+        VBox all = new VBox(alll, gabung);
+        all.getStyleClass().add("backgroundK");
+
+        Scene scene = new Scene(all, 800,600);
+        scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene);
 
 

@@ -26,7 +26,7 @@ public class Hasil {
 
 
 
-        Button home = new Button("Home");
+        Button home = new Button("Menu");
         home.getStyleClass().add("home2");
         home.setOnAction(e -> {
             Menuisi menu = new Menuisi(stage);

@@ -6,6 +6,8 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import shopsense_app.fungsiMenu.Hasil;
@@ -21,7 +23,19 @@ public class Menuisi {
 
     public void show(){
         Label nmToko = new Label(FormPane.namaToko);
-        // nmToko.getStyleClass().add("tf-name1");
+        nmToko.getStyleClass().add("tokok");
+        Line line = new Line();
+        line.setStartY(0);
+        line.setStartX(20);
+        line.setEndY(20);
+        line.setEndX(20);
+        line.setStrokeWidth(2);
+        line.setStroke(Color.BLACK);
+        HBox lin2 = new HBox(line);
+        // lin2.setPadding(new Insets(20,0,0,50));
+
+    
+
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
 
@@ -72,14 +86,18 @@ public class Menuisi {
 
 
         VBox vbox = new VBox(menu2, fungsi);
-        vbox.getStyleClass().add("background2");
-        vbox.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
+        
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(80);
         vbox.setPadding(new Insets(10,10,10,10));
-
-        StackPane pane = new StackPane(vbox, nmToko);
-        StackPane.setMargin(nmToko, new Insets(-540, 0, 0, -720));
+        HBox nstore = new HBox(lin2, nmToko);
+        VBox alldata = new VBox(nstore, vbox);
+        nstore.setPadding(new Insets(10,0,0,20));
+        nstore.setSpacing(10);
+        StackPane pane = new StackPane( alldata);
+        pane.getStyleClass().add("background2");
+        pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
+        // StackPane.setMargin(nstore, new Insets(-540, 0, 0, -720));
 
         // pane.setPadding(new Insets(40));
 

@@ -261,6 +261,23 @@
     -fx-font-weight: bold;
 }
 
+.tokok{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+
+}
+
+.tokok2{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #20CD8D;
+
+}
+
+
 
 
 
