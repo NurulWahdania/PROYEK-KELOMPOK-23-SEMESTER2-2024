@@ -11,9 +11,14 @@ import javafx.scene.control.TextField;
 import shopsense_app.scenes.Menuisi;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+<<<<<<< HEAD
 import shopsense_app.scenes.FormPane;
 import shopsense_app.scenes.FromBarang;
 import shopsense_app.scenes.ListPaneBarang;
+=======
+import shopsense_app.scenes.FromBarang;
+import shopsense_app.scenes.ListPane2;
+>>>>>>> a29ef94c755ff97e566de0a44b2786b7fd4813c1
 import javafx.beans.property.SimpleStringProperty;
 
 public class Barang {
@@ -64,7 +69,11 @@ public class Barang {
     }
 
     public void show() {
+<<<<<<< HEAD
         ListPaneBarang listPane = new ListPaneBarang();
+=======
+        ListPane2 listPane = new ListPane2();
+>>>>>>> a29ef94c755ff97e566de0a44b2786b7fd4813c1
         FromBarang fromPane2 = new FromBarang(listPane);
 
         Pane formPaneContainer = new Pane(fromPane2.getFormPane());

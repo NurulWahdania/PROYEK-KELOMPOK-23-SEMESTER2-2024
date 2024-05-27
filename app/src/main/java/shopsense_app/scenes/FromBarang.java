@@ -20,7 +20,11 @@ import shopsense_app.fungsi1.BarangController;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FromBarang {
+<<<<<<< HEAD
 
+=======
+    Button add, update, delete, submit, cancel;
+>>>>>>> a29ef94c755ff97e566de0a44b2786b7fd4813c1
     VBox content;
     TextField tf_nama, tf_harga, tf_stok;
     Button add, update, delete, submit, cancel;
@@ -29,7 +33,11 @@ public class FromBarang {
     ListPaneBarang listPane;
     TableView<shopsense_app.fungsiMenu.Barang> tableView;
 
+<<<<<<< HEAD
     public FromBarang(ListPaneBarang listPane) {
+=======
+    public FromBarang(ListPane2 listPane) {
+>>>>>>> a29ef94c755ff97e566de0a44b2786b7fd4813c1
         this.listPane = listPane;
     }
 
