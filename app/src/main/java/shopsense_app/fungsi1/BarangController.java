@@ -72,7 +72,7 @@ public class BarangController{
     	String sql = "UPDATE barang SET harga = ?, stok = ? WHERE nama = ?";
     	try (Connection conn = DatabaseConnection2.connect();
          	PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setString(1, nama);
+        	pstmt.setString(1, harga);
         	pstmt.setString(2, stok);
         	pstmt.setString(3, nama);
         	pstmt.executeUpdate();
@@ -93,5 +93,23 @@ public class BarangController{
         	System.out.println(e.getMessage());
     	}
 	}	
+
+
+		// Metode lainnya...
+	
+	public void updateStok(String nama, int newStok) {
+			// Logika untuk memperbarui stok barang di database
+		String query = "UPDATE barang SET stok = ? WHERE nama = ?";
+		try (Connection conn = DatabaseConnection2.connect();
+			PreparedStatement pstmt = conn.prepareStatement(query)) {
+			pstmt.setInt(1, newStok);
+			pstmt.setString(2, nama);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
 }
 

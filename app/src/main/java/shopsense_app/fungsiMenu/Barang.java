@@ -7,11 +7,13 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import shopsense_app.scenes.Menuisi;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
-import shopsense_app.scenes.FromPane2;
-import shopsense_app.scenes.ListPane2;
+import shopsense_app.scenes.FormPane;
+import shopsense_app.scenes.FromBarang;
+import shopsense_app.scenes.ListPaneBarang;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Barang {
@@ -62,8 +64,8 @@ public class Barang {
     }
 
     public void show() {
-        ListPane2 listPane = new ListPane2();
-        FromPane2 fromPane2 = new FromPane2(listPane);
+        ListPaneBarang listPane = new ListPaneBarang();
+        FromBarang fromPane2 = new FromBarang(listPane);
 
         Pane formPaneContainer = new Pane(fromPane2.getFormPane());
         formPaneContainer.setPadding(new Insets(40));
@@ -88,6 +90,7 @@ public class Barang {
 
         // Wrap the VBox in another layout to control the overall alignment and padding
         StackPane stackPane = new StackPane(vBox, home);
+        // StackPane.setMargin(nmToko1, new Insets(-540, 0, 0, -760));
         StackPane.setAlignment(home, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(home, new Insets(10));
 

@@ -19,20 +19,22 @@ import javafx.scene.control.TextFormatter;
 import shopsense_app.fungsi1.BarangController;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class FromPane2 {
-    Button add, update, delete, submit, cancel;
+public class FromBarang {
+
     VBox content;
     TextField tf_nama, tf_harga, tf_stok;
+    Button add, update, delete, submit, cancel;
     BarangController barangController = new BarangController();
 
-    ListPane2 listPane;
+    ListPaneBarang listPane;
     TableView<shopsense_app.fungsiMenu.Barang> tableView;
 
-    public FromPane2(ListPane2 listPane) {
+    public FromBarang(ListPaneBarang listPane) {
         this.listPane = listPane;
     }
 
     public VBox getFormPane() {
+        // Label nmToko = new Label(FormPane.namaToko);
 
         add = new Button("Add");
         add.setMaxHeight(40);
@@ -86,14 +88,17 @@ public class FromPane2 {
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
         namaColum.setCellValueFactory(new PropertyValueFactory<>("nama"));
+        namaColum.setPrefWidth(170);
         TableColumn<Barang, String> hargaColum = new TableColumn<>("HARGA BARANG");
         hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
+        namaColum.setPrefWidth(160);
         TableColumn<Barang, String> stokColum = new TableColumn<>("STOK BARANG");
         stokColum.setCellValueFactory(new PropertyValueFactory<>("stok"));
+        stokColum.setPrefWidth(115);
 
         VBox tab = new VBox(10, add, update, delete, submit);
         tab.setAlignment(Pos.TOP_CENTER);
-        tab.maxWidth(150);
+        tab.maxWidth(160);
 
         tableView.getColumns().add(namaColum);
         tableView.getColumns().add(hargaColum);
@@ -122,6 +127,7 @@ public class FromPane2 {
 
         VBox last = new VBox(40, barang, res);
         last.setAlignment(Pos.CENTER);
+        
         loadData();
 
         return last;

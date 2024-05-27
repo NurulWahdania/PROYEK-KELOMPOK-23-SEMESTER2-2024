@@ -1,14 +1,23 @@
 package shopsense_app.fungsiMenu;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+// import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import shopsense_app.Data.DatabaseConnection2;
+// import shopsense_app.fungsi1.DataProvider;
+// import shopsense_app.fungsi1.KaryawanController;
 import shopsense_app.scenes.Menuisi;
 
 public class Karyawan {
@@ -30,6 +39,9 @@ public class Karyawan {
     }
 
     public void  show(){
+
+
+
         Label judul = new Label("Karyawan");
         judul.getStyleClass().add("judul2");
 
@@ -47,6 +59,14 @@ public class Karyawan {
         karyawan.setPadding(new Insets(0, 0, 0, 20));
         TextField bKaryawan = new TextField();
         bKaryawan.getStyleClass().add("buton4");
+        TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
+                    String newText = change.getControlNewText();
+                    if (newText.matches("\\d*")) {
+                        return change;
+                    }
+                    return null;
+                });
+                bKaryawan.setTextFormatter(textFormatter);
 
         VBox karyawan1 = new VBox(karyawan, bKaryawan);
 
@@ -66,13 +86,22 @@ public class Karyawan {
 
         VBox tanggal1 = new VBox(tanggal, bTanggal);
 
-        Button foto = new Button("FOTO");
-        foto.getStyleClass().add("foto");
-        foto.setMinSize(0, 200);
+        // Button foto = new Button("FOTO");
+        // foto.getStyleClass().add("foto");
+        // foto.setMinSize(0, 200);
 
         Button add = new Button("Add");
         add.getStyleClass().add("home2");
         add.setPrefSize(80, 0);
+        add.setOnAction(e -> {
+            String namaKaryawan = bNama.getText();
+            int idKaryawan = Integer.parseInt(bKaryawan.getText());
+            String posisiKaryawan = bPosis.getText();
+            int tanggalMasuk = Integer.parseInt(bTanggal.getText());
+        
+            addKaryawan(namaKaryawan, idKaryawan, posisiKaryawan, tanggalMasuk);
+        });
+
         Button home = new Button("Home");
         home.getStyleClass().add("home2");
         home.setOnAction(e -> {
@@ -84,7 +113,7 @@ public class Karyawan {
         HBox home2 = new HBox(10, add,home);
         home2.setAlignment(Pos.CENTER);
         
-        VBox all2 = new VBox(20, foto, home2);
+        VBox all2 = new VBox(20, home2);
         all2.setAlignment(Pos.CENTER);
         all2.setPadding(new Insets(10, 0, 0, 100));
 
@@ -98,6 +127,25 @@ public class Karyawan {
         all.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         Scene scene = new Scene(all, 800,600);
         stage.setScene(scene);
+    }
+
+    public void addKaryawan(String nama, int id_karyawan, String posisi, int tanggal_masuk) {
+        String sql = "INSERT INTO karyawan (nama, id_karyawan, posisi, tanggal_masuk) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection2.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nama);
+            pstmt.setInt(2, id_karyawan);
+            pstmt.setString(3, posisi);
+            pstmt.setInt(4, tanggal_masuk);
+
+            pstmt.executeUpdate();
+            System.out.println("Karyawan added successfully!");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public String getNama() {
@@ -139,4 +187,5 @@ public class Karyawan {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
 }

@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import shopsense_app.fungsi1.BarangController;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class ListPane2 {
+public class ListPaneBarang {
     TableView<shopsense_app.fungsiMenu.Barang> tableView;
     BarangController barangController = new BarangController();
 
@@ -32,11 +32,11 @@ public class ListPane2 {
         tableView.getColumns().add(stokColum);
         tableView.setMinWidth(400);
 
-        ScrollPane scrollPane = new ScrollPane(tableView);
-        scrollPane.setMaxHeight(200);
-        scrollPane.setMinWidth(400);
+        // ScrollPane scrollPane = new ScrollPane(tableView);
+        // scrollPane.setMaxHeight(200);
+        // scrollPane.setMinWidth(400);
  
-        VBox vbox = new VBox(scrollPane);
+        VBox vbox = new VBox(tableView);
         vbox.setMaxHeight(200);
         vbox.setMaxWidth(400);
         vbox.setMinHeight(200);

@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -22,6 +23,8 @@ public class Menuisi {
     }
 
     public void show(){
+        Label nmToko = new Label(FormPane.namaToko);
+        // nmToko.getStyleClass().add("tf-name1");
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
 
@@ -79,7 +82,6 @@ public class Menuisi {
         HBox menu2 = new HBox(menu1);
         menu2.setAlignment(Pos.CENTER);
 
-
         VBox vbox = new VBox(menu2, fungsi);
         vbox.getStyleClass().add("background2");
         vbox.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
@@ -87,7 +89,12 @@ public class Menuisi {
         vbox.setSpacing(80);
         vbox.setPadding(new Insets(10,10,10,10));
 
-        Scene scene = new Scene(vbox, 800, 600);
+        StackPane pane = new StackPane(vbox, nmToko);
+        StackPane.setMargin(nmToko, new Insets(-540, 0, 0, -720));
+
+        // pane.setPadding(new Insets(40));
+
+        Scene scene = new Scene(pane, 800, 600);
         stage.setScene(scene); 
     }
     
