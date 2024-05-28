@@ -2,6 +2,9 @@ package shopsense_app.scenes;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.geometry.Pos;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -101,8 +104,9 @@ public class Menuisi {
 
         // pane.setPadding(new Insets(40));
 
-        Scene scene = new Scene(pane, 800, 600);
+        Scene scene = new Scene(pane, 800,600);
         stage.setScene(scene); 
+        // stage.setMaximized(true);
     }
 
 }

@@ -29,9 +29,9 @@ public class BarangController{
     	String sql = "INSERT INTO barang(nama, harga, stok) VALUES(?, ?, ?)";
     	try (Connection conn = DatabaseConnection2.connect();
          	PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setString(1, harga);
-			pstmt.setString(2, stok);
-        	pstmt.setString(3, nama);
+        	pstmt.setString(1, nama);
+			pstmt.setString(2, harga);
+        	pstmt.setString(3, stok);
         	pstmt.executeUpdate();
         	System.out.println("Data berhasil ditambahkan.");
     	} catch (SQLException e) {
@@ -61,7 +61,7 @@ public class BarangController{
     	String sql = "UPDATE barang SET harga = ?, stok = ? WHERE nama = ?";
     	try (Connection conn = DatabaseConnection2.connect();
          	PreparedStatement pstmt = conn.prepareStatement(sql)) {
-        	pstmt.setString(1, nama);
+        	// pstmt.setString(1, nama);
         	pstmt.setString(1, harga);
         	pstmt.setString(2, stok);
         	pstmt.setString(3, nama);
@@ -72,19 +72,23 @@ public class BarangController{
     	}
 	}
 	public void delete(String nama) {
+		System.out.println(nama);
     	String sql = "DELETE FROM barang WHERE nama = ?";
     	try (Connection conn = DatabaseConnection2.connect();
          	PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	pstmt.setString(1, nama);
-        	pstmt.executeUpdate();
-        	System.out.println("Data berhasil dihapus.");
+        	int affectedRows = pstmt.executeUpdate();
+        if (affectedRows > 0) {
+            System.out.println("Data berhasil dihapus.");
+        } else {
+            System.out.println("Tidak ada data yang dihapus. Mungkin nama tidak ditemukan: " + nama);
+        }
     	} catch (SQLException e) {
         	System.out.println(e.getMessage());
     	}
 	}	
 
 
-		// Metode lainnya...
 
 	public void updateStok(String nama, int newStok) {
 			// Logika untuk memperbarui stok barang di database

@@ -45,6 +45,7 @@ public class ListPaneBarang {
     }
      public void loadData() {
         ObservableList<Barang> barang = barangController.selectAll();
+        System.out.println(String.valueOf(barang.size()));
         tableView.setItems(barang);
     }
 }

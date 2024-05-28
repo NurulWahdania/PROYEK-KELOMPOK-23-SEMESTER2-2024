@@ -27,12 +27,12 @@ public class Karyawan {
     String nama ;
     int id;
     String posisi;
-    int tanggal;
+    String tanggal;
     Stage stage;
     public Karyawan(Stage stage){
         this.stage = stage;
     }
-    public Karyawan(String nama, int id, String posisi, int tanggal) {
+    public Karyawan(String nama, int id, String posisi, String tanggal) {
         this.nama = nama;
         this.id = id;
         this.posisi = posisi;
@@ -108,7 +108,7 @@ public class Karyawan {
             String namaKaryawan = bNama.getText();
             int idKaryawan = Integer.parseInt(bKaryawan.getText());
             String posisiKaryawan = bPosis.getText();
-            int tanggalMasuk = Integer.parseInt(bTanggal.getText());
+            String tanggalMasuk = bTanggal.getText();
 
             addKaryawan(namaKaryawan, idKaryawan, posisiKaryawan, tanggalMasuk);
         });
@@ -138,8 +138,8 @@ public class Karyawan {
         stage.setScene(scene);
     }
 
-    public void addKaryawan(String nama, int id_karyawan, String posisi, int tanggal_masuk) {
-        String sql = "INSERT INTO karyawan (nama, id_karyawan, posisi, tanggal_masuk) VALUES (?, ?, ?, ?)";
+    public void addKaryawan(String nama, int id_karyawan, String posisi, String tanggal_masuk) {
+        String sql = "INSERT INTO karyawan (nama, 'id karyawan', posisi, 'tanggal masuk') VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection2.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -147,7 +147,7 @@ public class Karyawan {
             pstmt.setString(1, nama);
             pstmt.setInt(2, id_karyawan);
             pstmt.setString(3, posisi);
-            pstmt.setInt(4, tanggal_masuk);
+            pstmt.setString(4, tanggal_masuk);
 
             pstmt.executeUpdate();
             System.out.println("Karyawan added successfully!");
@@ -175,10 +175,10 @@ public class Karyawan {
     public void setPosisi(String posisi) {
         this.posisi = posisi;
     }
-    public int getTanggal() {
+    public String getTanggal() {
         return tanggal;
     }
-    public void setTanggal(int tanggal) {
+    public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
     }
     public Stage getStage() {

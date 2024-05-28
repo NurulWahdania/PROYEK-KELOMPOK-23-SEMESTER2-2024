@@ -1,4 +1,5 @@
 package shopsense_app.scenes;
+
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.geometry.Pos;
@@ -33,7 +34,6 @@ public class FromBarang {
     }
 
     public VBox getFormPane() {
-        // Label nmToko = new Label(FormPane.namaToko);
 
         add = new Button("Add");
         add.setMaxHeight(40);
@@ -64,25 +64,30 @@ public class FromBarang {
         });
         content = new VBox();
         content.setSpacing(10);
-        // content.setStyle("-fx-padding: 15px");
+
         submit = new Button();
         submit.setPrefSize(200, 25);
         submit.setStyle("-fx-background-color: #0faf0f; -fx-text-fill: #ffffff;  -fx-background-radius: 10");
         submit.setMinWidth(150);
+
         cancel = new Button("Cancel");
         cancel.setPrefSize(200, 25);
         cancel.setStyle("-fx-background-color: #0faf0f; -fx-text-fill: #ffffff;  -fx-background-radius: 10");
         cancel.setMinWidth(120);
+
         setActive(1);
         setForm(1);
         setSubmit(1);
+
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
         namaColum.setCellValueFactory(new PropertyValueFactory<>("nama"));
         namaColum.setPrefWidth(170);
+
         TableColumn<Barang, String> hargaColum = new TableColumn<>("HARGA BARANG");
         hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
         namaColum.setPrefWidth(160);
+
         TableColumn<Barang, String> stokColum = new TableColumn<>("STOK BARANG");
         stokColum.setCellValueFactory(new PropertyValueFactory<>("stok"));
         stokColum.setPrefWidth(115);
@@ -95,6 +100,7 @@ public class FromBarang {
         tableView.getColumns().add(hargaColum);
         tableView.getColumns().add(stokColum);
         tableView.setMinWidth(400);
+
         Label barang = new Label("Barang");
         barang.setStyle(
                 "-fx-font-size: 40px; -fx-text-fill: #02c37e; -fx-text-align: center; -fx-font-family: Arial; -fx-weight: bold;");
@@ -121,6 +127,7 @@ public class FromBarang {
     }
     public void loadData() {
         ObservableList<Barang> barang = barangController.selectAll();
+        System.out.println(String.valueOf(barang.size()));
         tableView.setItems(barang);
     }
     void setActive(int button) {
@@ -221,7 +228,7 @@ public class FromBarang {
             case 1 -> {
                 submit.setText("Add Data");
                 submit.setOnAction(e -> {
-                    String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText();
+                    String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText().trim();
                     String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText();
                     String stok = ((TextField) ((HBox) content.getChildren().get(2)).getChildren().get(1)).getText();
                     barangController.insert(nama, harga, stok);
@@ -263,7 +270,7 @@ public class FromBarang {
             case 3 -> {
                 submit.setText("Delete Data");
                 submit.setOnAction(e -> {
-                    String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText();
+                    String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText().trim();
                     Stage stage = new Stage();
                     Button yes = new Button("Yes");
                     yes.setOnAction(e1 -> {
