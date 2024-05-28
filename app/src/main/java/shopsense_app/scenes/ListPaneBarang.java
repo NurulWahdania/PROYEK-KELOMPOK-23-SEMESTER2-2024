@@ -3,15 +3,15 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ScrollPane;
-import shopsense_app.fungsiMenu.Barang;
+import shopsense_app.fungsiMenu.BarangController;
+import shopsense_app.scene.Barang;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.collections.ObservableList;
-import shopsense_app.fungsi1.BarangController;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListPaneBarang {
-    TableView<shopsense_app.fungsiMenu.Barang> tableView;
+    TableView<shopsense_app.scene.Barang> tableView;
     BarangController barangController = new BarangController();
 
     public VBox getListPane() {

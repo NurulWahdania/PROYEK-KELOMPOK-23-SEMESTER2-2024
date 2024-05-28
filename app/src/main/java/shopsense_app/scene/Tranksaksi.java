@@ -1,4 +1,6 @@
-package shopsense_app.fungsiMenu;
+package shopsense_app.scene;
+
+import java.util.concurrent.ThreadPoolExecutor.DiscardOldestPolicy;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -11,17 +13,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import shopsense_app.fungsi1.BarangController;
-import shopsense_app.scenes.FormPane;
-import shopsense_app.scenes.Menuisi;
+import shopsense_app.fungsiMenu.BarangController;
 
 
 public class Tranksaksi {
@@ -31,7 +33,7 @@ public class Tranksaksi {
         this.stage = stage;
     }
 
-    TableView<shopsense_app.fungsiMenu.Barang> tableView;
+    TableView<shopsense_app.scene.Barang> tableView;
     TableView<Stokbarang> rightTableView;
     BarangController barangController = new BarangController();
     private ObservableList<Stokbarang> selectedItems = FXCollections.observableArrayList();
@@ -39,7 +41,7 @@ public class Tranksaksi {
 
     public void show() {
 
-        Label nmToko = new Label(FormPane.namaToko);
+        Label nmToko = new Label(Home.namaToko);
         nmToko.getStyleClass().add("tokok");
         Line line = new Line();
         line.setStartY(0);
@@ -48,27 +50,22 @@ public class Tranksaksi {
         line.setEndX(20);
         line.setStrokeWidth(2);
         line.setStroke(Color.BLACK);
-        HBox lin2 = new HBox(line);
-
-        // Initialize left table view
+        HBox all = new HBox(10, line, nmToko);
+        all.setPadding(new Insets(30,0,0,1100));
+    
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
         namaColum.setCellValueFactory(new PropertyValueFactory<>("nama"));
-        namaColum.setPrefWidth(130);
+        namaColum.setPrefWidth(180);
         TableColumn<Barang, String> hargaColum = new TableColumn<>("HARGA BARANG");
         hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
-        hargaColum.setPrefWidth(120);
-        TableColumn<Barang, String> stokColum = new TableColumn<>("STOK BARANG");
-        stokColum.setCellValueFactory(new PropertyValueFactory<>("stok"));
-        stokColum.setPrefWidth(100);
-
+        hargaColum.setPrefWidth(170);
+    
         tableView.getColumns().add(namaColum);
         tableView.getColumns().add(hargaColum);
-        tableView.getColumns().add(stokColum);
         tableView.setMinWidth(340);
         tableView.setMinHeight(340);
-
-        // Initialize right table view
+    
         rightTableView = new TableView<>();
         TableColumn<Stokbarang, String> namaColumRight = new TableColumn<>("NAMA BARANG");
         namaColumRight.setCellValueFactory(new PropertyValueFactory<>("nama"));
@@ -79,96 +76,160 @@ public class Tranksaksi {
         TableColumn<Stokbarang, Integer> stokColumRight = new TableColumn<>("JUMLAH");
         stokColumRight.setCellValueFactory(new PropertyValueFactory<>("stock"));
         stokColumRight.setPrefWidth(100);
-
-
+    
         rightTableView.getColumns().add(namaColumRight);
         rightTableView.getColumns().add(hargaColumRight);
         rightTableView.getColumns().add(stokColumRight);
         rightTableView.setMinWidth(340);
         rightTableView.setMaxHeight(250);
-
+    
         Label label = new Label("Tranksaksi");
-        label.getStyleClass().add("judul3");
-
+        label.getStyleClass().add("judul5");
+    
         Button label2 = new Button("\t\tBarang Yang Di Beli\t\t");
         label2.getStyleClass().add("buton7");
-
+    
         Button main = new Button("<\t\t\tMain Menu\t\t\t>");
         main.getStyleClass().add("buton7");
-
+    
         Button add = new Button("+");
         add.getStyleClass().add("buton6");
         add.setOnAction(e -> incrementStock());
-
+    
         Button less = new Button("-");
         less.getStyleClass().add("buton6");
         less.setOnAction(e -> decrementStock());
-
-        Button hasil = new Button("HASIL");
-        hasil.getStyleClass().add("buton8");
-        hasil.setOnAction(e -> processTransaction());
-
+    
+        Button hasill = new Button("HASIL");
+        hasill.getStyleClass().add("buton8");
+        hasill.setOnAction(e -> processTransaction());
+    
         Button delet = new Button("DELET");
         delet.getStyleClass().add("buton8");
         delet.setOnAction(e -> deleteSelectedItem());
-
-        Button home = new Button("Menu");
-        home.getStyleClass().add("home2");
-        home.setOnAction(e -> {
-            Menuisi menu = new Menuisi(stage);
-            menu.show();
-        });
-
-        VBox home2 = new VBox(home);
-        home2.setAlignment(Pos.BOTTOM_RIGHT);
-        home2.setPadding(new Insets(-20,0,0,0));
-
-        HBox buton = new HBox(10, add,delet, hasil, less);
+    
+        TextField diskon = new TextField();
+        diskon.setPromptText("Diskon");
+        diskon.getStyleClass().add("diskon");
+        diskon.setPadding(new Insets(-20,0,0,0));
+        diskon.setMaxSize(100, 30);
+        diskon.setAlignment(Pos.CENTER);
+    
+    
+        HBox buton = new HBox(10, add,delet, hasill, less);
         buton.setAlignment(Pos.CENTER);
-
+    
         totalLabel = new Label("Total: 0");
         totalLabel.setMinWidth(0);
         totalLabel.getStyleClass().add("total-label");
-
-        VBox totalBox = new VBox(buton, totalLabel);
+    
+        VBox totalBox = new VBox(buton, diskon, totalLabel);
         totalBox.setAlignment(Pos.CENTER);
         totalBox.setSpacing(30);
-
+    
         Rectangle rectangle3 = new Rectangle(340, 35);
         rectangle3.setFill(Color.web("#D9D9D9"));
-
+    
         HBox rec2 = new HBox(rectangle3);
-        rec2.setPadding(new Insets(485,0, 0, 440));
-
-
-        VBox rec = new VBox(20, label2, rightTableView, totalBox);
-        rec.setPadding(new Insets(20, 0, 0, 30));
-        rec.setAlignment(Pos.CENTER);
-        rec.setSpacing(10);
-
-        VBox menu1 = new VBox(20, label, main, tableView);
-        HBox sejajar = new HBox(menu1, rec);
-
+        rec2.setPadding(new Insets(520,0, 0, 800));
+    
+        VBox spasi = new VBox(20, label2, rightTableView);
+        VBox recc = new VBox(10, spasi, totalBox);
+        recc.setPadding(new Insets(55, 0, 0, 100));
+        recc.setAlignment(Pos.CENTER);
+        recc.setSpacing(10);
+    
+        VBox men = new VBox(20, label, main, tableView);
+        HBox sejajar = new HBox(men, recc);
         sejajar.setSpacing(30);
-        HBox all2 = new HBox(10, lin2, nmToko);
-        all2.setAlignment(Pos.CENTER);
-        VBox all = new VBox(all2, sejajar, home2);
-        Pane root = new Pane(rec2, all);
-        all.setPadding(new Insets(20));
-        root.getStyleClass().add("background2");
-        root.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
-        Scene scene = new Scene(root, 800, 600);
-        stage.setScene(scene);
+        sejajar.setPadding(new Insets(40,0,0,0));
 
-        loadData();
+        Label menu1 = new Label("MENU");
+        menu1.getStyleClass().add("judul");
+        menu1.setPadding(new Insets(0,0,0,25));
 
-        // Add selection listener to left table
+        Button keuangan = new Button("Laporan Keuangan");
+        keuangan.getStyleClass().add("buton2");
+        keuangan.setOnAction(e -> {
+            Keuangan uang = new Keuangan(stage);
+            uang.show();
+        });
+        Button barang = new Button("Barang");
+        barang.getStyleClass().add("buton2");
+        barang.setOnAction(e -> {
+            Barang brg = new Barang(stage);
+            brg.show();
+        });
+        Button karyawan = new Button("Karyawan");
+        karyawan.getStyleClass().add("buton2");
+        karyawan.setOnAction(e -> {
+            Karyawan kar = new Karyawan(stage);
+            kar.show();
+        });
+        Button tranksaksi = new Button("Transaksi");
+        tranksaksi.getStyleClass().add("buton2");
+        tranksaksi.setOnAction(e -> {
+            Tranksaksi kasir = new Tranksaksi(stage);
+            kasir.show();
+        });
+        Button hasil = new Button("Cetak Hasil");
+        hasil.getStyleClass().add("buton2");
+        hasil.setOnAction(e -> {
+            Hasil cetak = new Hasil(stage);
+            cetak.show();
+        });
+        Button home = new Button("Home");
+        home.getStyleClass().add("home");
+        home.setOnAction(e -> {
+            Home pane = new Home(stage);
+            pane.show();
+        });
+
+        Rectangle rectangle = new Rectangle();
+        rectangle.setFill(Color.web("#182527"));
+        HBox rec = new HBox(rectangle);
+        rec.setPadding(new Insets(0,0,0,0));
+
+
+        Rectangle with = new Rectangle(1020, 650);
+        with.setFill(Color.web("#ffff"));
+        with.getStyleClass().add("rectangle");
+        with.setArcWidth(30); // Mengatur lebar sudut
+        with.setArcHeight(30);
+
+        HBox rewc = new HBox(with);
+        rewc.setPadding(new Insets(20,0,0,230));
+
+        HBox home2 = new HBox(home);
+        // home2.setAlignment(Pos.BOTTOM_RIGHT);
+        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home2);
+        fungsi.setSpacing(40);
+
+        VBox vbox = new VBox(menu1, fungsi);
+        
+        vbox.setSpacing(40);
+        vbox.setPadding(new Insets(10,10,10,10));
+ 
+        HBox gabungg = new HBox(90, vbox, sejajar);
+        Pane pane = new Pane(rewc,rec2, gabungg, all);
+        pane.getStyleClass().add("background2");
+
+        Scene scene = new Scene(pane);
+        scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
+        stage.setScene(scene); 
+        // stage.setFullScreen(true);
+        stage.setMaximized(true);
+        stage.show();
+    
         tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 addItemToRightTable(newValue);
             }
         });
     }
+
+    
+    
 
     public void loadData() {
         ObservableList<Barang> barang = barangController.selectAll();
@@ -219,7 +280,7 @@ public class Tranksaksi {
         Stokbarang selectedItem = rightTableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             selectedItems.remove(selectedItem);
-            rightTableView.refresh(); // Refresh the table view to remove the item from the display
+            rightTableView.refresh(); 
             updateTotal();
         }
     }
@@ -260,7 +321,7 @@ public class Tranksaksi {
         totalLabel.setText("Total: " + total);
     }
 
-    public static class Stokbarang extends shopsense_app.fungsiMenu.Barang {
+    public static class Stokbarang extends shopsense_app.scene.Barang {
         private final SimpleIntegerProperty stock;
 
         public Stokbarang(String nama, String harga, String stok, int initialStock) {

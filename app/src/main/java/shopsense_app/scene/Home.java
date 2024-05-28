@@ -1,4 +1,4 @@
-package shopsense_app.scenes;
+package shopsense_app.scene;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.geometry.Pos;
@@ -11,11 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-public class FormPane {
+public class Home {
     public static String namaToko;
     Stage stage;
 
-    public FormPane(Stage stage){
+    public Home(Stage stage){
         this.stage = stage;
     }
     public void show(){
@@ -77,9 +77,10 @@ public class FormPane {
         all.getStyleClass().add("background");
 
 
-        Scene scene = new Scene(all, 800, 600);
+        Scene scene = new Scene(all);
         scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
     

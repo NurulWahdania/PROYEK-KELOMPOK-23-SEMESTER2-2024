@@ -1,4 +1,4 @@
-package shopsense_app.fungsi1;
+package shopsense_app.fungsiMenu;
 
 public class PemasukanController {
     

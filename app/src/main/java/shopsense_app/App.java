@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import shopsense_app.scenes.FormPane;
+import shopsense_app.scene.Home;
 import shopsense_app.scenes.FromBarang;
 import shopsense_app.scenes.ListPaneBarang;
 
@@ -23,7 +23,7 @@ public class App extends Application {
         Image imageIcon = new Image(getClass().getClassLoader().getResourceAsStream("image/Logo.jpg"));
         stage.getIcons().add(imageIcon);
 
-        FormPane form = new FormPane(stage);
+        Home form = new Home(stage);
         form.show();
     }
     public static void main(String[] args) {

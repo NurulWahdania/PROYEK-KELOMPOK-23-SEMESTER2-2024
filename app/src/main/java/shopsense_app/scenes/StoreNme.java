@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import shopsense_app.scene.Menuisi;
 public class StoreNme {
     Stage stage;
     public StoreNme(Stage stage){

@@ -1,13 +1,14 @@
-package shopsense_app.fungsi1;
+package shopsense_app.fungsiMenu;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-import shopsense_app.fungsiMenu.Barang;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shopsense_app.Data.DatabaseConnection2;
+import shopsense_app.scene.Barang;
 public class BarangController{
 	public void createTable() {
     	String sql = "CREATE TABLE IF NOT EXISTS barang ("

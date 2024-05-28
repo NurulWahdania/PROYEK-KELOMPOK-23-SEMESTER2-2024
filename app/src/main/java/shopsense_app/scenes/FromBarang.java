@@ -10,13 +10,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import shopsense_app.fungsiMenu.Barang;
+import shopsense_app.fungsiMenu.BarangController;
+import shopsense_app.fungsiMenu.DataProvider;
+import shopsense_app.scene.Barang;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.collections.ObservableList;
-import shopsense_app.fungsi1.DataProvider;
 import javafx.scene.control.TextFormatter;
-import shopsense_app.fungsi1.BarangController;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FromBarang {
@@ -27,7 +27,7 @@ public class FromBarang {
     BarangController barangController = new BarangController();
 
     ListPaneBarang listPane;
-    TableView<shopsense_app.fungsiMenu.Barang> tableView;
+    TableView<shopsense_app.scene.Barang> tableView;
 
     public FromBarang(ListPaneBarang listPane) {
         this.listPane = listPane;

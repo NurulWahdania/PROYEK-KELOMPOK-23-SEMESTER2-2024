@@ -1,4 +1,4 @@
-package shopsense_app.fungsiMenu;
+package shopsense_app.scene;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,15 +13,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import shopsense_app.Data.DatabaseConnection2;
-import shopsense_app.scenes.FormPane;
-// import shopsense_app.fungsi1.DataProvider;
-// import shopsense_app.fungsi1.KaryawanController;
-import shopsense_app.scenes.Menuisi;
 
 public class Karyawan {
     String nama ;
@@ -41,7 +39,7 @@ public class Karyawan {
 
     public void  show(){
 
-        Label nmToko = new Label(FormPane.namaToko);
+       Label nmToko = new Label(Home.namaToko);
         nmToko.getStyleClass().add("tokok2");
         Line line = new Line();
         line.setStartY(0);
@@ -52,6 +50,7 @@ public class Karyawan {
         line.setStroke(Color.BLACK);
         HBox lin2 = new HBox(line);
         HBox alll = new HBox(10, lin2, nmToko);
+        alll.setPadding(new Insets(30,0,0,700));
         alll.setAlignment(Pos.CENTER);
         // alll.setPadding(new Insets(10,0,0,20));
 
@@ -67,9 +66,9 @@ public class Karyawan {
         bNama.getStyleClass().add("buton4");
         VBox nama1 = new VBox(nama,bNama);
         
-        Label karyawan = new Label("ID Karyawan");
-        karyawan.getStyleClass().add("karyawan");
-        karyawan.setPadding(new Insets(0, 0, 0, 20));
+        Label id = new Label("ID Karyawan");
+        id.getStyleClass().add("karyawan");
+        id.setPadding(new Insets(0, 0, 0, 20));
         TextField bKaryawan = new TextField();
         bKaryawan.getStyleClass().add("buton4");
         TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
@@ -81,7 +80,7 @@ public class Karyawan {
                 });
                 bKaryawan.setTextFormatter(textFormatter);
 
-        VBox karyawan1 = new VBox(karyawan, bKaryawan);
+        VBox karyawan1 = new VBox(id, bKaryawan);
 
         Label posis = new Label("Posis");
         posis.getStyleClass().add("karyawan");
@@ -108,19 +107,21 @@ public class Karyawan {
             String namaKaryawan = bNama.getText();
             int idKaryawan = Integer.parseInt(bKaryawan.getText());
             String posisiKaryawan = bPosis.getText();
-            String tanggalMasuk = bTanggal.getText();
+            String tanggalMasuk = (bTanggal.getText());
 
             addKaryawan(namaKaryawan, idKaryawan, posisiKaryawan, tanggalMasuk);
         });
 
-        Button home = new Button("Menu");
+
+        Button home = new Button("Home");
         home.getStyleClass().add("home2");
         home.setOnAction(e -> {
-            Menuisi menu = new Menuisi(stage);
+            Home menu = new Home(stage);
             menu.show();
         });
         HBox home2 = new HBox(10, add,home);
         home2.setAlignment(Pos.CENTER);
+        home2.setPadding(new Insets(150,0,0,0));
 
         VBox all2 = new VBox(20, home2);
         all2.setAlignment(Pos.CENTER);
@@ -133,11 +134,77 @@ public class Karyawan {
         all.setPadding(new Insets(20));
     
         VBox gbg = new VBox(alll, all);
-        Scene scene = new Scene(gbg, 800,600);
-        scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
-        stage.setScene(scene);
-    }
+    
+        Label menu1 = new Label("MENU");
+        menu1.getStyleClass().add("judul");
+        menu1.setPadding(new Insets(0,0,0,25));
 
+        Button keuangan = new Button("Laporan Keuangan");
+        keuangan.getStyleClass().add("buton2");
+        keuangan.setOnAction(e -> {
+            Keuangan uang = new Keuangan(stage);
+            uang.show();
+        });
+        Button barang = new Button("Barang");
+        barang.getStyleClass().add("buton2");
+        barang.setOnAction(e -> {
+            Barang brg = new Barang(stage);
+            brg.show();
+        });
+        Button karyawan = new Button("Karyawan");
+        karyawan.getStyleClass().add("buton2");
+        karyawan.setOnAction(e -> {
+            Karyawan kar = new Karyawan(stage);
+            kar.show();
+        });
+        Button tranksaksi = new Button("Transaksi");
+        tranksaksi.getStyleClass().add("buton2");
+        tranksaksi.setOnAction(e -> {
+            Tranksaksi kasir = new Tranksaksi(stage);
+            kasir.show();
+        });
+        Button hasil = new Button("Cetak Hasil");
+        hasil.getStyleClass().add("buton2");
+        hasil.setOnAction(e -> {
+            Hasil cetak = new Hasil(stage);
+            cetak.show();
+        });
+
+        Rectangle with = new Rectangle(1000, 650);
+        with.setFill(Color.web("#ffff"));
+        with.getStyleClass().add("rectangle");
+        with.setArcWidth(30); // Mengatur lebar sudut
+        with.setArcHeight(30);
+
+        HBox rewc = new HBox(with);
+        rewc.setPadding(new Insets(20,0,0,230));
+
+        // HBox home2 = new HBox(home);
+        // home2.setAlignment(Pos.BOTTOM_RIGHT);
+        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil);
+        fungsi.setSpacing(40);
+        HBox menu2 = new HBox(menu1);
+
+        VBox vbox = new VBox(menu2, fungsi);
+        
+        vbox.setSpacing(40);
+        vbox.setPadding(new Insets(10,10,10,10));
+
+        HBox alldata = new HBox(120, vbox, gbg);
+ 
+        StackPane pane = new StackPane(rewc, alldata);
+        pane.getStyleClass().add("background2");
+        pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
+        // StackPane.setMargin(nstore, new Insets(-540, 0, 0, -720));
+
+        // pane.setPadding(new Insets(40));
+
+        Scene scene = new Scene(pane);
+        stage.setScene(scene); 
+        // stage.setFullScreen(true);
+        stage.setMaximized(true);
+        stage.show();
+    }
     public void addKaryawan(String nama, int id_karyawan, String posisi, String tanggal_masuk) {
         String sql = "INSERT INTO karyawan (nama, 'id karyawan', posisi, 'tanggal masuk') VALUES (?, ?, ?, ?)";
 
