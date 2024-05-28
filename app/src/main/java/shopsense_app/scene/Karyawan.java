@@ -104,10 +104,10 @@ public class Karyawan {
         add.getStyleClass().add("home2");
         add.setPrefSize(80, 0);
         add.setOnAction(e -> {
-            String namaKaryawan = bNama.getText();
-            int idKaryawan = Integer.parseInt(bKaryawan.getText());
-            String posisiKaryawan = bPosis.getText();
-            String tanggalMasuk = (bTanggal.getText());
+            String namaKaryawan = bNama.getText().trim();
+            int idKaryawan = Integer.parseInt(bKaryawan.getText().trim());
+            String posisiKaryawan = bPosis.getText().trim();
+            String tanggalMasuk = (bTanggal.getText().trim());
 
             addKaryawan(namaKaryawan, idKaryawan, posisiKaryawan, tanggalMasuk);
         });

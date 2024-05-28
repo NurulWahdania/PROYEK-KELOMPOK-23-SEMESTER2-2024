@@ -229,8 +229,8 @@ public class FromBarang {
                 submit.setText("Add Data");
                 submit.setOnAction(e -> {
                     String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText().trim();
-                    String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText();
-                    String stok = ((TextField) ((HBox) content.getChildren().get(2)).getChildren().get(1)).getText();
+                    String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText().trim();
+                    String stok = ((TextField) ((HBox) content.getChildren().get(2)).getChildren().get(1)).getText().trim();
                     barangController.insert(nama, harga, stok);
                     if (!nama.isEmpty() || !harga.isEmpty() || !stok.isEmpty()) {
                         Barang barang = new Barang(nama, harga, stok);
@@ -249,9 +249,9 @@ public class FromBarang {
             case 2 -> {
                 submit.setText("Update Data");
                 submit.setOnAction(e -> {
-                    String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText();
-                    String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText();
-                    String stok = ((TextField) ((HBox) content.getChildren().get(2)).getChildren().get(1)).getText();
+                    String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText().trim();
+                    String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText().trim();
+                    String stok = ((TextField) ((HBox) content.getChildren().get(2)).getChildren().get(1)).getText().trim();
                     barangController.update(nama, harga, stok);
                     if (!nama.isEmpty() || !harga.isEmpty() || !stok.isEmpty()) {
                         Barang barang = new Barang(nama, harga, stok);
