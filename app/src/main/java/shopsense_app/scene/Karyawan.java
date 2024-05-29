@@ -66,21 +66,21 @@ public class Karyawan {
         bNama.getStyleClass().add("buton4");
         VBox nama1 = new VBox(nama, bNama);
 
-        Label id = new Label("ID Karyawan");
-        id.getStyleClass().add("karyawan");
-        id.setPadding(new Insets(0, 0, 0, 20));
-        TextField bKaryawan = new TextField();
-        bKaryawan.getStyleClass().add("buton4");
-        TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
-            String newText = change.getControlNewText();
-            if (newText.matches("\\d*")) {
-                return change;
-            }
-            return null;
-        });
-        bKaryawan.setTextFormatter(textFormatter);
+        // Label id = new Label("ID Karyawan");
+        // id.getStyleClass().add("karyawan");
+        // id.setPadding(new Insets(0, 0, 0, 20));
+        // TextField bKaryawan = new TextField();
+        // bKaryawan.getStyleClass().add("buton4");
+        // TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
+        //     String newText = change.getControlNewText();
+        //     if (newText.matches("\\d*")) {
+        //         return change;
+        //     }
+        //     return null;
+        // });
+        // bKaryawan.setTextFormatter(textFormatter);
 
-        VBox karyawan1 = new VBox(id, bKaryawan);
+        // VBox karyawan1 = new VBox(id, bKaryawan);
 
         Label posis = new Label("Posisi");
         posis.getStyleClass().add("karyawan");
@@ -101,12 +101,12 @@ public class Karyawan {
         add.setPrefSize(80, 0);
         add.setOnAction(e -> {
             String namaKaryawan = bNama.getText().trim();
-            int idKaryawan = Integer.parseInt(bKaryawan.getText().trim());
+            // int idKaryawan = Integer.parseInt(bKaryawan.getText().trim());
             String posisiKaryawan = bPosis.getText().trim();
             LocalDate selectedDate = datePicker.getValue();
             String tanggalMasuk = selectedDate != null ? selectedDate.toString() : "";
 
-            addKaryawan(namaKaryawan, idKaryawan, posisiKaryawan, tanggalMasuk);
+            addKaryawan(namaKaryawan, posisiKaryawan, tanggalMasuk);
         });
 
         Button home = new Button("Home");
@@ -123,7 +123,7 @@ public class Karyawan {
         all2.setAlignment(Pos.CENTER);
         all2.setPadding(new Insets(10, 0, 0, 100));
 
-        VBox gabung = new VBox(40, nama1, karyawan1, posisi1);
+        VBox gabung = new VBox(40, nama1, posisi1);
         VBox all1 = new VBox(judul, gabung);
         all1.setSpacing(50);
         HBox all = new HBox(20, all1, all2);
@@ -195,14 +195,14 @@ public class Karyawan {
         stage.show();
     }
 
-    public void addKaryawan(String nama, int id_karyawan, String posisi, String tanggal_masuk) {
+    public void addKaryawan(String nama, String posisi, String tanggal_masuk) {
         String sql = "INSERT INTO karyawan (nama, 'id karyawan', posisi, 'tanggal masuk') VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection2.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, nama);
-            pstmt.setInt(2, id_karyawan);
+            // pstmt.setInt(2, id_karyawan);
             pstmt.setString(3, posisi);
             pstmt.setString(4, tanggal_masuk);
 

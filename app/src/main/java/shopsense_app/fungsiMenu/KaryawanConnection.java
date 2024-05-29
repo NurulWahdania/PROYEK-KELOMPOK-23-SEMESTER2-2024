@@ -16,7 +16,7 @@ public class KaryawanConnection {
     public void createTable() {
     	String sql = "CREATE TABLE IF NOT EXISTS barang ("
                	+ " nama TEXT NOT NULL,"
-               	+ " id_karyawan PRIMARY KEY,"
+               	+ " id_karyawan  PRIMARY KEY INTEGER NOT NULL UNIQUE"
                	+ " posisi TEXT NOT NULL"
                 + " tanggal_masuk TEXT NOT NULL"
                	+ ");";
