@@ -35,10 +35,10 @@ public class Menuisi {
         menu1.getStyleClass().add("judul");
         menu1.setPadding(new Insets(0,0,0,25));
 
-        Button keuangan = new Button("Laporan Keuangan");
+        Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
         keuangan.setOnAction(e -> {
-            Keuangan uang = new Keuangan(stage);
+            LaporanToko uang = new LaporanToko(stage);
             uang.show();
         });
         Button barang = new Button("Barang");

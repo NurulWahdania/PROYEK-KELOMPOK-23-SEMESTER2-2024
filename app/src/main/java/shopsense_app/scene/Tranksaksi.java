@@ -14,6 +14,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -38,8 +39,26 @@ public class Tranksaksi {
     BarangController barangController = new BarangController();
     private ObservableList<Stokbarang> selectedItems = FXCollections.observableArrayList();
     private Label totalLabel;
+    private TextField diskon;
+    private Button hasil;
+    private Label salah;
+
 
     public void show() {
+
+        TextField idKaryawan = new TextField();
+        idKaryawan.setPromptText("Masukan Id");
+        idKaryawan.setOnAction(e -> {
+
+        });
+
+        idKaryawan.getStyleClass().add("text2");
+
+        TextField namaKaryawan = new TextField();
+        namaKaryawan.setPromptText("Masukan Nama");
+        namaKaryawan.getStyleClass().add("text2");
+
+        HBox atas = new HBox(10, idKaryawan, namaKaryawan);
 
         Label nmToko = new Label(Home.namaToko);
         nmToko.getStyleClass().add("tokok");
@@ -50,8 +69,8 @@ public class Tranksaksi {
         line.setEndX(20);
         line.setStrokeWidth(2);
         line.setStroke(Color.BLACK);
-        HBox all = new HBox(10, line, nmToko);
-        all.setPadding(new Insets(30,0,0,1100));
+        HBox all = new HBox(10,atas ,line, nmToko);
+        all.setPadding(new Insets(30,0,0,790));
     
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
@@ -82,6 +101,7 @@ public class Tranksaksi {
         rightTableView.getColumns().add(stokColumRight);
         rightTableView.setMinWidth(340);
         rightTableView.setMaxHeight(250);
+
     
         Label label = new Label("Tranksaksi");
         label.getStyleClass().add("judul5");
@@ -100,23 +120,31 @@ public class Tranksaksi {
         less.getStyleClass().add("buton6");
         less.setOnAction(e -> decrementStock());
     
-        Button hasill = new Button("HASIL");
-        hasill.getStyleClass().add("buton8");
-        hasill.setOnAction(e -> processTransaction());
+        hasil = new Button("HASIL");
+        hasil.getStyleClass().add("buton8");
+        hasil.setOnAction(e -> {
+        processTransaction();}
+        );
     
-        Button delet = new Button("DELET");
+        Button delet = new Button("CLEAR");
         delet.getStyleClass().add("buton8");
         delet.setOnAction(e -> deleteSelectedItem());
     
-        TextField diskon = new TextField();
-        diskon.setPromptText("Diskon");
+        diskon = new TextField();
+        diskon.setPromptText("Diskon %");
         diskon.getStyleClass().add("diskon");
         diskon.setPadding(new Insets(-20,0,0,0));
         diskon.setMaxSize(100, 30);
         diskon.setAlignment(Pos.CENTER);
-    
-    
-        HBox buton = new HBox(10, add,delet, hasill, less);
+        TextFormatter<String> textFormatter1 = new TextFormatter<>(change -> {
+                    String newText = change.getControlNewText();
+                    if (newText.matches("\\d*")) {
+                        return change;
+                    }
+                    return null;
+                });
+        diskon.setTextFormatter(textFormatter1);
+        HBox buton = new HBox(10, add,delet, hasil, less);
         buton.setAlignment(Pos.CENTER);
     
         totalLabel = new Label("Total: 0");
@@ -148,10 +176,10 @@ public class Tranksaksi {
         menu1.getStyleClass().add("judul");
         menu1.setPadding(new Insets(0,0,0,25));
 
-        Button keuangan = new Button("Laporan Keuangan");
+        Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
         keuangan.setOnAction(e -> {
-            Keuangan uang = new Keuangan(stage);
+            LaporanToko uang = new LaporanToko(stage);
             uang.show();
         });
         Button barang = new Button("Barang");
@@ -172,9 +200,9 @@ public class Tranksaksi {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasil = new Button("Cetak Hasil");
-        hasil.getStyleClass().add("buton2");
-        hasil.setOnAction(e -> {
+        Button hasill = new Button("Cetak Hasil");
+        hasill.getStyleClass().add("buton2");
+        hasill.setOnAction(e -> {
             Hasil cetak = new Hasil(stage);
             cetak.show();
         });
@@ -202,16 +230,18 @@ public class Tranksaksi {
 
         HBox home2 = new HBox(home);
         // home2.setAlignment(Pos.BOTTOM_RIGHT);
-        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home2);
+        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasill, home2);
         fungsi.setSpacing(40);
 
         VBox vbox = new VBox(menu1, fungsi);
         
         vbox.setSpacing(40);
         vbox.setPadding(new Insets(10,10,10,10));
+        salah = new Label();
+        salah.getStyleClass().add("hasil");
  
         HBox gabungg = new HBox(90, vbox, sejajar);
-        Pane pane = new Pane(rewc,rec2, gabungg, all);
+        Pane pane = new Pane(rewc,rec2, gabungg, all, salah);
         pane.getStyleClass().add("background2");
 
         Scene scene = new Scene(pane);
@@ -220,6 +250,7 @@ public class Tranksaksi {
         // stage.setFullScreen(true);
         stage.setMaximized(true);
         stage.show();
+        loadData();
     
         tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -289,18 +320,17 @@ public class Tranksaksi {
         // Mengurangi stok pada tabel kiri dan database
         for (Stokbarang item : selectedItems) {
             Barang barang = findItemInLeftTable(item.getNama());
-            if (barang != null) {
+            if (item.getStock() >= 0) {
                 int newStock = Integer.parseInt(barang.getStok()) - item.getStock();
                 barang.setStok(String.valueOf(newStock));
                 barangController.updateStok(barang.getNama(), newStock);
+            }else {
+                System.out.println("Jumlah stok barang kurang");
             }
         }
-        // Kosongkan tabel kanan setelah transaksi
         selectedItems.clear();
         rightTableView.refresh();
-        // Perbarui total
         updateTotal();
-        // Refresh tabel kiri untuk memperbarui stok yang ditampilkan
         tableView.refresh();
     }
 
@@ -316,10 +346,26 @@ public class Tranksaksi {
     public void updateTotal() {
         int total = 0;
         for (Stokbarang item : selectedItems) {
-            total += Integer.parseInt(item.getHarga()) * item.getStock();
+            if (item.getStock() >= 1) {
+                    total += Integer.parseInt(item.getHarga()) * item.getStock();
+                    try {
+                        int nilaidiskon = Integer.parseInt(diskon.getText());
+                        total = total - (total * nilaidiskon /100);   
+                    } catch (Exception e) {
+                        System.out.println("Diskon tidak valid " + e.getMessage());
+                    }  
+            }else {
+                // hasil.setOnAction(e -> {
+                //     salah.setText("Stok Kurang");
+                //     salah.relocate(800, 500);
+                // });                
+            }
+            totalLabel.setText("Total: " + total);
+            }
         }
-        totalLabel.setText("Total: " + total);
-    }
+    
+
+
 
     public static class Stokbarang extends shopsense_app.scene.Barang {
         private final SimpleIntegerProperty stock;
@@ -348,5 +394,6 @@ public class Tranksaksi {
         public void decrementStock() {
             setStock(getStock() - 1);
         }
-    }
-}
+    } 
+ }
+

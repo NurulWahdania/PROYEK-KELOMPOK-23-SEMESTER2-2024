@@ -8,6 +8,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -36,19 +39,24 @@ public class Hasil {
         HBox all = new HBox(10, line, nmToko);
         all.setPadding(new Insets(30,0,0,1100));
 
-        Label label = new Label("HASIL/CATATAN");
+        // Image foto = new Image("image/yooh.jpg");
+        // ImageView vieFoto = new ImageView(foto);
+        // vieFoto.setFitHeight(50);
+        // vieFoto.setFitWidth(300);
+
+
+        Label label = new Label("Histori");
         label.getStyleClass().add("judul4");
         label.setPadding(new Insets(40,0,0,20));
-
 
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
         menu1.setPadding(new Insets(0,0,0,25));
 
-        Button keuangan = new Button("Laporan Keuangan");
+        Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
         keuangan.setOnAction(e -> {
-            Keuangan uang = new Keuangan(stage);
+            LaporanToko uang = new LaporanToko(stage);
             uang.show();
         });
         Button barang = new Button("Barang");

@@ -14,10 +14,10 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class Keuangan {
+public class LaporanToko {
     Stage stage;
 
-    public Keuangan(Stage stage){
+    public LaporanToko(Stage stage){
         this.stage = stage;
     }
 
@@ -36,51 +36,26 @@ public class Keuangan {
         HBox alll = new HBox(10, lin2, nmToko);
         alll.setPadding(new Insets(30,0,0,750));
 
-        Label uang = new Label("Laporan Keuangan");
+        Label uang = new Label("Laporan Toko");
         uang.getStyleClass().add("judul2");
 
-        Label pemasukan = new Label("Pemasukan Rp:\t");
+
+        Label pemasukan = new Label("Jumlah Pemasukan");
         pemasukan.getStyleClass().add("keuangan");
-        Button bPemasukan = new Button();
-        bPemasukan.getStyleClass().add("buton3");
+        pemasukan.setAlignment(Pos.CENTER);
     
-
-        Label pengeluaran = new Label("Pengeluaran Rp:\t");
+        Label pengeluaran = new Label("Data karyawan:\t");
         pengeluaran.getStyleClass().add("keuangan");
-        Button bPengeluaran = new Button();
-        bPengeluaran.getStyleClass().add("buton3");
-    
-
-        Label laba = new Label("Laba Rp:\t");
-        laba.getStyleClass().add("keuangan");
-        Button bLaba = new Button();
-        bLaba.getStyleClass().add("buton3");
-
-
-        Button ceklaba = new Button("Cek Laba");
-        ceklaba.setAlignment(Pos.CENTER);
-        ceklaba.getStyleClass().add("home2");
-        ceklaba.setMaxSize(200, 0);
-
+        pengeluaran.setAlignment(Pos.CENTER);
 
         HBox hjudul = new HBox(uang);
         hjudul.setAlignment(Pos.CENTER);
 
+        HBox label = new HBox(100,pemasukan, pengeluaran);
+        label.setAlignment(Pos.CENTER);
 
-        VBox label = new VBox(pemasukan, pengeluaran,laba);
-        label.setSpacing(50);
-        label.setAlignment(Pos.CENTER_LEFT);
-
-        VBox butten = new VBox(bPemasukan, bPengeluaran, bLaba);
-        butten.setSpacing(40);
-        butten.setAlignment(Pos.CENTER_RIGHT);
-
-        HBox hbox = new HBox(label, butten);
-        hbox.setAlignment(Pos.CENTER);
-
-        VBox gabung = new VBox( hjudul, hbox,ceklaba);
-        gabung.setSpacing(80);
-        gabung.setPadding(new Insets(10,10,10,10));
+        VBox gabung = new VBox(40, hjudul, label);
+        gabung.setPadding(new Insets(10,10,10,40));
         gabung.setAlignment(Pos.CENTER);
 
         VBox all = new VBox(alll, gabung);
@@ -89,10 +64,10 @@ public class Keuangan {
         menu1.getStyleClass().add("judul");
         menu1.setPadding(new Insets(0,0,0,25));
 
-        Button keuangan = new Button("Laporan Keuangan");
+        Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
         keuangan.setOnAction(e -> {
-            Keuangan keuang= new Keuangan(stage);
+            LaporanToko keuang= new LaporanToko(stage);
             keuang.show();
         });
         Button barang = new Button("Barang");

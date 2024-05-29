@@ -95,6 +95,7 @@ public class Karyawan {
         datePicker = new DatePicker(); 
         datePicker.setId("datepick");
         VBox tanggal1 = new VBox(tanggal, datePicker); 
+        tanggal1.setPadding(new Insets(10,0,0,20));
 
         Button add = new Button("Add");
         add.getStyleClass().add("home2");
@@ -110,35 +111,32 @@ public class Karyawan {
         });
 
         Button home = new Button("Home");
-        home.getStyleClass().add("home2");
+        home.getStyleClass().add("home");
         home.setOnAction(e -> {
             Home menu = new Home(stage);
             menu.show();
         });
-        HBox home2 = new HBox(10, add, home);
-        home2.setAlignment(Pos.CENTER);
-        home2.setPadding(new Insets(150, 0, 0, 0));
 
-        VBox all2 = new VBox(20, home2); // Tombol add dan home
-        all2.setAlignment(Pos.CENTER);
-        all2.setPadding(new Insets(10, 0, 0, 100));
+        HBox home2 = new HBox(add);
+        home2.setAlignment(Pos.CENTER);
+        home2.setPadding(new Insets(40,0,0,0));
 
         VBox gabung = new VBox(40, nama1, posisi1);
         VBox all1 = new VBox(judul, gabung);
         all1.setSpacing(50);
-        HBox all = new HBox(20, all1, all2);
+        HBox all = new HBox(20, all1);
         all.setPadding(new Insets(20));
 
-        VBox gbg = new VBox(alll, all, tanggal1); // Menambahkan tanggal1 di sini setelah all
+        VBox gbg = new VBox(20, alll, all, tanggal1, home2); // Menambahkan tanggal1 di sini setelah all
 
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
         menu1.setPadding(new Insets(0, 0, 0, 25));
 
-        Button keuangan = new Button("Laporan Keuangan");
+        Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
         keuangan.setOnAction(e -> {
-            Keuangan uang = new Keuangan(stage);
+            LaporanToko uang = new LaporanToko(stage);
             uang.show();
         });
         Button barang = new Button("Barang");
@@ -175,7 +173,7 @@ public class Karyawan {
         HBox rewc = new HBox(with);
         rewc.setPadding(new Insets(20, 0, 0, 230));
 
-        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil);
+        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home);
         fungsi.setSpacing(40);
         HBox menu2 = new HBox(menu1);
 

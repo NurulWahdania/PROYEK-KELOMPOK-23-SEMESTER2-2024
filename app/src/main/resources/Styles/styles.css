@@ -178,7 +178,7 @@
     -fx-font-family: "Nunito";
     -fx-font-size: 15px;
     -fx-font-weight: bold;
-    -fx-text-fill: #040404;
+    -fx-text-fill: #ffffff;
     -fx-background-color: #20CD8D;
     -fx-pref-width: 350px;
 
@@ -225,7 +225,11 @@
     -fx-font-family: "Nunito";
     -fx-font-size: 20px;
     -fx-font-weight: bold;
-    -fx-text-fill: #040404;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #20CD8D;
+    -fx-background-radius: 5px ;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 20px;
 
 }
 
@@ -328,6 +332,28 @@
     -fx-background-radius: 5px ; 
 
 
+}
+
+
+.text2 {
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+    -fx-prompt-text-fill: rgb(255, 255, 255);
+    -fx-background-color: #20CD8D;
+    -fx-pref-width: 150px;
+
+}
+
+.hasil {
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+    /* -fx-prompt-text-fill: rgb(255, 255, 255);
+    -fx-background-color: #20CD8D; */
+    /* -fx-pref-width: 150px; */
 }
 
 
