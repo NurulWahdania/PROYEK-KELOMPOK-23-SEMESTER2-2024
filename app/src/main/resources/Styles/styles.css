@@ -41,7 +41,7 @@
     -fx-font-family: "Nunito";
     -fx-font-size: 50px;
     -fx-text-fill: #ffffff;
-    -fx-font-weight: bold;
+    -fx-font-weight: bold;   
 }
 
 
@@ -90,6 +90,17 @@
     -fx-font-weight: bold;
     -fx-text-fill: #040404;
     -fx-background-color: #fff;
+    -fx-background-radius: 25px ;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+
+}
+.buton2:hover{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-background-color: #182527;
     -fx-background-radius: 25px ;
     -fx-pref-width: 200px;
     -fx-pref-height: 40px;
