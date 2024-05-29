@@ -116,6 +116,28 @@
     -fx-background-radius: 25px ;
     -fx-pref-width: 410px;
 }
+#datepick .text-field{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+    -fx-background-color: #A6A6A6;
+    -fx-background-radius: 25px ;
+    -fx-pref-width: 410px;
+}
+#datepick{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+    -fx-background-color: #A6A6A6;
+    -fx-background-radius: 25px ;
+    -fx-pref-width: 410px;
+}
+#datepick .icon .iconi{
+    -fx-background-radis: 5px;
+    -fx-backgorund-color: #ffff;
+}
 
 .buton5{
     -fx-font-family: "Nunito";

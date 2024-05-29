@@ -3,13 +3,14 @@ package shopsense_app.scene;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-// import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.HBox;
@@ -22,14 +23,17 @@ import javafx.stage.Stage;
 import shopsense_app.Data.DatabaseConnection2;
 
 public class Karyawan {
-    String nama ;
+    String nama;
     int id;
     String posisi;
     String tanggal;
     Stage stage;
+    DatePicker datePicker; // Deklarasi DatePicker
+
     public Karyawan(Stage stage){
         this.stage = stage;
     }
+
     public Karyawan(String nama, int id, String posisi, String tanggal) {
         this.nama = nama;
         this.id = id;
@@ -37,9 +41,8 @@ public class Karyawan {
         this.tanggal = tanggal;
     }
 
-    public void  show(){
-
-       Label nmToko = new Label(Home.namaToko);
+    public void show(){
+        Label nmToko = new Label(Home.namaToko);
         nmToko.getStyleClass().add("tokok2");
         Line line = new Line();
         line.setStartY(0);
@@ -52,9 +55,6 @@ public class Karyawan {
         HBox alll = new HBox(10, lin2, nmToko);
         alll.setPadding(new Insets(30,0,0,700));
         alll.setAlignment(Pos.CENTER);
-        // alll.setPadding(new Insets(10,0,0,20));
-
-
 
         Label judul = new Label("Karyawan");
         judul.getStyleClass().add("judul2");
@@ -64,41 +64,37 @@ public class Karyawan {
         nama.setPadding(new Insets(0, 0, 0, 20));
         TextField bNama = new TextField();
         bNama.getStyleClass().add("buton4");
-        VBox nama1 = new VBox(nama,bNama);
-        
+        VBox nama1 = new VBox(nama, bNama);
+
         Label id = new Label("ID Karyawan");
         id.getStyleClass().add("karyawan");
         id.setPadding(new Insets(0, 0, 0, 20));
         TextField bKaryawan = new TextField();
         bKaryawan.getStyleClass().add("buton4");
         TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
-                    String newText = change.getControlNewText();
-                    if (newText.matches("\\d*")) {
-                        return change;
-                    }
-                    return null;
-                });
-                bKaryawan.setTextFormatter(textFormatter);
+            String newText = change.getControlNewText();
+            if (newText.matches("\\d*")) {
+                return change;
+            }
+            return null;
+        });
+        bKaryawan.setTextFormatter(textFormatter);
 
         VBox karyawan1 = new VBox(id, bKaryawan);
 
-        Label posis = new Label("Posis");
+        Label posis = new Label("Posisi");
         posis.getStyleClass().add("karyawan");
         posis.setPadding(new Insets(0, 0, 0, 20));
         TextField bPosis = new TextField();
         bPosis.getStyleClass().add("buton4");
         VBox posisi1 = new VBox(posis, bPosis);
+
         Label tanggal = new Label("Tanggal Masuk");
         tanggal.getStyleClass().add("karyawan");
         tanggal.setPadding(new Insets(0, 0, 0, 20));
-        TextField bTanggal = new TextField();
-        bTanggal.getStyleClass().add("buton4");
-
-        VBox tanggal1 = new VBox(tanggal, bTanggal);
-
-        // Button foto = new Button("FOTO");
-        // foto.getStyleClass().add("foto");
-        // foto.setMinSize(0, 200);
+        datePicker = new DatePicker(); 
+        datePicker.setId("datepick");
+        VBox tanggal1 = new VBox(tanggal, datePicker); 
 
         Button add = new Button("Add");
         add.getStyleClass().add("home2");
@@ -107,11 +103,11 @@ public class Karyawan {
             String namaKaryawan = bNama.getText().trim();
             int idKaryawan = Integer.parseInt(bKaryawan.getText().trim());
             String posisiKaryawan = bPosis.getText().trim();
-            String tanggalMasuk = (bTanggal.getText().trim());
+            LocalDate selectedDate = datePicker.getValue();
+            String tanggalMasuk = selectedDate != null ? selectedDate.toString() : "";
 
             addKaryawan(namaKaryawan, idKaryawan, posisiKaryawan, tanggalMasuk);
         });
-
 
         Button home = new Button("Home");
         home.getStyleClass().add("home2");
@@ -119,25 +115,25 @@ public class Karyawan {
             Home menu = new Home(stage);
             menu.show();
         });
-        HBox home2 = new HBox(10, add,home);
+        HBox home2 = new HBox(10, add, home);
         home2.setAlignment(Pos.CENTER);
-        home2.setPadding(new Insets(150,0,0,0));
+        home2.setPadding(new Insets(150, 0, 0, 0));
 
-        VBox all2 = new VBox(20, home2);
+        VBox all2 = new VBox(20, home2); // Tombol add dan home
         all2.setAlignment(Pos.CENTER);
         all2.setPadding(new Insets(10, 0, 0, 100));
 
-        VBox gabung = new VBox(40,nama1, karyawan1, posisi1, tanggal1);
-        VBox all1 = new VBox( judul, gabung);
-        all1. setSpacing(50);
-        HBox all = new HBox(20,all1, all2);
+        VBox gabung = new VBox(40, nama1, karyawan1, posisi1);
+        VBox all1 = new VBox(judul, gabung);
+        all1.setSpacing(50);
+        HBox all = new HBox(20, all1, all2);
         all.setPadding(new Insets(20));
-    
-        VBox gbg = new VBox(alll, all);
-    
+
+        VBox gbg = new VBox(alll, all, tanggal1); // Menambahkan tanggal1 di sini setelah all
+
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
-        menu1.setPadding(new Insets(0,0,0,25));
+        menu1.setPadding(new Insets(0, 0, 0, 25));
 
         Button keuangan = new Button("Laporan Keuangan");
         keuangan.getStyleClass().add("buton2");
@@ -173,38 +169,32 @@ public class Karyawan {
         Rectangle with = new Rectangle(1000, 650);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
-        with.setArcWidth(30); // Mengatur lebar sudut
+        with.setArcWidth(30);
         with.setArcHeight(30);
 
         HBox rewc = new HBox(with);
-        rewc.setPadding(new Insets(20,0,0,230));
+        rewc.setPadding(new Insets(20, 0, 0, 230));
 
-        // HBox home2 = new HBox(home);
-        // home2.setAlignment(Pos.BOTTOM_RIGHT);
         VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil);
         fungsi.setSpacing(40);
         HBox menu2 = new HBox(menu1);
 
         VBox vbox = new VBox(menu2, fungsi);
-        
         vbox.setSpacing(40);
-        vbox.setPadding(new Insets(10,10,10,10));
+        vbox.setPadding(new Insets(10, 10, 10, 10));
 
         HBox alldata = new HBox(120, vbox, gbg);
- 
+
         StackPane pane = new StackPane(rewc, alldata);
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
-        // StackPane.setMargin(nstore, new Insets(-540, 0, 0, -720));
-
-        // pane.setPadding(new Insets(40));
 
         Scene scene = new Scene(pane);
-        stage.setScene(scene); 
-        // stage.setFullScreen(true);
+        stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
     }
+
     public void addKaryawan(String nama, int id_karyawan, String posisi, String tanggal_masuk) {
         String sql = "INSERT INTO karyawan (nama, 'id karyawan', posisi, 'tanggal masuk') VALUES (?, ?, ?, ?)";
 
@@ -255,4 +245,3 @@ public class Karyawan {
         this.stage = stage;
     }
 }
-
