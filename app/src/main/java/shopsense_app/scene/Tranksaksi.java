@@ -1,6 +1,15 @@
 package shopsense_app.scene;
 
 import java.util.concurrent.ThreadPoolExecutor.DiscardOldestPolicy;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import shopsense_app.Data.DatabaseConnection2;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -24,8 +33,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import shopsense_app.Data.TranksaksiControler;
 import shopsense_app.fungsiMenu.BarangController;
-
+import shopsense_app.fungsiMenu.KaryawanConnection;
 
 public class Tranksaksi {
     Stage stage;
@@ -39,10 +49,10 @@ public class Tranksaksi {
     BarangController barangController = new BarangController();
     private ObservableList<Stokbarang> selectedItems = FXCollections.observableArrayList();
     private Label totalLabel;
+    private int hasilBelanja;
     private TextField diskon;
     private Button hasil;
     private Label salah;
-
 
     public void show() {
 
@@ -54,14 +64,14 @@ public class Tranksaksi {
 
         idKaryawan.getStyleClass().add("text2");
 
-        TextField namaKaryawan = new TextField();
-        namaKaryawan.setPromptText("Masukan Nama");
-        namaKaryawan.getStyleClass().add("text2");
+        // TextField namaKaryawan = new TextField();
+        // namaKaryawan.setPromptText("Masukan Nama");
+        // namaKaryawan.getStyleClass().add("text2");
 
-        HBox atas = new HBox(10, idKaryawan, namaKaryawan);
+        HBox atas = new HBox(10, idKaryawan);
 
-        Label nmToko = new Label(Home.namaToko);
-        nmToko.getStyleClass().add("tokok");
+        // Label nmToko = new Label(Home.namaToko);
+        // nmToko.getStyleClass().add("tokok");
         Line line = new Line();
         line.setStartY(0);
         line.setStartX(20);
@@ -69,7 +79,7 @@ public class Tranksaksi {
         line.setEndX(20);
         line.setStrokeWidth(2);
         line.setStroke(Color.BLACK);
-        HBox all = new HBox(10,atas ,line, nmToko);
+        HBox all = new HBox(10,atas ,line);
         all.setPadding(new Insets(30,0,0,790));
     
         tableView = new TableView<>();
@@ -123,7 +133,10 @@ public class Tranksaksi {
         hasil = new Button("HASIL");
         hasil.getStyleClass().add("buton8");
         hasil.setOnAction(e -> {
-        processTransaction();}
+            String nama_karyawan = cekNamaKaryawan(idKaryawan.getText());
+            TranksaksiControler tr = new TranksaksiControler();
+            tr.addHasil(hasilBelanja, waktu(), nama_karyawan);
+            processTransaction();}
         );
     
         Button delet = new Button("CLEAR");
@@ -212,6 +225,7 @@ public class Tranksaksi {
             Home pane = new Home(stage);
             pane.show();
         });
+        
 
         Rectangle rectangle = new Rectangle();
         rectangle.setFill(Color.web("#182527"));
@@ -258,9 +272,6 @@ public class Tranksaksi {
             }
         });
     }
-
-    
-    
 
     public void loadData() {
         ObservableList<Barang> barang = barangController.selectAll();
@@ -311,7 +322,7 @@ public class Tranksaksi {
         Stokbarang selectedItem = rightTableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             selectedItems.remove(selectedItem);
-            rightTableView.refresh(); 
+            rightTableView.refresh();
             updateTotal();
         }
     }
@@ -324,7 +335,7 @@ public class Tranksaksi {
                 int newStock = Integer.parseInt(barang.getStok()) - item.getStock();
                 barang.setStok(String.valueOf(newStock));
                 barangController.updateStok(barang.getNama(), newStock);
-            }else {
+            } else {
                 System.out.println("Jumlah stok barang kurang");
             }
         }
@@ -347,25 +358,23 @@ public class Tranksaksi {
         int total = 0;
         for (Stokbarang item : selectedItems) {
             if (item.getStock() >= 1) {
-                    total += Integer.parseInt(item.getHarga()) * item.getStock();
-                    try {
-                        int nilaidiskon = Integer.parseInt(diskon.getText());
-                        total = total - (total * nilaidiskon /100);   
-                    } catch (Exception e) {
-                        System.out.println("Diskon tidak valid " + e.getMessage());
-                    }  
-            }else {
+                total += Integer.parseInt(item.getHarga()) * item.getStock();
+                try {
+                    int nilaidiskon = Integer.parseInt(diskon.getText());
+                    total = total - (total * nilaidiskon / 100);
+                } catch (Exception e) {
+                    System.out.println("Diskon tidak valid " + e.getMessage());
+                }
+            } else {
                 // hasil.setOnAction(e -> {
-                //     salah.setText("Stok Kurang");
-                //     salah.relocate(800, 500);
-                // });                
+                // salah.setText("Stok Kurang");
+                // salah.relocate(800, 500);
+                // });
             }
             totalLabel.setText("Total: " + total);
-            }
+            hasilBelanja = total;
         }
-    
-
-
+    }
 
     public static class Stokbarang extends shopsense_app.scene.Barang {
         private final SimpleIntegerProperty stock;
@@ -394,6 +403,50 @@ public class Tranksaksi {
         public void decrementStock() {
             setStock(getStock() - 1);
         }
-    } 
- }
+    }
 
+    public String waktu() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String waktu = now.format(formatter);
+        return waktu;
+    }
+
+    private String cekNamaKaryawan(String id) {
+        System.out.println("id = " + id);
+        String data = "";
+        ObservableList<Karyawan> karyawanslIST = selectAll();
+        for (Karyawan karyawan : karyawanslIST){
+            System.out.println(String.valueOf(karyawan.getId()));
+            if (String.valueOf(karyawan.getId()).equals(id)) {
+                data = karyawan.getNama();
+            }
+        }
+        return data;
+    }
+
+    public ObservableList<Karyawan> selectAll() {
+    	String sql = "SELECT nama, `id karyawan`, posisi, `tanggal masuk` FROM karyawan";
+    	ObservableList<Karyawan> data = FXCollections.observableArrayList();
+
+    	try (Connection conn = DatabaseConnection2.connect();
+         	Statement stmt = conn.createStatement();
+         	ResultSet rs = stmt.executeQuery(sql)) {
+
+        	while (rs.next()) {
+            	    Karyawan karyawan = new Karyawan(
+                    	rs.getString("nama"),
+                    	rs.getInt("id karyawan"),
+                    	rs.getString("posisi"),
+                        rs.getString("tanggal masuk")
+            	);
+            	data.add(karyawan);
+        	}
+    	} catch (SQLException e) {
+        	System.out.println(e.getMessage());
+    	}
+    	return data;
+	}
+
+
+}

@@ -18,8 +18,8 @@ public class Menuisi {
     }
 
     public void show(){
-        Label nmToko = new Label(Home.namaToko);
-        nmToko.getStyleClass().add("tokok");
+        // Label nmToko = new Label(Home.namaToko);
+        // nmToko.getStyleClass().add("tokok");
         Line line = new Line();
         line.setStartY(0);
         line.setStartX(20);
@@ -76,7 +76,7 @@ public class Menuisi {
         Rectangle with = new Rectangle(1000, 650);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
-        with.setArcWidth(30); // Mengatur lebar sudut
+        with.setArcWidth(30); 
         with.setArcHeight(30);
 
         HBox rewc = new HBox(with);
@@ -93,7 +93,7 @@ public class Menuisi {
         vbox.setSpacing(40);
         vbox.setPadding(new Insets(10,10,10,10));
 
-        HBox nstore = new HBox(10,lin2,nmToko);
+        HBox nstore = new HBox(10,lin2);
         nstore.setPadding(new Insets(30,0,0,700));
 
         HBox alldata = new HBox(120, vbox, nstore);

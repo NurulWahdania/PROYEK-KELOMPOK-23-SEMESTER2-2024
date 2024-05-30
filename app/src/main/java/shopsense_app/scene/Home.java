@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class Home {
-    public static String namaToko;
+    // public static String namaToko;
     Stage stage;
 
     public Home(Stage stage){
@@ -45,16 +45,22 @@ public class Home {
         button.setPrefWidth(300);
         button.setPrefHeight(50);
 
-        TextField buttonToStoreName = new TextField();
-        buttonToStoreName.setPromptText("STORE NAME");
-        buttonToStoreName.setId("tf-home");
-        buttonToStoreName.setPrefWidth(300);
-        buttonToStoreName.setPrefHeight(50);
+        // TextField buttonToStoreName = new TextField();
+        // buttonToStoreName.setPromptText("STORE NAME");
+        // buttonToStoreName.setId("tf-home");
+        // buttonToStoreName.setPrefWidth(300);
+        // buttonToStoreName.setPrefHeight(50);
 
         button.setOnAction(e -> {
-            Menuisi menu = new Menuisi(stage);
-            namaToko = buttonToStoreName.getText();
-            menu.show();
+            // if (buttonToStoreName.getText().isEmpty()) {
+            //     buttonToStoreName.setPromptText("Harap Di Isi !!");;
+            //     buttonToStoreName.setId("tf-homeFailed");
+            // }else {
+                Menuisi menu = new Menuisi(stage);
+                // namaToko = buttonToStoreName.getText();
+                menu.show();
+
+            
         });
 
 
@@ -67,7 +73,7 @@ public class Home {
         VBox fifty = new VBox(sence, tittlegreet);
         fifty.setSpacing(150);
         fifty.setAlignment(Pos.CENTER);
-        HBox buttonbox = new HBox(button, buttonToStoreName);
+        HBox buttonbox = new HBox(button);
         buttonbox.setSpacing(7);
         buttonbox.setAlignment(Pos.CENTER);
         VBox all = new VBox(fifty, buttonbox);

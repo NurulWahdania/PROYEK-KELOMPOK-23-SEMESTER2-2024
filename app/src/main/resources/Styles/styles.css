@@ -298,6 +298,19 @@
     -fx-background-radius: 25px ; 
     -fx-alignment: center;
 }
+#tf-homeFailed{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-background-color: #d3607c83;
+    /* -fx-border-color: #ff0000; */
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffff; 
+    -fx-prompt-text-fill: rgb(255, 255, 255);
+    -fx-background-radius: 25px ; 
+    /* -fx-border-radius: 25px ;  */
+    /* -fx-border-width: 0.2em ; */
+    -fx-alignment: center;
+}
 
 #tf-name1{
     -fx-font-family: "Nunito";
@@ -354,6 +367,10 @@
     /* -fx-prompt-text-fill: rgb(255, 255, 255);
     -fx-background-color: #20CD8D; */
     /* -fx-pref-width: 150px; */
+}
+
+.rectangle{
+    -fx-background-image: url(\image\home.jpg);
 }
 
 

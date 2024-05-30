@@ -1,16 +1,15 @@
 package shopsense_app.scene;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.math.Quantiles.Scale;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -18,17 +17,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import shopsense_app.Data.TranksaksiControler;
 
 public class Hasil {
     Stage stage;
+    private TranksaksiControler transaksiDAO = new TranksaksiControler();
+    TableView<shopsense_app.scene.TransaksiClass> tableView;
 
     public Hasil(Stage stage){
         this.stage = stage;
     }
 
     public void show(){
-        Label nmToko = new Label(Home.namaToko);
-        nmToko.getStyleClass().add("tokok");
+        // Label nmToko = new Label(Home.namaToko);
+        // nmToko.getStyleClass().add("tokok");
         Line line = new Line();
         line.setStartY(0);
         line.setStartX(20);
@@ -36,14 +38,32 @@ public class Hasil {
         line.setEndX(20);
         line.setStrokeWidth(2);
         line.setStroke(Color.BLACK);
-        HBox all = new HBox(10, line, nmToko);
+        HBox all = new HBox(10, line);
         all.setPadding(new Insets(30,0,0,1100));
 
         // Image foto = new Image("image/yooh.jpg");
         // ImageView vieFoto = new ImageView(foto);
         // vieFoto.setFitHeight(50);
         // vieFoto.setFitWidth(300);
+        tableView = new TableView<>();
+        // TableColumn<TransaksiClass, String> hargaColum = new TableColumn<>("ID KARYAWAN");
+        // hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
+        TableColumn<TransaksiClass, String> hargaColum = new TableColumn<>("Total");
+        hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
+        TableColumn<TransaksiClass, String> waktuColum = new TableColumn<>("Waktu Transaksi");
+        waktuColum.setCellValueFactory(new PropertyValueFactory<>("waktu"));
+        ObservableList<TransaksiClass> data = FXCollections.observableArrayList();
+        tableView.setItems(data);
+        tableView.getColumns().add(hargaColum);
+        tableView.getColumns().add(waktuColum);
+        ObservableList<TransaksiClass> data2 = transaksiDAO.selectAll();
+        System.out.println(data2.size());
+        tableView.setItems(data2);
 
+        // tableView.setMinWidth(400);
+        tableView.setMaxSize(800, 400);
+        // tableView.setPadding(new Insets(5,0,0,100));
+        // tableView.setPrefSize(850, 500);
 
         Label label = new Label("Histori");
         label.getStyleClass().add("judul4");
@@ -105,7 +125,9 @@ public class Hasil {
 
         VBox vbox = new VBox(menu2, fungsi);
 
-        HBox alldata = new HBox(vbox,label);
+        // VBox content = new VBox(label, tableView);
+
+        HBox alldata = new HBox(vbox,label, tableView);
         
         vbox.setSpacing(40);
         vbox.setPadding(new Insets(10,10,10,10));

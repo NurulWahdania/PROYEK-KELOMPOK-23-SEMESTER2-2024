@@ -58,8 +58,8 @@ public class Barang {
 
     public void show() {
 
-        Label nmToko = new Label(Home.namaToko);
-        nmToko.getStyleClass().add("tokok2");
+        // Label nmToko = new Label(Home.namaToko);
+        // nmToko.getStyleClass().add("tokok2");
         Line line = new Line();
         line.setStartY(0);
         line.setStartX(20);
@@ -81,7 +81,7 @@ public class Barang {
         VBox.setVgrow(formPaneContainer, Priority.ALWAYS);
         vBox.setAlignment(Pos.TOP_CENTER);
 
-        HBox all2 = new HBox(10,lin2, nmToko );
+        HBox all2 = new HBox(10,lin2);
         all2.setPadding(new Insets(30,0,0,650));
 
         VBox box = new VBox(all2,vBox);

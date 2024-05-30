@@ -2,9 +2,12 @@ package shopsense_app.scene;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -30,8 +33,12 @@ public class Karyawan {
     Stage stage;
     DatePicker datePicker; // Deklarasi DatePicker
 
-    public Karyawan(Stage stage){
+    public Karyawan(Stage stage) {
         this.stage = stage;
+    }
+
+    public Karyawan(){
+
     }
 
     public Karyawan(String nama, int id, String posisi, String tanggal) {
@@ -41,9 +48,9 @@ public class Karyawan {
         this.tanggal = tanggal;
     }
 
-    public void show(){
-        Label nmToko = new Label(Home.namaToko);
-        nmToko.getStyleClass().add("tokok2");
+    public void show() {
+        // Label nmToko = new Label(Home.namaToko);
+        // nmToko.getStyleClass().add("tokok2");
         Line line = new Line();
         line.setStartY(0);
         line.setStartX(20);
@@ -52,8 +59,8 @@ public class Karyawan {
         line.setStrokeWidth(2);
         line.setStroke(Color.BLACK);
         HBox lin2 = new HBox(line);
-        HBox alll = new HBox(10, lin2, nmToko);
-        alll.setPadding(new Insets(30,0,0,700));
+        HBox alll = new HBox(10, lin2);
+        alll.setPadding(new Insets(30, 0, 0, 700));
         alll.setAlignment(Pos.CENTER);
 
         Label judul = new Label("Karyawan");
@@ -72,11 +79,11 @@ public class Karyawan {
         // TextField bKaryawan = new TextField();
         // bKaryawan.getStyleClass().add("buton4");
         // TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
-        //     String newText = change.getControlNewText();
-        //     if (newText.matches("\\d*")) {
-        //         return change;
-        //     }
-        //     return null;
+        // String newText = change.getControlNewText();
+        // if (newText.matches("\\d*")) {
+        // return change;
+        // }
+        // return null;
         // });
         // bKaryawan.setTextFormatter(textFormatter);
 
@@ -92,10 +99,10 @@ public class Karyawan {
         Label tanggal = new Label("Tanggal Masuk");
         tanggal.getStyleClass().add("karyawan");
         tanggal.setPadding(new Insets(0, 0, 0, 20));
-        datePicker = new DatePicker(); 
+        datePicker = new DatePicker();
         datePicker.setId("datepick");
-        VBox tanggal1 = new VBox(tanggal, datePicker); 
-        tanggal1.setPadding(new Insets(10,0,0,20));
+        VBox tanggal1 = new VBox(tanggal, datePicker);
+        tanggal1.setPadding(new Insets(10, 0, 0, 20));
 
         Button add = new Button("Add");
         add.getStyleClass().add("home2");
@@ -119,7 +126,7 @@ public class Karyawan {
 
         HBox home2 = new HBox(add);
         home2.setAlignment(Pos.CENTER);
-        home2.setPadding(new Insets(40,0,0,0));
+        home2.setPadding(new Insets(40, 0, 0, 0));
 
         VBox gabung = new VBox(40, nama1, posisi1);
         VBox all1 = new VBox(judul, gabung);
@@ -197,7 +204,7 @@ public class Karyawan {
         String sql = "INSERT INTO karyawan (nama, 'id karyawan', posisi, 'tanggal masuk') VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection2.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, nama);
             // pstmt.setInt(2, id_karyawan);
@@ -212,33 +219,63 @@ public class Karyawan {
         }
     }
 
+    public ObservableList<Karyawan> selectAll() {
+        String sql = "SELECT nama, 'id karyawan', posisi, 'tanggal masuk' FROM karyawan";
+        ObservableList<Karyawan> data = FXCollections.observableArrayList();
+        try (Connection conn = DatabaseConnection2.connect();
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Karyawan karyawan = new Karyawan(
+                    rs.getString("nama"),
+                    rs.getInt("id karyawan"),
+                    rs.getString("posisi"),
+                    rs.getString("tanggal masuk")
+                );
+                data.add(karyawan);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return data;
+    }
+
     public String getNama() {
         return nama;
     }
+
     public void setNama(String nama) {
         this.nama = nama;
     }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getPosisi() {
         return posisi;
     }
+
     public void setPosisi(String posisi) {
         this.posisi = posisi;
     }
+
     public String getTanggal() {
         return tanggal;
     }
+
     public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
     }
+
     public Stage getStage() {
         return stage;
     }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }
