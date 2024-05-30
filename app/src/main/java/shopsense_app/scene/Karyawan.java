@@ -220,7 +220,7 @@ public class Karyawan {
     }
 
     public ObservableList<Karyawan> selectAll() {
-        String sql = "SELECT nama, 'id karyawan', posisi, 'tanggal masuk' FROM karyawan";
+        String sql = "SELECT nama, \"id karyawan\", posisi, \"tanggal masuk\" FROM karyawan";
         ObservableList<Karyawan> data = FXCollections.observableArrayList();
         try (Connection conn = DatabaseConnection2.connect();
                 PreparedStatement stmt = conn.prepareStatement(sql);

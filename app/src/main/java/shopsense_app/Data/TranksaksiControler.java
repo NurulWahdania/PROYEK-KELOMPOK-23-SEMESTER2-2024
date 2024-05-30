@@ -28,7 +28,7 @@ public class TranksaksiControler {
     }
 
     public ObservableList<TransaksiClass> selectAll() {
-        String sql = "SELECT hasil, nama_karyawan waktu FROM penghasilan";
+        String sql = "SELECT hasil, nama_karyawan, waktu FROM penghasilan";
         ObservableList<TransaksiClass> data = FXCollections.observableArrayList();
         try (Connection conn = DatabaseConnection2.connect();
                 PreparedStatement stmt = conn.prepareStatement(sql);

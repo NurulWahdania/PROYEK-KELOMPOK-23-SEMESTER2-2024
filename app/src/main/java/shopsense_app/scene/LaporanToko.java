@@ -21,13 +21,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import shopsense_app.Data.TranksaksiControler;
 import shopsense_app.scenes.FromBarang;
 import shopsense_app.scenes.ListPaneBarang;
 
 public class LaporanToko {
     private SimpleStringProperty penghasilan;
-    private TableView<shopsense_app.scene.Karyawan> tableView;
+    private TableView<shopsense_app.scene.Karyawan> tableView1;
     private Karyawan karyawanDAO = new Karyawan();
+        private TranksaksiControler transaksiDAO = new TranksaksiControler();
+    TableView<shopsense_app.scene.TransaksiClass> tableView;
     Stage stage;
 
     public LaporanToko(String penghasilan) {
@@ -60,21 +63,50 @@ public class LaporanToko {
         Pane formPaneContainer = new Pane(fromPane3.getFormPane());
         formPaneContainer.setPadding(new Insets(40));
 
-        tableView = new TableView<>();
-        TableColumn<Karyawan, String> hargaColum = new TableColumn<>("NAMA");
-        hargaColum.setCellValueFactory(new PropertyValueFactory<>("nama"));
-        TableColumn<Karyawan, String> waktuColum = new TableColumn<>("ID KARYAWAN");
-        waktuColum.setCellValueFactory(new PropertyValueFactory<>("id karyawan"));
+        tableView1 = new TableView<>();
+        TableColumn<Karyawan, String> namaKarColum = new TableColumn<>("NAMA");
+        namaKarColum.setCellValueFactory(new PropertyValueFactory<>("nama"));
+        TableColumn<Karyawan, Integer> idKarColum = new TableColumn<>("ID KARYAWAN");
+        idKarColum.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<Karyawan, String> posisiColum = new TableColumn<>("POSISI KARYAWAN");
+        posisiColum.setCellValueFactory(new PropertyValueFactory<>("posisi"));
+        TableColumn<Karyawan, String> tmColum = new TableColumn<>("TANGGAL MASUK");
+        tmColum.setCellValueFactory(new PropertyValueFactory<>("tanggal"));
+
         ObservableList<Karyawan> data = FXCollections.observableArrayList();
-        tableView.setItems(data);
+        tableView1.setItems(data);
+        tableView1.getColumns().add(namaKarColum);
+        tableView1.getColumns().add(idKarColum);
+        tableView1.getColumns().add(posisiColum);
+        tableView1.getColumns().add(tmColum);
+        ObservableList<Karyawan> data2 = karyawanDAO.selectAll();
+        System.out.println("Karyawan list size" + data2.size());
+        tableView1.setItems(data2);
+
+        tableView1.setMaxSize(400, 400);
+        // tableView1.set
+
+
+        tableView = new TableView<>();
+        TableColumn<TransaksiClass, String> namaKaryawanColum = new TableColumn<>("NAMA KARYAWAN");
+        namaKaryawanColum.setCellValueFactory(new PropertyValueFactory<>("nama_karyawan"));
+        TableColumn<TransaksiClass, String> hargaColum = new TableColumn<>("Total");
+        hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
+        TableColumn<TransaksiClass, String> waktuColum = new TableColumn<>("Waktu Transaksi");
+        waktuColum.setCellValueFactory(new PropertyValueFactory<>("waktu"));
+        ObservableList<TransaksiClass> dataTransaksi = FXCollections.observableArrayList();
+        tableView.setItems(dataTransaksi);
+        tableView.getColumns().add(namaKaryawanColum);
         tableView.getColumns().add(hargaColum);
         tableView.getColumns().add(waktuColum);
-        ObservableList<Karyawan> data2 = karyawanDAO.selectAll();
+        ObservableList<TransaksiClass> data3 = transaksiDAO.selectAll();
         System.out.println(data2.size());
-        tableView.setItems(data2);
+        tableView.setItems(data3);
 
-        tableView.setMaxSize(400, 400);
-        // tableView.set
+        // tableView.setMinWidth(400);
+        tableView.setMaxSize(800, 400);
+
+        
         Label uang = new Label("Laporan Toko");
         uang.getStyleClass().add("judul2");
 
@@ -157,10 +189,14 @@ public class LaporanToko {
         VBox vbox = new VBox(menu2, fungsi);
         vbox.setPadding(new Insets(10, 10, 10, 10));
 
+        HBox tabel = new HBox(tableView, tableView1);
+        tabel.setSpacing(50);
+        tabel.setAlignment(Pos.CENTER);
+
         vbox.setSpacing(40);
         vbox.setPadding(new Insets(10, 10, 10, 10));
         HBox alldata = new HBox(80, vbox, all);
-        StackPane pane = new StackPane(rewc, alldata, tableView);
+        StackPane pane = new StackPane(rewc, alldata, tabel);
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 

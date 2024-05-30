@@ -16,9 +16,9 @@ public class KaryawanConnection {
     public void createTable() {
     	String sql = "CREATE TABLE IF NOT EXISTS barang ("
                	+ " nama TEXT NOT NULL,"
-               	+ " id_karyawan  PRIMARY KEY INTEGER NOT NULL UNIQUE"
+               	+ " id karyawan  PRIMARY KEY INTEGER NOT NULL UNIQUE"
                	+ " posisi TEXT NOT NULL"
-                + " tanggal_masuk TEXT NOT NULL"
+                + " tanggal masuk TEXT NOT NULL"
                	+ ");";
 
     	try (Connection conn = DatabaseConnection2.connect();
@@ -32,7 +32,7 @@ public class KaryawanConnection {
 
     public void insert(String nama, int id_karyawan, String posisi, String tanggal_masuk) {
 		createTable();
-    	String sql = "INSERT INTO karyawan(nama, id karyawan, posisi, tanggal_masuk) VALUES(?, ?, ?, ?)";
+    	String sql = "INSERT INTO karyawan(nama, 'id karyawan', posisi, 'tanggal masuk') VALUES(?, ?, ?, ?)";
     	try (Connection conn = DatabaseConnection2.connect();
          	PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	pstmt.setString(1, nama);
@@ -47,7 +47,7 @@ public class KaryawanConnection {
     }
 
     public ObservableList<Karyawan> selectAll() {
-    	String sql = "SELECT nama, id_karyawa, posisi, tanggal_masuk FROM karyawan";
+    	String sql = "SELECT nama, id karyawan, posisi, tanggal masuk FROM karyawan";
     	ObservableList<Karyawan> data = FXCollections.observableArrayList();
 
     	try (Connection conn = DatabaseConnection2.connect();
@@ -59,7 +59,7 @@ public class KaryawanConnection {
                     	rs.getString("nama"),
                     	rs.getInt("id karyawan"),
                     	rs.getString("posisi"),
-                        rs.getString("tanggal_masuk")
+                        rs.getString("tanggal masuk")
             	);
             	data.add(karyawan);
         	}

@@ -46,14 +46,15 @@ public class Hasil {
         // vieFoto.setFitHeight(50);
         // vieFoto.setFitWidth(300);
         tableView = new TableView<>();
-        // TableColumn<TransaksiClass, String> hargaColum = new TableColumn<>("ID KARYAWAN");
-        // hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
+        TableColumn<TransaksiClass, String> namaKaryawanColum = new TableColumn<>("NAMA KARYAWAN");
+        namaKaryawanColum.setCellValueFactory(new PropertyValueFactory<>("nama_karyawan"));
         TableColumn<TransaksiClass, String> hargaColum = new TableColumn<>("Total");
         hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
         TableColumn<TransaksiClass, String> waktuColum = new TableColumn<>("Waktu Transaksi");
         waktuColum.setCellValueFactory(new PropertyValueFactory<>("waktu"));
         ObservableList<TransaksiClass> data = FXCollections.observableArrayList();
         tableView.setItems(data);
+        tableView.getColumns().add(namaKaryawanColum);
         tableView.getColumns().add(hargaColum);
         tableView.getColumns().add(waktuColum);
         ObservableList<TransaksiClass> data2 = transaksiDAO.selectAll();
