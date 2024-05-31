@@ -18,7 +18,7 @@ import shopsense_app.scenes.FromBarang;
 import shopsense_app.scenes.ListPaneBarang;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Barang {
+public class Barang extends ListPaneBarang {
     private SimpleStringProperty nama;
     private SimpleStringProperty harga;
     private SimpleStringProperty stok;

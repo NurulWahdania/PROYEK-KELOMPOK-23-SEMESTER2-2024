@@ -25,14 +25,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import shopsense_app.Data.DatabaseConnection2;
 
-public class Karyawan {
-    String nama;
-    int id;
-    String posisi;
-    String tanggal;
-    Stage stage;
-    DatePicker datePicker; 
-
+public class Karyawan extends KaryawanAbstrak {
     public Karyawan(Stage stage) {
         this.stage = stage;
     }
@@ -48,6 +41,7 @@ public class Karyawan {
         this.tanggal = tanggal;
     }
 
+    
     public void show() {
         Label judul = new Label("Karyawan");
         judul.getStyleClass().add("judul2");

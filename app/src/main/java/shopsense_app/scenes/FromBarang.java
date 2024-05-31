@@ -19,7 +19,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class FromBarang {
+public class FromBarang extends ListPaneBarang {
 
     VBox content;
     TextField tf_nama, tf_harga, tf_stok;
@@ -79,6 +79,7 @@ public class FromBarang {
         setForm(1);
         setSubmit(1);
 
+        
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
         namaColum.setCellValueFactory(new PropertyValueFactory<>("nama"));
@@ -125,6 +126,8 @@ public class FromBarang {
 
         return last;
     }
+
+    @Override
     public void loadData() {
         ObservableList<Barang> barang = barangController.selectAll();
         System.out.println(String.valueOf(barang.size()));

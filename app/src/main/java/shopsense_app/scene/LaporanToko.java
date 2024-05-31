@@ -26,7 +26,7 @@ import shopsense_app.fungsiMenu.TransaksiClass;
 import shopsense_app.scenes.FromBarang;
 import shopsense_app.scenes.ListPaneBarang;
 
-public class LaporanToko {
+public class LaporanToko  {
     private SimpleStringProperty penghasilan;
     private TableView<shopsense_app.scene.Karyawan> tableView1;
     private Karyawan karyawanDAO = new Karyawan();
@@ -34,7 +34,7 @@ public class LaporanToko {
     TableView<shopsense_app.fungsiMenu.TransaksiClass> tableView;
     Stage stage;
 
-    public LaporanToko(String penghasilan) {
+    public LaporanToko(String penghasilan){
         this.penghasilan = new SimpleStringProperty(penghasilan);
     }
 
