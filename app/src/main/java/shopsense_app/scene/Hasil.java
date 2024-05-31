@@ -3,7 +3,6 @@ package shopsense_app.scene;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import shopsense_app.Data.TranksaksiControler;
@@ -124,15 +122,9 @@ public class Hasil {
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
  
-
         Scene scene = new Scene(pane,1290, 650);
         stage.setScene(scene); 
-        // stage.setFullScreen(true);
-        // stage.setMaximized(true);
         stage.show();
-
-
-
     }
     
 }

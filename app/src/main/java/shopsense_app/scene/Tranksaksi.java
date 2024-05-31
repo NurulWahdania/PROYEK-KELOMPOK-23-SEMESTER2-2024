@@ -21,7 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,15 +29,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import shopsense_app.Data.TranksaksiControler;
 import shopsense_app.fungsiMenu.BarangController;
-import shopsense_app.fungsiMenu.KaryawanConnection;
 
 public class Tranksaksi {
     Stage stage;
@@ -253,14 +249,13 @@ public class Tranksaksi {
         Rectangle with = new Rectangle(1040, 610);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
-        with.setArcWidth(30); // Mengatur lebar sudut
+        with.setArcWidth(30);
         with.setArcHeight(30);
 
         HBox rewc = new HBox(with);
         rewc.setPadding(new Insets(20,0,0,230));
 
         HBox home2 = new HBox(home);
-        // home2.setAlignment(Pos.BOTTOM_RIGHT);
         VBox fungsi = new VBox(home2, keuangan, barang, karyawan, tranksaksi, hasill);
         fungsi.setSpacing(40);
 
@@ -278,8 +273,6 @@ public class Tranksaksi {
         Scene scene = new Scene(pane,1290, 650);
         scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene); 
-        // stage.setFullScreen(true);
-        // stage.setMaximized(true);
         stage.show();
         loadData();
     
@@ -296,7 +289,6 @@ public class Tranksaksi {
     }
 
     public void addItemToRightTable(Barang barang) {
-        // Cek apakah barang sudah ada di daftar selectedItems
         Stokbarang existingItem = findItemInRightTable(barang);
         if (existingItem != null) {
             existingItem.incrementStock();
@@ -345,7 +337,6 @@ public class Tranksaksi {
     }
 
     public void processTransaction() {
-        // Mengurangi stok pada tabel kiri dan database
         for (Stokbarang item : selectedItems) {
             Barang barang = findItemInLeftTable(item.getNama());
             if (item.getStock() >= 0) {
@@ -381,12 +372,7 @@ public class Tranksaksi {
                     total = total - (total * nilaidiskon / 100);
                 } catch (Exception e) {
                     System.out.println("Diskon tidak valid " + e.getMessage());
-                }
-            } else {
-                // hasil.setOnAction(e -> {
-                // salah.setText("Stok Kurang");
-                // salah.relocate(800, 500);
-                // });
+                }         
             }
             totalLabel.setText("Total: " + total);
             hasilBelanja = total;

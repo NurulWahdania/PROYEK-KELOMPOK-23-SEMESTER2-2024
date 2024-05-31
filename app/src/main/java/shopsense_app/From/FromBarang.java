@@ -1,4 +1,4 @@
-package shopsense_app.scenes;
+package shopsense_app.From;
 
 import javafx.stage.Stage;
 import javafx.scene.Scene;

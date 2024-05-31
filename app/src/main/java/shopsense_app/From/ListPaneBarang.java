@@ -1,4 +1,4 @@
-package shopsense_app.scenes;
+package shopsense_app.From;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.TableView;

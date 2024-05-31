@@ -12,15 +12,17 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import shopsense_app.Data.DatabaseConnection2;
@@ -76,13 +78,69 @@ public class Karyawan extends KaryawanAbstrak {
             String posisiKaryawan = bPosis.getText().trim();
             LocalDate selectedDate = datePicker.getValue();
             String tanggalMasuk = selectedDate != null ? selectedDate.toString() : "";
-
+            
             addKaryawan(namaKaryawan, posisiKaryawan, tanggalMasuk);
+            bNama.clear();
+            bPosis.clear();
+            datePicker.setValue(null);
         });
+
+
+        Label idKaryawan = new Label("Pilih Id");
+        idKaryawan.getStyleClass().add("textid2");
+        ComboBox<Karyawan> idBox = new ComboBox<>();
+        idBox.getStyleClass().add("textid");
+        idBox.setCellFactory(param -> new ListCell<Karyawan>(){
+        //    @Override
+            public void updateItem (Karyawan item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getId() +" - " + item.getNama());
+                }
+            }
+        });
+        idBox.setButtonCell(new ListCell<Karyawan>(){
+
+            public void updateItem(Karyawan item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getId() +" - " + item.getNama());
+                }
+            }
+        });
+
+        idBox.setOnMouseClicked((MouseEvent event)-> {
+            ObservableList<Karyawan> karyawanList = selectAll();
+            idBox.setItems(karyawanList);
+        });
+
+        Button delet  = new Button("Delete");
+        delet.getStyleClass().add("textid3");
+        delet.setPrefSize(80, 0);
+        delet.setOnAction(e -> {
+            Karyawan pilihId = idBox.getValue();
+            if (pilihId != null) {
+                int idkaryawan = pilihId.getId();
+                deleteKaryawan(idkaryawan);
+                idBox.setValue(null);
+            }
+        });
+
+        HBox deleteBox = new HBox(delet);
+        deleteBox.setAlignment(Pos.CENTER);
+        deleteBox.setPadding(new Insets(0, 0, 0, 0));
+
+        VBox hapus = new VBox(5,idBox, deleteBox);
+        hapus.setPadding(new Insets(-150,0,0,600));
 
         HBox adBox = new HBox(add);
         adBox.setAlignment(Pos.CENTER);
-        adBox.setPadding(new Insets(40, 0, 0, 0));
+        adBox.setPadding(new Insets(20, 0, 0, -850));
+        HBox yo = new HBox(hapus, adBox);
 
         VBox gabung = new VBox(40, nama1, posisi1);
         VBox all1 = new VBox(judul, gabung);
@@ -90,7 +148,9 @@ public class Karyawan extends KaryawanAbstrak {
         HBox all = new HBox(20, all1);
         all.setPadding(new Insets(20));
 
-        VBox gbg = new VBox(20, all, tanggal1, adBox); 
+
+
+        VBox gbg = new VBox(20, all, tanggal1, yo); 
 
         Label menu1 = new Label("SHOP SENSE");
         menu1.getStyleClass().add("judulhom");
@@ -159,7 +219,6 @@ public class Karyawan extends KaryawanAbstrak {
 
         Scene scene = new Scene(pane,1290, 650);
         stage.setScene(scene);
-        // stage.setMaximized(true);
         stage.show();
     }
 
@@ -175,6 +234,21 @@ public class Karyawan extends KaryawanAbstrak {
 
             pstmt.executeUpdate();
             System.out.println("Karyawan added successfully!");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteKaryawan(int id) {
+        String sql = "DELETE FROM karyawan WHERE \"id karyawan\" = ?";
+
+        try (Connection conn = DatabaseConnection2.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            System.out.println("Karyawan deleted successfully!");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -201,23 +275,6 @@ public class Karyawan extends KaryawanAbstrak {
         }
         return data;
     }
-
-    // public void delete(int id) {
-	// 	System.out.println(nama);
-    // 	String sql = "DELETE FROM barang WHERE id karyawan = ?";
-    // 	try (Connection conn = DatabaseConnection2.connect();
-    //      	PreparedStatement pstmt = conn.prepareStatement(sql)) {
-    //     	pstmt.setString(1, nama);
-    //     	int affectedRows = pstmt.executeUpdate();
-    //     if (affectedRows > 0) {
-    //         System.out.println("Data berhasil dihapus.");
-    //     } else {
-    //         System.out.println("Tidak ada data yang dihapus. Mungkin nama tidak ditemukan: " + id);
-    //     }
-    // 	} catch (SQLException e) {
-    //     	System.out.println(e.getMessage());
-    // 	}
-	// }
 
     public String getNama() {
         return nama;

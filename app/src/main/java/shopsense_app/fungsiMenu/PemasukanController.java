@@ -8,7 +8,6 @@ import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shopsense_app.Data.DatabaseConnection2;
-import shopsense_app.scene.Barang;
 import shopsense_app.scene.LaporanToko;
 
 public class PemasukanController {

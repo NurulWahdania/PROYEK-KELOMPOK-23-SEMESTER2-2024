@@ -402,9 +402,20 @@
     -fx-background-radius: 2px ; 
     -fx-pref-width: 80px;
     -fx-pref-height: 33px;
-
 }
 
+.textid3{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-background-color:#A6A6A6;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    /* -fx-prompt-text-fill: white; */
+    -fx-background-radius: 2px ; 
+    -fx-pref-width: 80px;
+    -fx-pref-height: 33px;
+
+}
 .jam {
     -fx-font-family: "Nunito";
     -fx-font-size: 20px;

@@ -1,7 +1,5 @@
 package shopsense_app.scene;
 
-import org.checkerframework.checker.units.qual.g;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,20 +16,21 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import shopsense_app.Data.TranksaksiControler;
+import shopsense_app.From.FromBarang;
+import shopsense_app.From.ListPaneBarang;
 import shopsense_app.fungsiMenu.TransaksiClass;
-import shopsense_app.scenes.FromBarang;
-import shopsense_app.scenes.ListPaneBarang;
 
 public class LaporanToko  {
+    TableView<shopsense_app.fungsiMenu.TransaksiClass> tableView;
     private SimpleStringProperty penghasilan;
     private TableView<shopsense_app.scene.Karyawan> tableView1;
     private Karyawan karyawanDAO = new Karyawan();
-        private TranksaksiControler transaksiDAO = new TranksaksiControler();
-    TableView<shopsense_app.fungsiMenu.TransaksiClass> tableView;
+    private TranksaksiControler transaksiDAO = new TranksaksiControler();
+    private Label totalItem;
+    private Label totalkaryawan;
     Stage stage;
 
     public LaporanToko(String penghasilan){
@@ -69,29 +68,24 @@ public class LaporanToko  {
         System.out.println("Karyawan list size" + data2.size());
         tableView1.setItems(data2);
 
-        // tableView1.setMaxSize(800, 400);
         tableView1.setMinWidth(300);
-        tableView1.setMaxHeight(400);
+        tableView1.setMaxHeight(300);
 
         tableView = new TableView<>();
-        TableColumn<TransaksiClass, String> namaKaryawanColum = new TableColumn<>("NAMA KARYAWAN");
-        namaKaryawanColum.setCellValueFactory(new PropertyValueFactory<>("nama_karyawan"));
         TableColumn<TransaksiClass, String> hargaColum = new TableColumn<>("Total");
         hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
         TableColumn<TransaksiClass, String> waktuColum = new TableColumn<>("Waktu Transaksi");
         waktuColum.setCellValueFactory(new PropertyValueFactory<>("waktu"));
         ObservableList<TransaksiClass> dataTransaksi = FXCollections.observableArrayList();
         tableView.setItems(dataTransaksi);
-        tableView.getColumns().add(namaKaryawanColum);
         tableView.getColumns().add(hargaColum);
         tableView.getColumns().add(waktuColum);
         ObservableList<TransaksiClass> data3 = transaksiDAO.selectAll();
         System.out.println(data2.size());
         tableView.setItems(data3);
 
-        // tableView.setMaxSize(800, 400);
         tableView.setMinWidth(300);
-        tableView.setMaxHeight(400);
+        tableView.setMaxHeight(300);
         
         Label uang = new Label("Laporan Toko");
         uang.getStyleClass().add("judul2");
@@ -106,12 +100,25 @@ public class LaporanToko  {
 
         HBox hjudul = new HBox(uang);
         hjudul.setAlignment(Pos.CENTER);
+        // hjudul.setPadding(new Insets(-20,0,0,0));
 
         HBox label = new HBox(100, pemasukan, data1);
         label.setAlignment(Pos.CENTER);
 
-        VBox gabung = new VBox(30, hjudul, label);
-        gabung.setPadding(new Insets(-450, 10, 10, 40));
+        totalItem = new Label();
+        totalItem.getStyleClass().add("keuangan");
+        totalItem.setAlignment(Pos.CENTER);
+        itemTotal(data3);
+
+        totalkaryawan = new Label();
+        totalkaryawan.getStyleClass().add("keuangan");
+        totalkaryawan.setAlignment(Pos.CENTER);
+        jumlahKaryawan(data2);
+
+        HBox totalBox = new HBox(100, totalItem, totalkaryawan);
+
+        VBox gabung = new VBox(30, hjudul, label, totalBox);
+        gabung.setPadding(new Insets(-420, 10, 10, 40));
         gabung.setAlignment(Pos.CENTER);
 
         Label menu1 = new Label("SHOP SENSE");
@@ -157,10 +164,11 @@ public class LaporanToko  {
             pane.show();
         });
 
+
         Rectangle with = new Rectangle(1040, 610);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
-        with.setArcWidth(30); // Mengatur lebar sudut
+        with.setArcWidth(30); 
         with.setArcHeight(30);
 
         HBox rewc = new HBox(with);
@@ -180,7 +188,7 @@ public class LaporanToko  {
         view.setPadding(new Insets(20,0,0,40));
 
         HBox tabel = new HBox(50,view, view1);
-        tabel.setPadding(new Insets(180,0,0,-1000));
+        tabel.setPadding(new Insets(220,0,0,-1000));
         tabel.setAlignment(Pos.CENTER);
 
         vbox.setSpacing(40);
@@ -192,10 +200,18 @@ public class LaporanToko  {
 
         Scene scene = new Scene(pane,1290, 650);
         stage.setScene(scene);
-        // stage.setFullScreen(true);
-        // stage.setMaximized(true);
         stage.show();
 
+    }
+
+    private void itemTotal (ObservableList<TransaksiClass> data) {
+        int total = data.size();
+        totalItem.setText("Total Tranksaksi = " + total);
+    }
+
+    private void jumlahKaryawan (ObservableList<Karyawan> data) {
+        int totalkar = data.size();
+        totalkaryawan.setText("Jumlah Karyawan =  " + totalkar);
     }
 
 }

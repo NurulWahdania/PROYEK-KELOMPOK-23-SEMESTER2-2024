@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shopsense_app.fungsiMenu.TransaksiClass;
-import shopsense_app.scene.Barang;
 
 public class TranksaksiControler {
     public boolean addHasil(int hasil, String waktu, String nama) {
