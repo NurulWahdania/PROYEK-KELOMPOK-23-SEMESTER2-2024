@@ -22,6 +22,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import shopsense_app.Data.TranksaksiControler;
+import shopsense_app.fungsiMenu.TransaksiClass;
 import shopsense_app.scenes.FromBarang;
 import shopsense_app.scenes.ListPaneBarang;
 
@@ -30,13 +31,12 @@ public class LaporanToko {
     private TableView<shopsense_app.scene.Karyawan> tableView1;
     private Karyawan karyawanDAO = new Karyawan();
         private TranksaksiControler transaksiDAO = new TranksaksiControler();
-    TableView<shopsense_app.scene.TransaksiClass> tableView;
+    TableView<shopsense_app.fungsiMenu.TransaksiClass> tableView;
     Stage stage;
 
     public LaporanToko(String penghasilan) {
         this.penghasilan = new SimpleStringProperty(penghasilan);
     }
-    // private SimpleStringProperty stok;
 
     public LaporanToko(Stage stage) {
         this.stage = stage;
@@ -69,7 +69,9 @@ public class LaporanToko {
         System.out.println("Karyawan list size" + data2.size());
         tableView1.setItems(data2);
 
-        tableView1.setMaxSize(800, 400);
+        // tableView1.setMaxSize(800, 400);
+        tableView1.setMinWidth(300);
+        tableView1.setMaxHeight(400);
 
         tableView = new TableView<>();
         TableColumn<TransaksiClass, String> namaKaryawanColum = new TableColumn<>("NAMA KARYAWAN");
@@ -87,7 +89,9 @@ public class LaporanToko {
         System.out.println(data2.size());
         tableView.setItems(data3);
 
-        tableView.setMaxSize(800, 400);
+        // tableView.setMaxSize(800, 400);
+        tableView.setMinWidth(300);
+        tableView.setMaxHeight(400);
         
         Label uang = new Label("Laporan Toko");
         uang.getStyleClass().add("judul2");
@@ -107,19 +111,20 @@ public class LaporanToko {
         label.setAlignment(Pos.CENTER);
 
         VBox gabung = new VBox(30, hjudul, label);
-        gabung.setPadding(new Insets(-400, 10, 10, 40));
+        gabung.setPadding(new Insets(-450, 10, 10, 40));
         gabung.setAlignment(Pos.CENTER);
 
-        Label menu1 = new Label("MENU");
-        menu1.getStyleClass().add("judul");
-        menu1.setPadding(new Insets(0, 0, 0, 25));
+        Label menu1 = new Label("SHOP SENSE");
+        menu1.getStyleClass().add("judulhom");
+        menu1.setPadding(new Insets(0,0,0,15));
 
         Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
         keuangan.setOnAction(e -> {
-            LaporanToko keuang = new LaporanToko(stage);
-            keuang.show();
+            LaporanToko keuan = new LaporanToko(stage);
+            keuan.show();
         });
+
         Button barang = new Button("Barang");
         barang.getStyleClass().add("buton2");
         barang.setOnAction(e -> {
@@ -146,13 +151,13 @@ public class LaporanToko {
         });
 
         Button home = new Button("Home");
-        home.getStyleClass().add("home");
+        home.getStyleClass().add("buton2");
         home.setOnAction(e -> {
-            Home menu = new Home(stage);
-            menu.show();
+            Menuisi pane = new Menuisi(stage);
+            pane.show();
         });
 
-        Rectangle with = new Rectangle(1000, 650);
+        Rectangle with = new Rectangle(1040, 610);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
         with.setArcWidth(30); // Mengatur lebar sudut
@@ -161,7 +166,7 @@ public class LaporanToko {
         HBox rewc = new HBox(with);
         rewc.setPadding(new Insets(20, 0, 0, 230));
 
-        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home);
+        VBox fungsi = new VBox(home,keuangan, barang, karyawan, tranksaksi, hasil);
         fungsi.setSpacing(40);
         HBox menu2 = new HBox(menu1);
 
@@ -169,12 +174,12 @@ public class LaporanToko {
         vbox.setPadding(new Insets(10, 10, 10, 10));
 
         HBox view1 = new HBox(tableView1);
-        view1.setPadding(new Insets(50,0,0,90));
+        view1.setPadding(new Insets(20,0,0,90));
 
         HBox view = new HBox(tableView);
-        view.setPadding(new Insets(50,0,0,60));
+        view.setPadding(new Insets(20,0,0,40));
 
-        HBox tabel = new HBox(80,view, view1);
+        HBox tabel = new HBox(50,view, view1);
         tabel.setPadding(new Insets(180,0,0,-1000));
         tabel.setAlignment(Pos.CENTER);
 
@@ -185,10 +190,10 @@ public class LaporanToko {
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 
-        Scene scene = new Scene(pane);
+        Scene scene = new Scene(pane,1290, 650);
         stage.setScene(scene);
         // stage.setFullScreen(true);
-        stage.setMaximized(true);
+        // stage.setMaximized(true);
         stage.show();
 
     }

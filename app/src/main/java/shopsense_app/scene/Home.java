@@ -2,11 +2,16 @@ package shopsense_app.scene;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.geometry.Pos;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -68,11 +73,10 @@ public class Home {
         all.setPadding(new Insets(10, 10, 10, 10));
         all.getStyleClass().add("background");
 
-
-        Scene scene = new Scene(all);
+        Scene scene = new Scene(all,1290, 650);
         scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene);
-        stage.setMaximized(true);
+        // stage.setMaximized(true);
         stage.show();
     }
     

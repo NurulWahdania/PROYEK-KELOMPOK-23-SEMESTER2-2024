@@ -1,4 +1,4 @@
-package shopsense_app.scene;
+package shopsense_app.fungsiMenu;
 
 public class TransaksiClass {
     private int harga;

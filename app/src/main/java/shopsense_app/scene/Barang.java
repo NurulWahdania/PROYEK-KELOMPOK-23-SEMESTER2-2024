@@ -73,9 +73,9 @@ public class Barang {
         VBox box = new VBox(vBox);
         box.setPadding(new Insets(40,0,0,0));
 
-        Label menu1 = new Label("MENU");
-        menu1.getStyleClass().add("judul");
-        menu1.setPadding(new Insets(0,0,0,25));
+        Label menu1 = new Label("SHOP SENSE");
+        menu1.getStyleClass().add("judulhom");
+        menu1.setPadding(new Insets(0,0,0,15));
 
         Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
@@ -107,15 +107,16 @@ public class Barang {
             Hasil cetak = new Hasil(stage);
             cetak.show();
         });
+
         Button home = new Button("Home");
-        home.getStyleClass().add("home");
+        home.getStyleClass().add("buton2");
         home.setOnAction(e -> {
-            Home pane = new Home(stage);
+            Menuisi pane = new Menuisi(stage);
             pane.show();
         });
 
 
-        Rectangle with = new Rectangle(1000, 650);
+        Rectangle with = new Rectangle(1040, 610);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
         with.setArcWidth(30); 
@@ -126,7 +127,7 @@ public class Barang {
 
         HBox home2 = new HBox(home);
 
-        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home2);
+        VBox fungsi = new VBox(home2,keuangan, barang, karyawan, tranksaksi, hasil);
         fungsi.setSpacing(40);
       
 
@@ -141,10 +142,10 @@ public class Barang {
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 
-        Scene scene = new Scene(pane);
+        Scene scene = new Scene(pane,1290, 650);
         stage.setScene(scene); 
         // stage.setFullScreen(true);
-        stage.setMaximized(true);
+        // stage.setMaximized(true);
         stage.show();
     }
 }

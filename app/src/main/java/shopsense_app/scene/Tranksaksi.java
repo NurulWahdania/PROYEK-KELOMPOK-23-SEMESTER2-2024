@@ -201,9 +201,9 @@ public class Tranksaksi {
         sejajar.setSpacing(30);
         sejajar.setPadding(new Insets(40,0,0,0));
 
-        Label menu1 = new Label("MENU");
-        menu1.getStyleClass().add("judul");
-        menu1.setPadding(new Insets(0,0,0,25));
+        Label menu1 = new Label("SHOP SENSE");
+        menu1.getStyleClass().add("judulhom");
+        menu1.setPadding(new Insets(0,0,0,15));
 
         Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
@@ -235,10 +235,11 @@ public class Tranksaksi {
             Hasil cetak = new Hasil(stage);
             cetak.show();
         });
+
         Button home = new Button("Home");
-        home.getStyleClass().add("home");
+        home.getStyleClass().add("buton2");
         home.setOnAction(e -> {
-            Home pane = new Home(stage);
+            Menuisi pane = new Menuisi(stage);
             pane.show();
         });
         
@@ -249,7 +250,7 @@ public class Tranksaksi {
         rec.setPadding(new Insets(0,0,0,0));
 
 
-        Rectangle with = new Rectangle(1020, 650);
+        Rectangle with = new Rectangle(1040, 610);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
         with.setArcWidth(30); // Mengatur lebar sudut
@@ -260,7 +261,7 @@ public class Tranksaksi {
 
         HBox home2 = new HBox(home);
         // home2.setAlignment(Pos.BOTTOM_RIGHT);
-        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasill, home2);
+        VBox fungsi = new VBox(home2, keuangan, barang, karyawan, tranksaksi, hasill);
         fungsi.setSpacing(40);
 
         VBox vbox = new VBox(menu1, fungsi);
@@ -274,11 +275,11 @@ public class Tranksaksi {
         Pane pane = new Pane(rewc,rec2, gabungg,salah);
         pane.getStyleClass().add("background2");
 
-        Scene scene = new Scene(pane);
+        Scene scene = new Scene(pane,1290, 650);
         scene.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
         stage.setScene(scene); 
         // stage.setFullScreen(true);
-        stage.setMaximized(true);
+        // stage.setMaximized(true);
         stage.show();
         loadData();
     
@@ -303,7 +304,7 @@ public class Tranksaksi {
             selectedItems.add(new Stokbarang(barang.getNama(), barang.getHarga(), barang.getStok(), 0));
         }
         rightTableView.setItems(selectedItems);
-        rightTableView.refresh(); // Refresh the table view to update the displayed stock
+        rightTableView.refresh(); 
         updateTotal();
     }
 
@@ -320,7 +321,7 @@ public class Tranksaksi {
         Stokbarang selectedItem = rightTableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             selectedItem.incrementStock();
-            rightTableView.refresh(); // Refresh the table view to update the displayed stock
+            rightTableView.refresh(); 
             updateTotal();
         }
     }
@@ -329,7 +330,7 @@ public class Tranksaksi {
         Stokbarang selectedItem = rightTableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null && selectedItem.getStock() > 0) {
             selectedItem.decrementStock();
-            rightTableView.refresh(); // Refresh the table view to update the displayed stock
+            rightTableView.refresh(); 
             updateTotal();
         }
     }
@@ -463,6 +464,4 @@ public class Tranksaksi {
     	}
     	return data;
 	}
-
-
 }

@@ -18,11 +18,12 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import shopsense_app.Data.TranksaksiControler;
+import shopsense_app.fungsiMenu.TransaksiClass;
 
 public class Hasil {
     Stage stage;
     private TranksaksiControler transaksiDAO = new TranksaksiControler();
-    TableView<shopsense_app.scene.TransaksiClass> tableView;
+    TableView<shopsense_app.fungsiMenu.TransaksiClass> tableView;
 
     public Hasil(Stage stage){
         this.stage = stage;
@@ -54,9 +55,9 @@ public class Hasil {
         label.getStyleClass().add("judul4");
         label.setPadding(new Insets(40,0,0,20));
 
-        Label menu1 = new Label("MENU");
-        menu1.getStyleClass().add("judul");
-        menu1.setPadding(new Insets(0,0,0,25));
+        Label menu1 = new Label("SHOP SENSE");
+        menu1.getStyleClass().add("judulhom");
+        menu1.setPadding(new Insets(0,0,0,15));
 
         Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
@@ -88,14 +89,15 @@ public class Hasil {
             Hasil cetak = new Hasil(stage);
             cetak.show();
         });
+
         Button home = new Button("Home");
-        home.getStyleClass().add("home");
+        home.getStyleClass().add("buton2");
         home.setOnAction(e -> {
-            Home pane = new Home(stage);
+            Menuisi pane = new Menuisi(stage);
             pane.show();
         });
 
-        Rectangle with = new Rectangle(1000, 650);
+        Rectangle with = new Rectangle(1040, 610);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
         with.setArcWidth(30); 
@@ -104,7 +106,7 @@ public class Hasil {
         HBox rewc = new HBox(with);
         rewc.setPadding(new Insets(20,0,0,230));
 
-        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home);
+        VBox fungsi = new VBox(home, keuangan, barang, karyawan, tranksaksi, hasil);
         fungsi.setSpacing(40);
         HBox menu2 = new HBox(menu1);
         VBox vbox = new VBox(menu2, fungsi);
@@ -123,10 +125,10 @@ public class Hasil {
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
  
 
-        Scene scene = new Scene(pane);
+        Scene scene = new Scene(pane,1290, 650);
         stage.setScene(scene); 
         // stage.setFullScreen(true);
-        stage.setMaximized(true);
+        // stage.setMaximized(true);
         stage.show();
 
 

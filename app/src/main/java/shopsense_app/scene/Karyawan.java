@@ -31,7 +31,7 @@ public class Karyawan {
     String posisi;
     String tanggal;
     Stage stage;
-    DatePicker datePicker; // Deklarasi DatePicker
+    DatePicker datePicker; 
 
     public Karyawan(Stage stage) {
         this.stage = stage;
@@ -79,7 +79,6 @@ public class Karyawan {
         add.setPrefSize(80, 0);
         add.setOnAction(e -> {
             String namaKaryawan = bNama.getText().trim();
-            // int idKaryawan = Integer.parseInt(bKaryawan.getText().trim());
             String posisiKaryawan = bPosis.getText().trim();
             LocalDate selectedDate = datePicker.getValue();
             String tanggalMasuk = selectedDate != null ? selectedDate.toString() : "";
@@ -87,16 +86,9 @@ public class Karyawan {
             addKaryawan(namaKaryawan, posisiKaryawan, tanggalMasuk);
         });
 
-        Button home = new Button("Home");
-        home.getStyleClass().add("home");
-        home.setOnAction(e -> {
-            Home menu = new Home(stage);
-            menu.show();
-        });
-
-        HBox home2 = new HBox(add);
-        home2.setAlignment(Pos.CENTER);
-        home2.setPadding(new Insets(40, 0, 0, 0));
+        HBox adBox = new HBox(add);
+        adBox.setAlignment(Pos.CENTER);
+        adBox.setPadding(new Insets(40, 0, 0, 0));
 
         VBox gabung = new VBox(40, nama1, posisi1);
         VBox all1 = new VBox(judul, gabung);
@@ -104,11 +96,11 @@ public class Karyawan {
         HBox all = new HBox(20, all1);
         all.setPadding(new Insets(20));
 
-        VBox gbg = new VBox(20, all, tanggal1, home2); // Menambahkan tanggal1 di sini setelah all
+        VBox gbg = new VBox(20, all, tanggal1, adBox); 
 
-        Label menu1 = new Label("MENU");
-        menu1.getStyleClass().add("judul");
-        menu1.setPadding(new Insets(0, 0, 0, 25));
+        Label menu1 = new Label("SHOP SENSE");
+        menu1.getStyleClass().add("judulhom");
+        menu1.setPadding(new Insets(0,0,0,15));
 
         Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
@@ -141,7 +133,14 @@ public class Karyawan {
             cetak.show();
         });
 
-        Rectangle with = new Rectangle(1000, 650);
+        Button home = new Button("Home");
+        home.getStyleClass().add("buton2");
+        home.setOnAction(e -> {
+            Menuisi pane = new Menuisi(stage);
+            pane.show();
+        });
+
+        Rectangle with = new Rectangle(1040, 610);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
         with.setArcWidth(30);
@@ -150,7 +149,7 @@ public class Karyawan {
         HBox rewc = new HBox(with);
         rewc.setPadding(new Insets(20, 0, 0, 230));
 
-        VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home);
+        VBox fungsi = new VBox(home,keuangan, barang, karyawan, tranksaksi, hasil);
         fungsi.setSpacing(40);
         HBox menu2 = new HBox(menu1);
 
@@ -164,9 +163,9 @@ public class Karyawan {
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 
-        Scene scene = new Scene(pane);
+        Scene scene = new Scene(pane,1290, 650);
         stage.setScene(scene);
-        stage.setMaximized(true);
+        // stage.setMaximized(true);
         stage.show();
     }
 
@@ -177,7 +176,6 @@ public class Karyawan {
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, nama);
-            // pstmt.setInt(2, id_karyawan);
             pstmt.setString(3, posisi);
             pstmt.setString(4, tanggal_masuk);
 
@@ -209,6 +207,23 @@ public class Karyawan {
         }
         return data;
     }
+
+    // public void delete(int id) {
+	// 	System.out.println(nama);
+    // 	String sql = "DELETE FROM barang WHERE id karyawan = ?";
+    // 	try (Connection conn = DatabaseConnection2.connect();
+    //      	PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    //     	pstmt.setString(1, nama);
+    //     	int affectedRows = pstmt.executeUpdate();
+    //     if (affectedRows > 0) {
+    //         System.out.println("Data berhasil dihapus.");
+    //     } else {
+    //         System.out.println("Tidak ada data yang dihapus. Mungkin nama tidak ditemukan: " + id);
+    //     }
+    // 	} catch (SQLException e) {
+    //     	System.out.println(e.getMessage());
+    // 	}
+	// }
 
     public String getNama() {
         return nama;
