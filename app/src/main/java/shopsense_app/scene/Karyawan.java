@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import org.checkerframework.checker.units.qual.h;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -132,15 +134,16 @@ public class Karyawan extends KaryawanAbstrak {
 
         HBox deleteBox = new HBox(delet);
         deleteBox.setAlignment(Pos.CENTER);
-        deleteBox.setPadding(new Insets(0, 0, 0, 0));
+        deleteBox.setAlignment(Pos.CENTER);
 
         VBox hapus = new VBox(5,idBox, deleteBox);
-        hapus.setPadding(new Insets(-150,0,0,600));
+        hapus.setPadding(new Insets(250, 0, 0, 40));
+
 
         HBox adBox = new HBox(add);
         adBox.setAlignment(Pos.CENTER);
-        adBox.setPadding(new Insets(20, 0, 0, -850));
-        HBox yo = new HBox(hapus, adBox);
+        adBox.setPadding(new Insets(20, 0, 0,0));
+        HBox yo = new HBox(hapus);
 
         VBox gabung = new VBox(40, nama1, posisi1);
         VBox all1 = new VBox(judul, gabung);
@@ -148,9 +151,9 @@ public class Karyawan extends KaryawanAbstrak {
         HBox all = new HBox(20, all1);
         all.setPadding(new Insets(20));
 
-
-
-        VBox gbg = new VBox(20, all, tanggal1, yo); 
+        VBox gbb = new VBox(20, all,tanggal1,adBox); 
+        HBox gbg = new HBox(gbb, yo);
+        gbg.setPadding(new Insets(0,0,0,100));
 
         Label menu1 = new Label("SHOP SENSE");
         menu1.getStyleClass().add("judulhom");
@@ -211,7 +214,7 @@ public class Karyawan extends KaryawanAbstrak {
         vbox.setSpacing(40);
         vbox.setPadding(new Insets(10, 10, 10, 10));
 
-        HBox alldata = new HBox(120, vbox, gbg);
+        HBox alldata = new HBox(80, vbox, gbg);
 
         StackPane pane = new StackPane(rewc, alldata);
         pane.getStyleClass().add("background2");
