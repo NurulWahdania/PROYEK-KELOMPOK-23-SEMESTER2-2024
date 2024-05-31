@@ -228,7 +228,7 @@
     -fx-text-fill: #ffffff;
     -fx-background-color: #20CD8D;
     -fx-background-radius: 5px ;
-    -fx-pref-width: 300px;
+    -fx-pref-width: 350px;
     -fx-pref-height: 20px;
 
 }
@@ -344,7 +344,6 @@
     /* -fx-prompt-text-fill: white; */
     -fx-background-radius: 5px ; 
 
-
 }
 
 
@@ -373,6 +372,29 @@
     -fx-background-image: url(\image\home.jpg);
 }
 
+.textid {
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: rgb(255, 255, 255);
+    -fx-background-color: #A6A6A6;
+    -fx-pref-width: 200px;
+
+}
+
+.textid2{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 15px;
+    -fx-background-color:#A6A6A6;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    /* -fx-prompt-text-fill: white; */
+    -fx-background-radius: 2px ; 
+    -fx-pref-width: 80px;
+    -fx-pref-height: 33px;
+
+}
 
 
 

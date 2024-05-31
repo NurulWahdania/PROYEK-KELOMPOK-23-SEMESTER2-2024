@@ -18,19 +18,6 @@ public class Menuisi {
     }
 
     public void show(){
-        // Label nmToko = new Label(Home.namaToko);
-        // nmToko.getStyleClass().add("tokok");
-        Line line = new Line();
-        line.setStartY(0);
-        line.setStartX(20);
-        line.setEndY(20);
-        line.setEndX(20);
-        line.setStrokeWidth(2);
-        line.setStroke(Color.BLACK);
-        HBox lin2 = new HBox(line);
-        // lin2.setPadding(new Insets(20,0,0,50));
-                
-
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
         menu1.setPadding(new Insets(0,0,0,25));
@@ -59,7 +46,7 @@ public class Menuisi {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasil = new Button("Cetak Hasil");
+        Button hasil = new Button("Histori");
         hasil.getStyleClass().add("buton2");
         hasil.setOnAction(e -> {
             Hasil cetak = new Hasil(stage);
@@ -82,8 +69,6 @@ public class Menuisi {
         HBox rewc = new HBox(with);
         rewc.setPadding(new Insets(20,0,0,230));
 
-        // HBox home2 = new HBox(home);
-        // home2.setAlignment(Pos.BOTTOM_RIGHT);
         VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil,home);
         fungsi.setSpacing(40);
         HBox menu2 = new HBox(menu1);
@@ -93,12 +78,8 @@ public class Menuisi {
         vbox.setSpacing(40);
         vbox.setPadding(new Insets(10,10,10,10));
 
-        HBox nstore = new HBox(10,lin2);
-        nstore.setPadding(new Insets(30,0,0,700));
+        HBox alldata = new HBox(120, vbox);
 
-        HBox alldata = new HBox(120, vbox, nstore);
-
-        nstore.setSpacing(10);
         StackPane pane = new StackPane(rewc, alldata);
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());

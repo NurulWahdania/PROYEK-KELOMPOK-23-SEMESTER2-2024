@@ -29,42 +29,26 @@ public class Hasil {
     }
 
     public void show(){
-        // Label nmToko = new Label(Home.namaToko);
-        // nmToko.getStyleClass().add("tokok");
-        Line line = new Line();
-        line.setStartY(0);
-        line.setStartX(20);
-        line.setEndY(20);
-        line.setEndX(20);
-        line.setStrokeWidth(2);
-        line.setStroke(Color.BLACK);
-        HBox all = new HBox(10, line);
-        all.setPadding(new Insets(30,0,0,1100));
-
-        // Image foto = new Image("image/yooh.jpg");
-        // ImageView vieFoto = new ImageView(foto);
-        // vieFoto.setFitHeight(50);
-        // vieFoto.setFitWidth(300);
         tableView = new TableView<>();
         TableColumn<TransaksiClass, String> namaKaryawanColum = new TableColumn<>("NAMA KARYAWAN");
         namaKaryawanColum.setCellValueFactory(new PropertyValueFactory<>("nama_karyawan"));
+        namaKaryawanColum.setPrefWidth(250);
         TableColumn<TransaksiClass, String> hargaColum = new TableColumn<>("Total");
         hargaColum.setCellValueFactory(new PropertyValueFactory<>("harga"));
+        hargaColum.setPrefWidth(250);
         TableColumn<TransaksiClass, String> waktuColum = new TableColumn<>("Waktu Transaksi");
         waktuColum.setCellValueFactory(new PropertyValueFactory<>("waktu"));
+        waktuColum.setPrefWidth(283);
         ObservableList<TransaksiClass> data = FXCollections.observableArrayList();
         tableView.setItems(data);
         tableView.getColumns().add(namaKaryawanColum);
         tableView.getColumns().add(hargaColum);
         tableView.getColumns().add(waktuColum);
         ObservableList<TransaksiClass> data2 = transaksiDAO.selectAll();
-        System.out.println(data2.size());
         tableView.setItems(data2);
 
-        // tableView.setMinWidth(400);
-        tableView.setMaxSize(800, 400);
-        // tableView.setPadding(new Insets(5,0,0,100));
-        // tableView.setPrefSize(850, 500);
+        tableView.setMinWidth(800);
+        tableView.setMaxHeight(400);
 
         Label label = new Label("Histori");
         label.getStyleClass().add("judul4");
@@ -98,7 +82,7 @@ public class Hasil {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasil = new Button("Cetak Hasil");
+        Button hasil = new Button("Histori");
         hasil.getStyleClass().add("buton2");
         hasil.setOnAction(e -> {
             Hasil cetak = new Hasil(stage);
@@ -114,7 +98,7 @@ public class Hasil {
         Rectangle with = new Rectangle(1000, 650);
         with.setFill(Color.web("#ffff"));
         with.getStyleClass().add("rectangle");
-        with.setArcWidth(30); // Mengatur lebar sudut
+        with.setArcWidth(30); 
         with.setArcHeight(30);
 
         HBox rewc = new HBox(with);
@@ -123,17 +107,18 @@ public class Hasil {
         VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home);
         fungsi.setSpacing(40);
         HBox menu2 = new HBox(menu1);
-
         VBox vbox = new VBox(menu2, fungsi);
 
-        // VBox content = new VBox(label, tableView);
+        HBox view = new HBox(tableView);
+        view.setPadding(new Insets(140,0,0,-20));
 
-        HBox alldata = new HBox(vbox,label, tableView);
+        VBox content = new VBox(label,view);
+        HBox gabung = new HBox(vbox, label, content);
         
         vbox.setSpacing(40);
         vbox.setPadding(new Insets(10,10,10,10));
 
-        StackPane pane = new StackPane(rewc, all,alldata);
+        StackPane pane = new StackPane(rewc, gabung);
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
  

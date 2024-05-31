@@ -58,17 +58,6 @@ public class Barang {
 
     public void show() {
 
-        // Label nmToko = new Label(Home.namaToko);
-        // nmToko.getStyleClass().add("tokok2");
-        Line line = new Line();
-        line.setStartY(0);
-        line.setStartX(20);
-        line.setEndY(20);
-        line.setEndX(20);
-        line.setStrokeWidth(2);
-        line.setStroke(Color.BLACK);
-        HBox lin2 = new HBox(line);
-
         ListPaneBarang listPane = new ListPaneBarang();
         FromBarang fromPane2 = new FromBarang(listPane);
 
@@ -81,10 +70,8 @@ public class Barang {
         VBox.setVgrow(formPaneContainer, Priority.ALWAYS);
         vBox.setAlignment(Pos.TOP_CENTER);
 
-        HBox all2 = new HBox(10,lin2);
-        all2.setPadding(new Insets(30,0,0,650));
-
-        VBox box = new VBox(all2,vBox);
+        VBox box = new VBox(vBox);
+        box.setPadding(new Insets(40,0,0,0));
 
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
@@ -114,7 +101,7 @@ public class Barang {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasil = new Button("Cetak Hasil");
+        Button hasil = new Button("Histori");
         hasil.getStyleClass().add("buton2");
         hasil.setOnAction(e -> {
             Hasil cetak = new Hasil(stage);

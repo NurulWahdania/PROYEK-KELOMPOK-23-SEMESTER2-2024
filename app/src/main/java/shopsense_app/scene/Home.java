@@ -45,24 +45,10 @@ public class Home {
         button.setPrefWidth(300);
         button.setPrefHeight(50);
 
-        // TextField buttonToStoreName = new TextField();
-        // buttonToStoreName.setPromptText("STORE NAME");
-        // buttonToStoreName.setId("tf-home");
-        // buttonToStoreName.setPrefWidth(300);
-        // buttonToStoreName.setPrefHeight(50);
-
         button.setOnAction(e -> {
-            // if (buttonToStoreName.getText().isEmpty()) {
-            //     buttonToStoreName.setPromptText("Harap Di Isi !!");;
-            //     buttonToStoreName.setId("tf-homeFailed");
-            // }else {
                 Menuisi menu = new Menuisi(stage);
-                // namaToko = buttonToStoreName.getText();
                 menu.show();
-
-            
         });
-
 
         VBox tittle = new VBox(label, label2);
         tittle.setSpacing(5);

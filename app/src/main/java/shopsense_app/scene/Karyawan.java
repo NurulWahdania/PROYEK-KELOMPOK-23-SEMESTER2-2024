@@ -49,20 +49,6 @@ public class Karyawan {
     }
 
     public void show() {
-        // Label nmToko = new Label(Home.namaToko);
-        // nmToko.getStyleClass().add("tokok2");
-        Line line = new Line();
-        line.setStartY(0);
-        line.setStartX(20);
-        line.setEndY(20);
-        line.setEndX(20);
-        line.setStrokeWidth(2);
-        line.setStroke(Color.BLACK);
-        HBox lin2 = new HBox(line);
-        HBox alll = new HBox(10, lin2);
-        alll.setPadding(new Insets(30, 0, 0, 700));
-        alll.setAlignment(Pos.CENTER);
-
         Label judul = new Label("Karyawan");
         judul.getStyleClass().add("judul2");
 
@@ -72,22 +58,6 @@ public class Karyawan {
         TextField bNama = new TextField();
         bNama.getStyleClass().add("buton4");
         VBox nama1 = new VBox(nama, bNama);
-
-        // Label id = new Label("ID Karyawan");
-        // id.getStyleClass().add("karyawan");
-        // id.setPadding(new Insets(0, 0, 0, 20));
-        // TextField bKaryawan = new TextField();
-        // bKaryawan.getStyleClass().add("buton4");
-        // TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
-        // String newText = change.getControlNewText();
-        // if (newText.matches("\\d*")) {
-        // return change;
-        // }
-        // return null;
-        // });
-        // bKaryawan.setTextFormatter(textFormatter);
-
-        // VBox karyawan1 = new VBox(id, bKaryawan);
 
         Label posis = new Label("Posisi");
         posis.getStyleClass().add("karyawan");
@@ -134,7 +104,7 @@ public class Karyawan {
         HBox all = new HBox(20, all1);
         all.setPadding(new Insets(20));
 
-        VBox gbg = new VBox(20, alll, all, tanggal1, home2); // Menambahkan tanggal1 di sini setelah all
+        VBox gbg = new VBox(20, all, tanggal1, home2); // Menambahkan tanggal1 di sini setelah all
 
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
@@ -164,7 +134,7 @@ public class Karyawan {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasil = new Button("Cetak Hasil");
+        Button hasil = new Button("Histori");
         hasil.getStyleClass().add("buton2");
         hasil.setOnAction(e -> {
             Hasil cetak = new Hasil(stage);

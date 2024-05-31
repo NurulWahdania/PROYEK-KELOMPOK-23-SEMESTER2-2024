@@ -43,20 +43,6 @@ public class LaporanToko {
     }
 
     public void show() {
-
-        // Label nmToko = new Label(Home.namaToko);
-        // nmToko.getStyleClass().add("tokok2");
-        Line line = new Line();
-        line.setStartY(0);
-        line.setStartX(20);
-        line.setEndY(20);
-        line.setEndX(20);
-        line.setStrokeWidth(2);
-        line.setStroke(Color.BLACK);
-        HBox lin2 = new HBox(line);
-        HBox alll = new HBox(10, lin2);
-        alll.setPadding(new Insets(30, 0, 0, 750));
-
         ListPaneBarang listPane = new ListPaneBarang();
         FromBarang fromPane3 = new FromBarang(listPane);
 
@@ -83,9 +69,7 @@ public class LaporanToko {
         System.out.println("Karyawan list size" + data2.size());
         tableView1.setItems(data2);
 
-        tableView1.setMaxSize(400, 400);
-        // tableView1.set
-
+        tableView1.setMaxSize(800, 400);
 
         tableView = new TableView<>();
         TableColumn<TransaksiClass, String> namaKaryawanColum = new TableColumn<>("NAMA KARYAWAN");
@@ -103,9 +87,7 @@ public class LaporanToko {
         System.out.println(data2.size());
         tableView.setItems(data3);
 
-        // tableView.setMinWidth(400);
         tableView.setMaxSize(800, 400);
-
         
         Label uang = new Label("Laporan Toko");
         uang.getStyleClass().add("judul2");
@@ -114,21 +96,19 @@ public class LaporanToko {
         pemasukan.getStyleClass().add("keuangan");
         pemasukan.setAlignment(Pos.CENTER);
 
-        Label pengeluaran = new Label("Data karyawan:\t");
-        pengeluaran.getStyleClass().add("keuangan");
-        pengeluaran.setAlignment(Pos.CENTER);
+        Label data1 = new Label("Data karyawan:\t");
+        data1.getStyleClass().add("keuangan");
+        data1.setAlignment(Pos.CENTER);
 
         HBox hjudul = new HBox(uang);
         hjudul.setAlignment(Pos.CENTER);
 
-        HBox label = new HBox(100, pemasukan, pengeluaran);
+        HBox label = new HBox(100, pemasukan, data1);
         label.setAlignment(Pos.CENTER);
 
-        VBox gabung = new VBox(40, hjudul, label);
-        gabung.setPadding(new Insets(10, 10, 10, 40));
+        VBox gabung = new VBox(30, hjudul, label);
+        gabung.setPadding(new Insets(-400, 10, 10, 40));
         gabung.setAlignment(Pos.CENTER);
-
-        VBox all = new VBox(alll, gabung);
 
         Label menu1 = new Label("MENU");
         menu1.getStyleClass().add("judul");
@@ -158,7 +138,7 @@ public class LaporanToko {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasil = new Button("Cetak Hasil");
+        Button hasil = new Button("Histori");
         hasil.getStyleClass().add("buton2");
         hasil.setOnAction(e -> {
             Hasil cetak = new Hasil(stage);
@@ -181,7 +161,6 @@ public class LaporanToko {
         HBox rewc = new HBox(with);
         rewc.setPadding(new Insets(20, 0, 0, 230));
 
-        // home2.setAlignment(Pos.BOTTOM_RIGHT);
         VBox fungsi = new VBox(keuangan, barang, karyawan, tranksaksi, hasil, home);
         fungsi.setSpacing(40);
         HBox menu2 = new HBox(menu1);
@@ -189,14 +168,20 @@ public class LaporanToko {
         VBox vbox = new VBox(menu2, fungsi);
         vbox.setPadding(new Insets(10, 10, 10, 10));
 
-        HBox tabel = new HBox(tableView, tableView1);
-        tabel.setSpacing(50);
+        HBox view1 = new HBox(tableView1);
+        view1.setPadding(new Insets(50,0,0,90));
+
+        HBox view = new HBox(tableView);
+        view.setPadding(new Insets(50,0,0,60));
+
+        HBox tabel = new HBox(80,view, view1);
+        tabel.setPadding(new Insets(180,0,0,-1000));
         tabel.setAlignment(Pos.CENTER);
 
         vbox.setSpacing(40);
         vbox.setPadding(new Insets(10, 10, 10, 10));
-        HBox alldata = new HBox(80, vbox, all);
-        StackPane pane = new StackPane(rewc, alldata, tabel);
+        HBox alldata = new HBox(80, vbox, gabung,tabel);
+        StackPane pane = new StackPane(rewc, alldata);
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 

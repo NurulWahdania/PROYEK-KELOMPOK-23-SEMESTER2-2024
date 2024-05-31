@@ -18,13 +18,16 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -54,33 +57,42 @@ public class Tranksaksi {
     private Button hasil;
     private Label salah;
 
+
     public void show() {
+        Label idKaryawan = new Label("Pilih Id");
+        idKaryawan.getStyleClass().add("textid2");
+        ComboBox<Karyawan> idBox = new ComboBox<>();
+        idBox.getStyleClass().add("textid");
+        idBox.setCellFactory(param -> new ListCell<Karyawan>(){
+        //    @Override
+            public void updateItem (Karyawan item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getId() +" - " + item.getNama());
+                }
+            }
+        });
+        idBox.setButtonCell(new ListCell<Karyawan>(){
 
-        TextField idKaryawan = new TextField();
-        idKaryawan.setPromptText("Masukan Id");
-        idKaryawan.setOnAction(e -> {
-
+            public void updateItem(Karyawan item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getId() +" - " + item.getNama());
+                }
+            }
         });
 
-        idKaryawan.getStyleClass().add("text2");
+        idBox.setOnMouseClicked((MouseEvent event)-> {
+            ObservableList<Karyawan> karyawanList = selectAll();
+            idBox.setItems(karyawanList);
+        });
 
-        // TextField namaKaryawan = new TextField();
-        // namaKaryawan.setPromptText("Masukan Nama");
-        // namaKaryawan.getStyleClass().add("text2");
-
-        HBox atas = new HBox(10, idKaryawan);
-
-        // Label nmToko = new Label(Home.namaToko);
-        // nmToko.getStyleClass().add("tokok");
-        Line line = new Line();
-        line.setStartY(0);
-        line.setStartX(20);
-        line.setEndY(20);
-        line.setEndX(20);
-        line.setStrokeWidth(2);
-        line.setStroke(Color.BLACK);
-        HBox all = new HBox(10,atas ,line);
-        all.setPadding(new Insets(30,0,0,790));
+        HBox atas = new HBox(idKaryawan, idBox);
+        atas.setPadding(new Insets(-70,0,0,20));
     
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
@@ -133,11 +145,14 @@ public class Tranksaksi {
         hasil = new Button("HASIL");
         hasil.getStyleClass().add("buton8");
         hasil.setOnAction(e -> {
-            String nama_karyawan = cekNamaKaryawan(idKaryawan.getText());
-            TranksaksiControler tr = new TranksaksiControler();
-            tr.addHasil(hasilBelanja, waktu(), nama_karyawan);
-            processTransaction();}
-        );
+            Karyawan pilih = idBox.getSelectionModel().getSelectedItem();
+            if (pilih != null) {
+                String nama_karyawan = pilih.getNama();
+                TranksaksiControler tr = new TranksaksiControler();
+                tr.addHasil(hasilBelanja, waktu(), nama_karyawan);
+                processTransaction();
+            }
+        });
     
         Button delet = new Button("CLEAR");
         delet.getStyleClass().add("buton8");
@@ -172,10 +187,11 @@ public class Tranksaksi {
         rectangle3.setFill(Color.web("#D9D9D9"));
     
         HBox rec2 = new HBox(rectangle3);
-        rec2.setPadding(new Insets(520,0, 0, 800));
+        rec2.setPadding(new Insets(530,0, 0, 800));
     
         VBox spasi = new VBox(20, label2, rightTableView);
-        VBox recc = new VBox(10, spasi, totalBox);
+        VBox you = new VBox(20, spasi, totalBox);
+        VBox recc = new VBox(atas, you);
         recc.setPadding(new Insets(55, 0, 0, 100));
         recc.setAlignment(Pos.CENTER);
         recc.setSpacing(10);
@@ -213,7 +229,7 @@ public class Tranksaksi {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasill = new Button("Cetak Hasil");
+        Button hasill = new Button("Histori");
         hasill.getStyleClass().add("buton2");
         hasill.setOnAction(e -> {
             Hasil cetak = new Hasil(stage);
@@ -255,7 +271,7 @@ public class Tranksaksi {
         salah.getStyleClass().add("hasil");
  
         HBox gabungg = new HBox(90, vbox, sejajar);
-        Pane pane = new Pane(rewc,rec2, gabungg, all, salah);
+        Pane pane = new Pane(rewc,rec2, gabungg,salah);
         pane.getStyleClass().add("background2");
 
         Scene scene = new Scene(pane);
