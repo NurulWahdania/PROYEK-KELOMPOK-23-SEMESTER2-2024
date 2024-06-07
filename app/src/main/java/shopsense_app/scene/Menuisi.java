@@ -1,21 +1,21 @@
 package shopsense_app.scene;
+
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import javafx.geometry.Insets;
+import javafx.scene.text.Text;
+import java.time.LocalDateTime;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import java.time.format.DateTimeFormatter;
+
 public class Menuisi {
     Stage stage;
     private Text datet;

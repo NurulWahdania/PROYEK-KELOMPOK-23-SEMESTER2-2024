@@ -1,8 +1,8 @@
 package shopsense_app.fungsiMenu;
 
+import shopsense_app.scene.Barang;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import shopsense_app.scene.Barang;
 
 public class DataProvider {
     public ObservableList<Barang> data;

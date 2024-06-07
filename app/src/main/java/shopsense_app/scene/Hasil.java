@@ -1,22 +1,22 @@
 package shopsense_app.scene;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
+import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import shopsense_app.Data.TranksaksiControler;
 import shopsense_app.fungsiMenu.TransaksiClass;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class Hasil {
     Stage stage;
@@ -126,5 +126,4 @@ public class Hasil {
         stage.setScene(scene); 
         stage.show();
     }
-    
 }

@@ -1,32 +1,28 @@
 package shopsense_app.scene;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import javafx.stage.Stage;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.LocalDate;
-
-import org.checkerframework.checker.units.qual.h;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import java.sql.Connection;
+import javafx.geometry.Pos;
+import java.time.LocalDate;
+import java.sql.SQLException;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
+import java.sql.PreparedStatement;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import shopsense_app.Data.DatabaseConnection2;
 
 public class Karyawan extends KaryawanAbstrak {
@@ -45,7 +41,6 @@ public class Karyawan extends KaryawanAbstrak {
         this.tanggal = tanggal;
     }
 
-    
     public void show() {
         Label judul = new Label("Karyawan");
         judul.getStyleClass().add("judul2");
@@ -86,7 +81,6 @@ public class Karyawan extends KaryawanAbstrak {
             bPosis.clear();
             datePicker.setValue(null);
         });
-
 
         Label idKaryawan = new Label("Pilih Id");
         idKaryawan.getStyleClass().add("textid2");
@@ -138,7 +132,6 @@ public class Karyawan extends KaryawanAbstrak {
 
         VBox hapus = new VBox(5,idBox, deleteBox);
         hapus.setPadding(new Insets(250, 0, 0, 40));
-
 
         HBox adBox = new HBox(add);
         adBox.setAlignment(Pos.CENTER);

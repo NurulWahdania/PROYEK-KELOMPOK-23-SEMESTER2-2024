@@ -1,27 +1,27 @@
 package shopsense_app.scene;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import shopsense_app.Data.TranksaksiControler;
+import javafx.scene.layout.StackPane;
 import shopsense_app.From.FromBarang;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import shopsense_app.From.ListPaneBarang;
+import shopsense_app.Data.TranksaksiControler;
 import shopsense_app.fungsiMenu.TransaksiClass;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class LaporanToko  {
     TableView<shopsense_app.fungsiMenu.TransaksiClass> tableView;
@@ -213,5 +213,4 @@ public class LaporanToko  {
         int totalkar = data.size();
         totalkaryawan.setText("Jumlah Karyawan =  " + totalkar);
     }
-
 }

@@ -1,7 +1,6 @@
 package shopsense_app.scene;
+
 import javafx.stage.Stage;
-import shopsense_app.From.FromBarang;
-import shopsense_app.From.ListPaneBarang;
 import javafx.scene.Scene;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
@@ -9,11 +8,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import shopsense_app.From.FromBarang;
+import shopsense_app.From.ListPaneBarang;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Barang extends ListPaneBarang {

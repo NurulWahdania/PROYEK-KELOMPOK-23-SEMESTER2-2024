@@ -1,15 +1,15 @@
 package shopsense_app.From;
+
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ScrollPane;
-import shopsense_app.fungsiMenu.BarangController;
-import shopsense_app.fungsiMenu.PemasukanController;
 import shopsense_app.scene.Barang;
+import javafx.scene.control.TableView;
 import shopsense_app.scene.LaporanToko;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.collections.ObservableList;
+import shopsense_app.fungsiMenu.BarangController;
+import shopsense_app.fungsiMenu.PemasukanController;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListPaneBarang {
@@ -34,10 +34,6 @@ public class ListPaneBarang {
         tableView.getColumns().add(stokColum);
         tableView.setMinWidth(400);
 
-        // ScrollPane scrollPane = new ScrollPane(tableView);
-        // scrollPane.setMaxHeight(200);
-        // scrollPane.setMinWidth(400);
-
         VBox vbox = new VBox(tableView);
         vbox.setMaxHeight(200);
         vbox.setMaxWidth(400);
@@ -48,7 +44,6 @@ public class ListPaneBarang {
         loadData();
         return vbox;
     }
-
 
      public void loadData() {
         ObservableList<Barang> barang = barangController.selectAll();

@@ -1,16 +1,14 @@
 package shopsense_app.fungsiMenu;
 
-
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
-
+import shopsense_app.scene.Karyawan;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shopsense_app.Data.DatabaseConnection2;
-import shopsense_app.scene.Karyawan;
 
 public class KaryawanConnection {
     public void createTable() {
@@ -68,6 +66,4 @@ public class KaryawanConnection {
     	}
     	return data;
 	}
-
-
 }

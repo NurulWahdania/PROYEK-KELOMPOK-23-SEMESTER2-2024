@@ -2,21 +2,27 @@ package shopsense_app.From;
 
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javafx.geometry.Pos;
+import java.sql.Connection;
+import java.sql.SQLException;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import shopsense_app.scene.Barang;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import shopsense_app.fungsiMenu.BarangController;
-import shopsense_app.fungsiMenu.DataProvider;
-import shopsense_app.scene.Barang;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ScrollPane;
+import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextFormatter;
+import shopsense_app.fungsiMenu.DataProvider;
+import shopsense_app.Data.DatabaseConnection2;
+import shopsense_app.fungsiMenu.BarangController;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FromBarang extends ListPaneBarang {
@@ -28,13 +34,12 @@ public class FromBarang extends ListPaneBarang {
 
     ListPaneBarang listPane;
     TableView<shopsense_app.scene.Barang> tableView;
-
+    
     public FromBarang(ListPaneBarang listPane) {
         this.listPane = listPane;
     }
 
     public VBox getFormPane() {
-
         add = new Button("Add");
         add.setMaxHeight(40);
         add.setMinWidth(200);
@@ -79,7 +84,6 @@ public class FromBarang extends ListPaneBarang {
         setForm(1);
         setSubmit(1);
 
-        
         tableView = new TableView<>();
         TableColumn<Barang, String> namaColum = new TableColumn<>("NAMA BARANG");
         namaColum.setCellValueFactory(new PropertyValueFactory<>("nama"));
@@ -126,7 +130,7 @@ public class FromBarang extends ListPaneBarang {
 
         return last;
     }
-
+    
     @Override
     public void loadData() {
         ObservableList<Barang> barang = barangController.selectAll();
@@ -134,14 +138,14 @@ public class FromBarang extends ListPaneBarang {
         tableView.setItems(barang);
     }
     void setActive(int button) {
-        add.setStyle("-fx-background-color: #BFF6C3; -fx-text-fill: #ffffff;  -fx-background-radius: 10");
-        update.setStyle("-fx-background-color: #BFF6C3; -fx-text-fill: #ffffff; -fx-background-radius: 10");
-        delete.setStyle("-fx-background-color: #BFF6C3; -fx-text-fill: #ffffff; -fx-background-radius: 10");
+        add.setStyle("-fx-background-color: #BFF6C3; -fx-text-fill: #000000;  -fx-background-radius: 10");
+        update.setStyle("-fx-background-color: #BFF6C3; -fx-text-fill: #000000; -fx-background-radius: 10");
+        delete.setStyle("-fx-background-color: #BFF6C3; -fx-text-fill: #000000; -fx-background-radius: 10");
         switch (button) {
             case 1 -> add.setStyle("-fx-background-color: #00ffff; -fx-text-fill: #000000; -fx-background-radius: 0");
             case 2 ->
                 update.setStyle("-fx-background-color: #00ffff; -fx-text-fill: #000000; -fx-background-radius: 0");
-            case 3 ->
+                case 3 ->
                 delete.setStyle("-fx-background-color: #00ffff; -fx-text-fill: #000000; -fx-background-radius: 0");
         }
     }
@@ -283,7 +287,7 @@ public class FromBarang extends ListPaneBarang {
                     });
                     Button no = new Button("No");
                     no.setOnAction(e1 -> stage.close());
-                    VBox vBox = new VBox(new Label("Are you sure want to delete this data?"), yes, no);
+                    HBox vBox = new HBox(new Label("Are you sure want to delete this data?"), yes, no);
                     vBox.setSpacing(10);
                     vBox.setStyle("-fx-padding: 20px");
                     vBox.setPrefSize(200, 100);
@@ -296,4 +300,35 @@ public class FromBarang extends ListPaneBarang {
             }
         }
     }
+    private String cekNamaBarang(String nama) {
+        String data = "";
+        ObservableList<Barang> barangList = selectAll();
+        for (Barang barang : barangList){
+            System.out.println(barang.getNama()); // Mengakses properti nama dari objek barang
+            if (barang.getNama().equals(nama)) { // Membandingkan nama barang dari objek barang dengan nama yang diberikan
+                data = barang.getNama();
+            }
+        }
+        return data;
+    }
+    
+    public ObservableList<Barang> selectAll() {
+    	String sql = "SELECT nama, harga, stok FROM barang";
+    	ObservableList<Barang> data = FXCollections.observableArrayList();
+    	try (Connection conn = DatabaseConnection2.connect();
+         	Statement stmt = conn.createStatement();
+         	ResultSet rs = stmt.executeQuery(sql)) {
+        	while (rs.next()) {
+            	Barang barang = new Barang(
+                    	rs.getString("nama"),
+                    	rs.getString("harga"),
+                    	rs.getString("stok")
+            	);
+            	data.add(barang);
+        	}
+    	} catch (SQLException e) {
+        	System.out.println(e.getMessage());
+    	}
+    	return data;
+	}
 }
