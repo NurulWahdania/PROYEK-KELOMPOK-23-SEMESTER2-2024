@@ -1,1 +1,2 @@
-# PROYEK-KELOMPOK-23-SEMESTER2-2024
+# SHOPSENSE
+Membantu para wirausaha untuk memantau stok barang mereka.
