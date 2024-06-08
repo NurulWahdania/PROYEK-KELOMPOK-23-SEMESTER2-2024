@@ -257,6 +257,61 @@
     -fx-text-fill: #040404;
 }
 
+.barang{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+}
+
+.barangb{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 10px ;
+    -fx-background-color: #0faf0f;
+}
+
+.barangb:pressed {
+    -fx-background-color: #BFF6C3; /* Warna saat tombol ditekan */
+}
+
+.ba{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+    -fx-background-radius: 10px ;
+    -fx-background-color: #20CD8D;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 15px;
+}
+
+.barang2{
+    -fx-font-family: "Nunito";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 10px ;
+    -fx-background-color: #20CD8D;
+}
+
+.barang2:pressed {
+    -fx-background-color: #BFF6C3; /* Warna saat tombol ditekan */
+}
+
+
+/* .barang2:pre {
+    -fx-font-family: "Nunito";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #040404;
+    -fx-background-radius: 10px ;
+    -fx-background-color: #20CD8D;
+
+} */
+
 .foto{
     -fx-font-family: "Nunito";
     -fx-font-size: 15px;

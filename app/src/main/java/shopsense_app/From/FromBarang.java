@@ -11,8 +11,11 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import shopsense_app.scene.Barang;
+import shopsense_app.scene.Karyawan;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ScrollPane;
@@ -24,12 +27,13 @@ import shopsense_app.fungsiMenu.DataProvider;
 import shopsense_app.Data.DatabaseConnection2;
 import shopsense_app.fungsiMenu.BarangController;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class FromBarang extends ListPaneBarang {
 
     VBox content;
     TextField tf_nama, tf_harga, tf_stok;
-    Button add, update, delete, submit, cancel;
+    Button add, update, delete, stok_barang, submit, cancel;
     BarangController barangController = new BarangController();
 
     ListPaneBarang listPane;
@@ -40,30 +44,37 @@ public class FromBarang extends ListPaneBarang {
     }
 
     public VBox getFormPane() {
-        add = new Button("Add");
+        add = new Button("Tambah");
+        add.getStyleClass().add("barang2");
         add.setMaxHeight(40);
         add.setMinWidth(200);
-        add.setStyle("-fx-background-color: #02c37e; -fx-text-fill: black; -fx-background-radius: 10");
         add.setOnAction(e -> {
-            setActive(1);
             setForm(1);
             setSubmit(1);
         });
-        update = new Button("Update");
+
+        stok_barang = new Button("Perbarui Stok");
+        stok_barang.setMaxHeight(40);
+        stok_barang.setMinWidth(200);
+        stok_barang.getStyleClass().add("barang2");
+        stok_barang.setOnAction(e -> {
+            setForm(4);
+            setSubmit(4);
+        });
+
+        update = new Button("Perbarui Harga");
         update.setMaxHeight(40);
         update.setMinWidth(200);
-        update.setStyle("-fx-background-color: #02c37e; -fx-text-fill: black; -fx-background-radius: 10");
+        update.getStyleClass().add("barang2");
         update.setOnAction(e -> {
-            setActive(2);
             setForm(2);
             setSubmit(2);
         });
-        delete = new Button("Delete");
+        delete = new Button("Hapus");
+        delete.getStyleClass().add("barang2");
         delete.setMaxHeight(40);
         delete.setMinWidth(200);
-        delete.setStyle("-fx-background-color: #02c37e; -fx-text-fill: black; -fx-background-radius: 10");
         delete.setOnAction(e -> {
-            setActive(3);
             setForm(3);
             setSubmit(3);
         });
@@ -72,7 +83,7 @@ public class FromBarang extends ListPaneBarang {
 
         submit = new Button();
         submit.setPrefSize(200, 25);
-        submit.setStyle("-fx-background-color: #0faf0f; -fx-text-fill: #ffffff;  -fx-background-radius: 10");
+        submit.getStyleClass().add("barangb");
         submit.setMinWidth(150);
 
         cancel = new Button("Cancel");
@@ -80,7 +91,6 @@ public class FromBarang extends ListPaneBarang {
         cancel.setStyle("-fx-background-color: #0faf0f; -fx-text-fill: #ffffff;  -fx-background-radius: 10");
         cancel.setMinWidth(120);
 
-        setActive(1);
         setForm(1);
         setSubmit(1);
 
@@ -97,7 +107,7 @@ public class FromBarang extends ListPaneBarang {
         stokColum.setCellValueFactory(new PropertyValueFactory<>("stok"));
         stokColum.setPrefWidth(115);
 
-        VBox tab = new VBox(10, add, update, delete, submit);
+        VBox tab = new VBox(10, add,stok_barang, update, delete, submit);
         tab.setAlignment(Pos.TOP_CENTER);
         tab.maxWidth(160);
 
@@ -107,8 +117,7 @@ public class FromBarang extends ListPaneBarang {
         tableView.setMinWidth(400);
 
         Label barang = new Label("Barang");
-        barang.setStyle(
-                "-fx-font-size: 40px; -fx-text-fill: #02c37e; -fx-text-align: center; -fx-font-family: Arial; -fx-weight: bold;");
+        barang.getStyleClass().add("judul5");
         ScrollPane scrollPane = new ScrollPane(tableView);
         scrollPane.setMaxHeight(400);
         scrollPane.setMinWidth(400);
@@ -137,34 +146,26 @@ public class FromBarang extends ListPaneBarang {
         System.out.println(String.valueOf(barang.size()));
         tableView.setItems(barang);
     }
-    void setActive(int button) {
-        add.setStyle("-fx-background-color: #BFF6C3; -fx-text-fill: #000000;  -fx-background-radius: 10");
-        update.setStyle("-fx-background-color: #BFF6C3; -fx-text-fill: #000000; -fx-background-radius: 10");
-        delete.setStyle("-fx-background-color: #BFF6C3; -fx-text-fill: #000000; -fx-background-radius: 10");
-        switch (button) {
-            case 1 -> add.setStyle("-fx-background-color: #00ffff; -fx-text-fill: #000000; -fx-background-radius: 0");
-            case 2 ->
-                update.setStyle("-fx-background-color: #00ffff; -fx-text-fill: #000000; -fx-background-radius: 0");
-                case 3 ->
-                delete.setStyle("-fx-background-color: #00ffff; -fx-text-fill: #000000; -fx-background-radius: 0");
-        }
-    }
+
     void setForm(int type) {
         switch (type) {
             case 1 -> {
                 content.getChildren().clear();
                 Label lb_nama = new Label("Nama Barang");
                 lb_nama.setPrefSize(100, 20);
+                lb_nama.getStyleClass().add("barang");
                 tf_nama = new TextField();
                 tf_nama.setPrefSize(200, 20);
-                tf_nama.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
                 tf_nama.setMinWidth(300);
+                tf_nama.getStyleClass().add("ba");
                 HBox nama = new HBox(lb_nama, tf_nama);
                 Label lb_harga = new Label("Harga Barang");
+                lb_harga.getStyleClass().add("barang");
                 lb_harga.setPrefSize(100, 20);
                 tf_harga = new TextField();
                 tf_harga.setPrefSize(200, 20);
                 tf_harga.setMinWidth(300);
+                tf_harga.getStyleClass().add("ba");
                 TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
                     String newText = change.getControlNewText();
                     if (newText.matches("\\d*")) {
@@ -173,9 +174,9 @@ public class FromBarang extends ListPaneBarang {
                     return null;
                 });
                 tf_harga.setTextFormatter(textFormatter);
-                tf_harga.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
                 HBox harga = new HBox(lb_harga, tf_harga);
                 Label lb_stok = new Label("Stok Barang");
+                lb_stok.getStyleClass().add("barang");
                 lb_stok.setPrefSize(100, 20);
                 tf_stok = new TextField();
                 tf_stok.setPrefSize(200, 20);
@@ -187,53 +188,159 @@ public class FromBarang extends ListPaneBarang {
                     return null;
                 });
                 tf_stok.setTextFormatter(textFormatter1);
-                tf_stok.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
                 tf_stok.setMinWidth(300);
+                tf_stok.getStyleClass().add("ba");
                 HBox stok = new HBox(lb_stok, tf_stok);
                 content.getChildren().addAll(nama, harga, stok);
             }
             case 2 -> {
                 content.getChildren().clear();
                 Label lb_nama = new Label("Nama Barang");
+                lb_nama.getStyleClass().add("barang");
                 lb_nama.setPrefSize(100, 20);
-                tf_nama = new TextField();
-                tf_nama.setPrefSize(200, 20);
-                tf_nama.setMinWidth(300);
-                tf_nama.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
+                ComboBox<Barang> tf_nama = new ComboBox<>();
+                tf_nama.getStyleClass().add("ba");
+                tf_nama.setCellFactory(param -> new ListCell<Barang>(){
+                    public void updateItem(Barang item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item.getNama());
+                        }
+                    }
+                });
+
+                tf_nama.setButtonCell(new ListCell<Barang>(){
+                    public void updateItem(Barang item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item.getNama());
+                        }
+                    }
+                });
+
+                tf_nama.setOnMouseClicked((MouseEvent event) -> {
+                    ObservableList<Barang> barangList = selectAll();
+                    tf_nama.setItems(barangList);
+                });
+
                 HBox nama = new HBox(lb_nama, tf_nama);
                 Label lb_harga = new Label("Harga Barang");
+                lb_harga.getStyleClass().add("barang");
                 lb_harga.setPrefSize(100, 20);
                 tf_harga = new TextField();
                 tf_harga.setPrefSize(200, 20);
-                tf_harga.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
+                TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
+                    String newText = change.getControlNewText();
+                    if (newText.matches("\\d*")) {
+                        return change;
+                    }
+                    return null;
+                });
+                tf_harga.setTextFormatter(textFormatter);
+                tf_harga.getStyleClass().add("ba");
                 tf_harga.setMinWidth(300);
                 HBox harga = new HBox(lb_harga, tf_harga);
-                Label lb_stok = new Label("Stok Barang");
-                lb_stok.setPrefSize(100, 20);
-                tf_stok = new TextField();
-                tf_stok.setPrefSize(200, 20);
-                tf_stok.setMinWidth(300);
-                tf_stok.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
-                HBox stok = new HBox(lb_stok, tf_stok);
-                content.getChildren().addAll(nama, harga, stok);
+                content.getChildren().addAll(nama, harga);
             }
             case 3 -> {
                 content.getChildren().clear();
                 Label lb_nama = new Label("Nama Barang");
+                lb_nama.getStyleClass().add("barang");
                 lb_nama.setPrefSize(100, 20);
-                tf_nama = new TextField();
-                tf_nama.setPrefSize(200, 20);
-                tf_nama.setMinWidth(300);
-                tf_nama.setStyle("-fx-background-color: #02c37e;-fx-background-radius: 10px;");
+                ComboBox<Barang> tf_nama = new ComboBox<>();
+                tf_nama.getStyleClass().add("ba");
+                tf_nama.setCellFactory(param -> new ListCell<Barang>(){
+                    public void updateItem(Barang item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item.getNama());
+                        }
+                    }
+                });
+
+                tf_nama.setButtonCell(new ListCell<Barang>(){
+                    public void updateItem(Barang item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item.getNama());
+                        }
+                    }
+                });
+
+                tf_nama.setOnMouseClicked((MouseEvent event) -> {
+                    ObservableList<Barang> barangList = selectAll();
+                    tf_nama.setItems(barangList);
+                });
                 HBox nama = new HBox(lb_nama, tf_nama);
                 content.getChildren().addAll(nama);
+            }
+            case 4 -> {
+                content.getChildren().clear();
+                Label lb_nama = new Label("Nama Barang");
+                lb_nama.getStyleClass().add("barang");
+                lb_nama.setPrefSize(100, 20);
+                ComboBox<Barang> tf_nama = new ComboBox<>();
+                tf_nama.getStyleClass().add("ba");
+                tf_nama.setCellFactory(param -> new ListCell<Barang>(){
+                    public void updateItem(Barang item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item.getNama());
+                        }
+                    }
+                });
+
+                tf_nama.setButtonCell(new ListCell<Barang>(){
+                    public void updateItem(Barang item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty || item == null) {
+                            setText(null);
+                        } else {
+                            setText(item.getNama());
+                        }
+                    }
+                });
+
+                tf_nama.setOnMouseClicked((MouseEvent event) -> {
+                    ObservableList<Barang> barangList = selectAll();
+                    tf_nama.setItems(barangList);
+                });
+
+                HBox nama = new HBox(lb_nama, tf_nama);
+                Label lb_stok = new Label("Stok Barang");
+                lb_stok.getStyleClass().add("barang");
+                lb_stok.setPrefSize(100, 20);
+                tf_stok = new TextField();
+                tf_stok.setPrefSize(200, 20);
+                TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
+                    String newText = change.getControlNewText();
+                    if (newText.matches("\\d*")) {
+                        return change;
+                    }
+                    return null;
+                });
+                tf_stok.setTextFormatter(textFormatter);
+                tf_stok.setMinWidth(300);
+                tf_stok.getStyleClass().add("ba");
+                HBox stok = new HBox(lb_stok, tf_stok);
+                content.getChildren().addAll(nama, stok);
             }
         }
     }
     void setSubmit(int type) {
         switch (type) {
             case 1 -> {
-                submit.setText("Add Data");
+                submit.setText("Tambah Data");
                 submit.setOnAction(e -> {
                     String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText().trim();
                     String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText().trim();
@@ -254,50 +361,83 @@ public class FromBarang extends ListPaneBarang {
                 });
             }
             case 2 -> {
-                submit.setText("Update Data");
+                submit.setText("Perbarui Data");
                 submit.setOnAction(e -> {
-                    String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText().trim();
-                    String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText().trim();
-                    String stok = ((TextField) ((HBox) content.getChildren().get(2)).getChildren().get(1)).getText().trim();
-                    barangController.update(nama, harga, stok);
-                    if (!nama.isEmpty() || !harga.isEmpty() || !stok.isEmpty()) {
-                        Barang barang = new Barang(nama, harga, stok);
-                        DataProvider dataProvider = new DataProvider();
-                        dataProvider.addBarang(barang);
-                        tf_nama.clear();
-                        tf_harga.clear();
-                        tf_stok.clear();
+                    Barang selectedBarang = ((ComboBox<Barang>) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getValue();
+                    if (selectedBarang != null) {
+                        String nama = selectedBarang.getNama();
+                        String harga = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText().trim();
+                        
+                        if (!harga.isEmpty()) {
+                            try {
+                                barangController.update(nama, harga);
+                                selectedBarang.setHarga(harga);
+                                tf_harga.clear();
+                                tf_nama.clear();
+                                loadData();
+                            } catch (Exception ex) {
+                                System.out.println("Error saat memperbarui data: " + ex.getMessage());
+                            }
+                        } else {
+                            System.out.println("Input harga kosong");
+                        }
+                    } else {
+                        System.out.println("Tidak ada barang yang dipilih");
                     }
-                    tf_nama.setText("");
-                    tf_harga.setText("");
-                    tf_stok.setText("");
-                    loadData();
                 });
             }
+            
             case 3 -> {
-                submit.setText("Delete Data");
+                submit.setText("Hapus Data");
                 submit.setOnAction(e -> {
-                    String nama = ((TextField) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getText().trim();
+                    String nama = ((ComboBox<Barang>) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getValue().getNama();
                     Stage stage = new Stage();
-                    Button yes = new Button("Yes");
+                    Button yes = new Button("Ya");
                     yes.setOnAction(e1 -> {
                         barangController.delete(nama);
                         loadData();
                         stage.close();
                     });
-                    Button no = new Button("No");
+                    Button no = new Button("Tidak");
                     no.setOnAction(e1 -> stage.close());
-                    HBox vBox = new HBox(new Label("Are you sure want to delete this data?"), yes, no);
+                    HBox buton = new HBox(50, yes, no);
+                    buton.setAlignment(Pos.CENTER);
+                    VBox vBox = new VBox(new Label("Apakah Anda ingin Menghapus Barang?"), buton);
                     vBox.setSpacing(10);
                     vBox.setStyle("-fx-padding: 20px");
-                    vBox.setPrefSize(200, 100);
+                    vBox.setPrefSize(300, 100);
                     Scene scene = new Scene(vBox);
                     stage.setScene(scene);
                     stage.setResizable(false);
                     stage.show();
-                    tf_nama.setText("");
                 });
             }
+            case 4 -> {
+                submit.setText("Perbarui Data");
+                submit.setOnAction(e -> {
+                    Barang selectedBarang = ((ComboBox<Barang>) ((HBox) content.getChildren().get(0)).getChildren().get(1)).getValue();
+                    if (selectedBarang != null) {
+                        String nama = selectedBarang.getNama();
+                        String stok = ((TextField) ((HBox) content.getChildren().get(1)).getChildren().get(1)).getText().trim();
+                        if (!stok.isEmpty()) {
+                            try {
+                                int stokBaru = Integer.parseInt(stok);
+                                Barang barang = barangController.getBarangByNama(nama);
+                                if (barang != null) {
+                                    int stokLama = Integer.parseInt(barang.getStok());
+                                    int total = stokLama + stokBaru;
+                                    barangController.updateStok(nama,String.valueOf(total));
+                                    tf_stok.clear();
+                                    loadData();
+                                }
+                            } catch (NumberFormatException ex) {
+                                System.out.println("input berupa angka");
+                            }
+                        }
+                    }
+                });
+            }       
+
         }
     }
     private String cekNamaBarang(String nama) {

@@ -59,14 +59,13 @@ public class BarangController{
     	}
     	return data;
 	}
-	public void update(String nama, String harga, String stok) {
-    	String sql = "UPDATE barang SET harga = ?, stok = ? WHERE nama = ?";
+	public void update(String nama, String harga) {
+    	String sql = "UPDATE barang SET harga = ? WHERE nama = ?";
     	try (Connection conn = DatabaseConnection2.connect();
          	PreparedStatement pstmt = conn.prepareStatement(sql)) {
         	// pstmt.setString(1, nama);
         	pstmt.setString(1, harga);
-        	pstmt.setString(2, stok);
-        	pstmt.setString(3, nama);
+        	pstmt.setString(2, nama);
         	pstmt.executeUpdate();
         	System.out.println("Data berhasil diperbarui.");
     	} catch (SQLException e) {
@@ -104,6 +103,35 @@ public class BarangController{
 			System.out.println(e.getMessage());
 		}
 	}
+    // Pada kelas BarangController
+	public void updateStok(String nama, String stokBaru) {
+		String sql = "UPDATE barang SET stok = ? WHERE nama = ?";
+		try (Connection conn = DatabaseConnection2.connect();
+			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+			pstmt.setString(1, stokBaru);
+			pstmt.setString(2, nama);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+
+public Barang getBarangByNama(String nama) {
+    String sql = "SELECT nama, harga, stok FROM barang WHERE nama = ?";
+    try (Connection conn = DatabaseConnection2.connect();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setString(1, nama);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return new Barang(rs.getString("nama"), rs.getString("harga"), rs.getString("stok"));
+        }
+    } catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+    return null;
+}
+
 
 
 }

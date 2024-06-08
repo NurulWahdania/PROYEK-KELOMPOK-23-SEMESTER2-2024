@@ -57,6 +57,7 @@ public class Karyawan extends KaryawanAbstrak {
         posis.setPadding(new Insets(0, 0, 0, 20));
         TextField bPosis = new TextField();
         bPosis.getStyleClass().add("buton4");
+        // ComboBox<Karyawan> posisiBox = new ComboBox<Karyawan>();
         VBox posisi1 = new VBox(posis, bPosis);
 
         Label tanggal = new Label("Tanggal Masuk");

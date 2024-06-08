@@ -33,6 +33,17 @@ public class Barang extends ListPaneBarang {
         this.harga = new SimpleStringProperty(harga);
         this.stok = new SimpleStringProperty(stok);
     }
+
+    public Barang(String nama, String stok) {
+        this.nama = new SimpleStringProperty(nama);
+        this.stok = new SimpleStringProperty(stok);
+    }
+
+    public Barang(String nama, String harga, Stage stage) {
+        this.nama = new SimpleStringProperty(nama);
+        this.harga = new SimpleStringProperty(harga);
+    }
+
     public Barang(Stage stage) {
         this.stage = stage;
     }
