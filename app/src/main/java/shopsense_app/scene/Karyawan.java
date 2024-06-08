@@ -14,25 +14,25 @@ import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import java.sql.PreparedStatement;
 import javafx.scene.control.Button;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shopsense_app.Data.DatabaseConnection2;
 
 public class Karyawan extends KaryawanAbstrak {
+    private DatePicker datePicker;
+
     public Karyawan(Stage stage) {
         this.stage = stage;
     }
 
-    public Karyawan(){
-
-    }
+    public Karyawan() {}
 
     public Karyawan(String nama, int id, String posisi, String tanggal) {
         this.nama = nama;
@@ -55,10 +55,10 @@ public class Karyawan extends KaryawanAbstrak {
         Label posis = new Label("Posisi");
         posis.getStyleClass().add("karyawan");
         posis.setPadding(new Insets(0, 0, 0, 20));
-        TextField bPosis = new TextField();
-        bPosis.getStyleClass().add("buton4");
-        // ComboBox<Karyawan> posisiBox = new ComboBox<Karyawan>();
-        VBox posisi1 = new VBox(posis, bPosis);
+        ObservableList<String> posisiList = FXCollections.observableArrayList("Manager", "Kasir", "Logistik", "Marketing");
+        ComboBox<String> posisiBox = new ComboBox<>(posisiList);
+        posisiBox.getStyleClass().add("buton4");
+        VBox posisi1 = new VBox(posis, posisiBox);
 
         Label tanggal = new Label("Tanggal Masuk");
         tanggal.getStyleClass().add("karyawan");
@@ -68,54 +68,63 @@ public class Karyawan extends KaryawanAbstrak {
         VBox tanggal1 = new VBox(tanggal, datePicker);
         tanggal1.setPadding(new Insets(10, 0, 0, 20));
 
+        Label errorMessage = new Label();
+        errorMessage.getStyleClass().add("error");
+        errorMessage.setTextFill(Color.RED);
+
         Button add = new Button("Add");
         add.getStyleClass().add("home2");
         add.setPrefSize(80, 0);
         add.setOnAction(e -> {
             String namaKaryawan = bNama.getText().trim();
-            String posisiKaryawan = bPosis.getText().trim();
+            String posisiKaryawan = posisiBox.getValue();
             LocalDate selectedDate = datePicker.getValue();
             String tanggalMasuk = selectedDate != null ? selectedDate.toString() : "";
-            
-            addKaryawan(namaKaryawan, posisiKaryawan, tanggalMasuk);
-            bNama.clear();
-            bPosis.clear();
-            datePicker.setValue(null);
+
+            if (namaKaryawan.isEmpty() || tanggalMasuk.isEmpty()) {
+                errorMessage.setText("Nama dan Tanggal Masuk harus diisi.");
+            } else {
+                addKaryawan(namaKaryawan, posisiKaryawan, tanggalMasuk);
+                bNama.clear();
+                posisiBox.setValue(null);
+                datePicker.setValue(null);
+                errorMessage.setText("");
+            }
         });
 
         Label idKaryawan = new Label("Pilih Id");
         idKaryawan.getStyleClass().add("textid2");
         ComboBox<Karyawan> idBox = new ComboBox<>();
         idBox.getStyleClass().add("textid");
-        idBox.setCellFactory(param -> new ListCell<Karyawan>(){
-        //    @Override
-            public void updateItem (Karyawan item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    setText(item.getId() +" - " + item.getNama());
-                }
-            }
-        });
-        idBox.setButtonCell(new ListCell<Karyawan>(){
-
+        idBox.setCellFactory(param -> new ListCell<Karyawan>() {
+            @Override
             public void updateItem(Karyawan item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    setText(item.getId() +" - " + item.getNama());
+                    setText(item.getId() + " - " + item.getNama());
+                }
+            }
+        });
+        idBox.setButtonCell(new ListCell<Karyawan>() {
+            @Override
+            public void updateItem(Karyawan item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getId() + " - " + item.getNama());
                 }
             }
         });
 
-        idBox.setOnMouseClicked((MouseEvent event)-> {
+        idBox.setOnMouseClicked((MouseEvent event) -> {
             ObservableList<Karyawan> karyawanList = selectAll();
             idBox.setItems(karyawanList);
         });
 
-        Button delet  = new Button("Delete");
+        Button delet = new Button("Delete");
         delet.getStyleClass().add("textid3");
         delet.setPrefSize(80, 0);
         delet.setOnAction(e -> {
@@ -129,14 +138,13 @@ public class Karyawan extends KaryawanAbstrak {
 
         HBox deleteBox = new HBox(delet);
         deleteBox.setAlignment(Pos.CENTER);
-        deleteBox.setAlignment(Pos.CENTER);
 
-        VBox hapus = new VBox(5,idBox, deleteBox);
+        VBox hapus = new VBox(5, idBox, deleteBox);
         hapus.setPadding(new Insets(250, 0, 0, 40));
 
         HBox adBox = new HBox(add);
         adBox.setAlignment(Pos.CENTER);
-        adBox.setPadding(new Insets(20, 0, 0,0));
+        adBox.setPadding(new Insets(20, 0, 0, 0));
         HBox yo = new HBox(hapus);
 
         VBox gabung = new VBox(40, nama1, posisi1);
@@ -145,13 +153,13 @@ public class Karyawan extends KaryawanAbstrak {
         HBox all = new HBox(20, all1);
         all.setPadding(new Insets(20));
 
-        VBox gbb = new VBox(20, all,tanggal1,adBox); 
+        VBox gbb = new VBox(20, all, tanggal1, errorMessage, adBox);
         HBox gbg = new HBox(gbb, yo);
-        gbg.setPadding(new Insets(0,0,0,100));
+        gbg.setPadding(new Insets(0, 0, 0, 100));
 
         Label menu1 = new Label("SHOP SENSE");
         menu1.getStyleClass().add("judulhom");
-        menu1.setPadding(new Insets(0,0,0,15));
+        menu1.setPadding(new Insets(0, 0, 0, 15));
 
         Button keuangan = new Button("Laporan Toko");
         keuangan.getStyleClass().add("buton2");
@@ -200,7 +208,7 @@ public class Karyawan extends KaryawanAbstrak {
         HBox rewc = new HBox(with);
         rewc.setPadding(new Insets(20, 0, 0, 230));
 
-        VBox fungsi = new VBox(home,keuangan, barang, karyawan, tranksaksi, hasil);
+        VBox fungsi = new VBox(home, keuangan, barang, karyawan, tranksaksi, hasil);
         fungsi.setSpacing(40);
         HBox menu2 = new HBox(menu1);
 
@@ -214,20 +222,20 @@ public class Karyawan extends KaryawanAbstrak {
         pane.getStyleClass().add("background2");
         pane.getStylesheets().add(getClass().getResource("/styles/Styles.css").toExternalForm());
 
-        Scene scene = new Scene(pane,1290, 650);
+        Scene scene = new Scene(pane, 1290, 650);
         stage.setScene(scene);
         stage.show();
     }
 
     public void addKaryawan(String nama, String posisi, String tanggal_masuk) {
-        String sql = "INSERT INTO karyawan (nama, 'id karyawan', posisi, 'tanggal masuk') VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO karyawan (nama, posisi, 'tanggal masuk') VALUES (?, ?, ?)";
 
         try (Connection conn = DatabaseConnection2.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, nama);
-            pstmt.setString(3, posisi);
-            pstmt.setString(4, tanggal_masuk);
+            pstmt.setString(2, posisi);
+            pstmt.setString(3, tanggal_masuk);
 
             pstmt.executeUpdate();
             System.out.println("Karyawan added successfully!");
