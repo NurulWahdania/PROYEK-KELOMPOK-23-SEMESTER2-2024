@@ -9,7 +9,8 @@ Nama Anggota :
 
 # Tema yang dipilih : Finance and Budgetin
 
-# Nama Pendamping : Kelvin Leonardo Sianipar
+# Nama Pendamping : 
+## Kelvin Leonardo Sianipar
 
 # Tim Juri :
   1. Abd. Rafiq Anwar
