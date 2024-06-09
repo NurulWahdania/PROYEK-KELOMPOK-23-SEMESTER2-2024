@@ -1,3 +1,2 @@
-## SHOPSENSE
-# sembarang
-Membantu para wirausaha untuk memantau stok barang mereka.
+# SHOPSENSE
+ShopSense adalah aplikasi yang dapat membuat manajemen keuangan toko dengan memantau stok barang dan menghitung jumlah transaksi dengan akurat, dan mencatat keuangan dengan teratur.
