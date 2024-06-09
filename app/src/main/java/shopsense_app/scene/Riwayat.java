@@ -20,19 +20,19 @@ import javafx.scene.control.TableCell;
 import shopsense_app.Data.TranksaksiControler;
 import shopsense_app.fungsiMenu.TransaksiClass;
 
-public class Hasil {
+public class Riwayat {
     Stage stage;
     private TranksaksiControler transaksiDAO = new TranksaksiControler();
     TableView<shopsense_app.fungsiMenu.TransaksiClass> tableView;
+    Label pemasukan;
 
-    public Hasil(Stage stage){
+    public Riwayat(Stage stage){
         this.stage = stage;
     }
 
     public void show(){
         tableView = new TableView<>();
 
-        // Kolom nomor urut
         TableColumn<TransaksiClass, Void> rowNumCol = new TableColumn<>("NO");
         rowNumCol.setCellFactory(new Callback<TableColumn<TransaksiClass, Void>, TableCell<TransaksiClass, Void>>() {
             @Override
@@ -50,7 +50,7 @@ public class Hasil {
                 };
             }
         });
-        rowNumCol.setPrefWidth(50);  // Lebar kolom nomor urut
+        rowNumCol.setPrefWidth(50); 
 
         TableColumn<TransaksiClass, String> namaKaryawanColum = new TableColumn<>("NAMA KARYAWAN");
         namaKaryawanColum.setCellValueFactory(new PropertyValueFactory<>("nama_karyawan"));
@@ -77,7 +77,7 @@ public class Hasil {
         tableView.setMinWidth(800);
         tableView.setMaxHeight(400);
 
-        Label label = new Label("Histori");
+        Label label = new Label("Riwayat");
         label.getStyleClass().add("judul4");
         label.setPadding(new Insets(40, 0, 0, 20));
 
@@ -113,14 +113,14 @@ public class Hasil {
             kasir.show();
         });
 
-        Button hasil = new Button("Histori");
+        Button hasil = new Button("Riwayat");
         hasil.getStyleClass().add("buton2");
         hasil.setOnAction(e -> {
-            Hasil cetak = new Hasil(stage);
+            Riwayat cetak = new Riwayat(stage);
             cetak.show();
         });
 
-        Button home = new Button("Home");
+        Button home = new Button("Beranda");
         home.getStyleClass().add("buton2");
         home.setOnAction(e -> {
             Menuisi pane = new Menuisi(stage);
@@ -145,7 +145,15 @@ public class Hasil {
         HBox view = new HBox(tableView);
         view.setPadding(new Insets(140, 0, 0, -20));
 
-        VBox content = new VBox(label, view);
+        pemasukan = new Label();
+        pemasukan.getStyleClass().add("keuangan");
+        pemasukan.setPadding(new Insets(5,0,0,0));
+        totalPemasukan(data2);
+
+        HBox peHBox = new HBox(pemasukan);
+        peHBox.setPadding(new Insets(10,0,0,20));
+
+        VBox content = new VBox(label, view, peHBox);
         HBox gabung = new HBox(vbox, label, content);
 
         vbox.setSpacing(40);
@@ -158,5 +166,13 @@ public class Hasil {
         Scene scene = new Scene(pane, 1290, 650);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void totalPemasukan (ObservableList<TransaksiClass> data) {
+        double total = 0;
+        for (TransaksiClass tranksaksi : data) {
+            total += (tranksaksi.getHarga());
+        }
+        pemasukan.setText("Total Pemasukan: " + total);
     }
 }

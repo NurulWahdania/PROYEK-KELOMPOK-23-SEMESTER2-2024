@@ -44,7 +44,7 @@ public class FromBarang extends ListPaneBarang {
     }
 
     public VBox getFormPane() {
-        add = new Button("Tambah");
+        add = new Button("Tambah Barang");
         add.getStyleClass().add("barang2");
         add.setMaxHeight(40);
         add.setMinWidth(200);

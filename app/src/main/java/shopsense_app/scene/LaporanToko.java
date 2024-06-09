@@ -94,13 +94,12 @@ public class LaporanToko  {
         pemasukan.getStyleClass().add("keuangan");
         pemasukan.setAlignment(Pos.CENTER);
 
-        Label data1 = new Label("Data karyawan:\t");
+        Label data1 = new Label("Data karyawan\t");
         data1.getStyleClass().add("keuangan");
         data1.setAlignment(Pos.CENTER);
 
         HBox hjudul = new HBox(uang);
         hjudul.setAlignment(Pos.CENTER);
-        // hjudul.setPadding(new Insets(-20,0,0,0));
 
         HBox label = new HBox(100, pemasukan, data1);
         label.setAlignment(Pos.CENTER);
@@ -150,14 +149,14 @@ public class LaporanToko  {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasil = new Button("Histori");
+        Button hasil = new Button("Riwayat");
         hasil.getStyleClass().add("buton2");
         hasil.setOnAction(e -> {
-            Hasil cetak = new Hasil(stage);
+            Riwayat cetak = new Riwayat(stage);
             cetak.show();
         });
 
-        Button home = new Button("Home");
+        Button home = new Button("Beranda");
         home.getStyleClass().add("buton2");
         home.setOnAction(e -> {
             Menuisi pane = new Menuisi(stage);
@@ -206,7 +205,7 @@ public class LaporanToko  {
 
     private void itemTotal (ObservableList<TransaksiClass> data) {
         int total = data.size();
-        totalItem.setText("Total Tranksaksi = " + total);
+        totalItem.setText("Jumlah Tranksaksi = " + total);
     }
 
     private void jumlahKaryawan (ObservableList<Karyawan> data) {

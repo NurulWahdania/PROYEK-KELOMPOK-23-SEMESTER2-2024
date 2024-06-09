@@ -148,7 +148,7 @@ public class Tranksaksi {
             }
         });
 
-        Button delet = new Button("DELETE");
+        Button delet = new Button("HAPUS");
         delet.getStyleClass().add("buton8");
         delet.setOnAction(e -> deleteSelectedItem());
 
@@ -223,14 +223,14 @@ public class Tranksaksi {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasill = new Button("Histori");
+        Button hasill = new Button("Riwayat");
         hasill.getStyleClass().add("buton2");
         hasill.setOnAction(e -> {
-            Hasil cetak = new Hasil(stage);
+            Riwayat cetak = new Riwayat(stage);
             cetak.show();
         });
 
-        Button home = new Button("Home");
+        Button home = new Button("Beranda");
         home.getStyleClass().add("buton2");
         home.setOnAction(e -> {
             Menuisi pane = new Menuisi(stage);
@@ -403,6 +403,7 @@ public class Tranksaksi {
             this.stock = new SimpleIntegerProperty(initialStock);
         }
 
+
         public int getStock() {
             return stock.get();
         }
@@ -466,4 +467,5 @@ public class Tranksaksi {
         }
         return data;
     }
+
 }

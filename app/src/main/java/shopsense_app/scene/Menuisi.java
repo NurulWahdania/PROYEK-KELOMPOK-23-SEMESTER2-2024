@@ -67,14 +67,14 @@ public class Menuisi {
             Tranksaksi kasir = new Tranksaksi(stage);
             kasir.show();
         });
-        Button hasil = new Button("Histori");
+        Button hasil = new Button("Riwayat");
         hasil.getStyleClass().add("buton2");
         hasil.setOnAction(e -> {
-            Hasil cetak = new Hasil(stage);
+            Riwayat cetak = new Riwayat(stage);
             cetak.show();
         });
 
-        Button home = new Button("Home");
+        Button home = new Button("Beranda");
         home.getStyleClass().add("buton2");
         home.setOnAction(e -> {
             Menuisi pane = new Menuisi(stage);
