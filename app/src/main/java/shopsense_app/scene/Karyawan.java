@@ -72,8 +72,8 @@ public class Karyawan extends KaryawanAbstrak {
         errorMessage.getStyleClass().add("error");
         errorMessage.setTextFill(Color.RED);
 
-        Button add = new Button("Add");
-        add.getStyleClass().add("home2");
+        Button add = new Button("Tambah Data");
+        add.getStyleClass().add("tambah");
         add.setPrefSize(80, 0);
         add.setOnAction(e -> {
             String namaKaryawan = bNama.getText().trim();
@@ -124,7 +124,7 @@ public class Karyawan extends KaryawanAbstrak {
             idBox.setItems(karyawanList);
         });
 
-        Button delet = new Button("Delete");
+        Button delet = new Button("Hapus Data");
         delet.getStyleClass().add("textid3");
         delet.setPrefSize(80, 0);
         delet.setOnAction(e -> {
