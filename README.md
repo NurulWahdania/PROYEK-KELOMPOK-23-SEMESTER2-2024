@@ -49,7 +49,26 @@ Aplikasi ini tidak hanya untuk mengelola stok dan pencatatan tranksaksi tetapi k
 https://github.com/NurulWahdania/PROYEK-KELOMPOK-23-SEMESTER2-2024/edit/main/README.md
 
 # Screenshots
+Scene Awal
+![Gambar WhatsApp 2024-06-09 pukul 12 18 45_f79dbc6b](https://github.com/NurulWahdania/PROYEK-KELOMPOK-23-SEMESTER2-2024/assets/143946709/353bffd1-3e2f-4b86-bd12-4e6ed1701dda)
 
+Menu Utama
+![Gambar WhatsApp 2024-06-09 pukul 12 19 15_d5be8f4f](https://github.com/NurulWahdania/PROYEK-KELOMPOK-23-SEMESTER2-2024/assets/143946709/1eea8c61-5eba-47db-951d-5adb1e5053d2)
+
+Laporan Toko
+![Gambar WhatsApp 2024-06-09 pukul 12 19 46_617abfe0](https://github.com/NurulWahdania/PROYEK-KELOMPOK-23-SEMESTER2-2024/assets/143946709/90c852a7-45da-46ae-9407-bef7d406c85f)
+
+Scene Barang
+![Gambar WhatsApp 2024-06-09 pukul 12 20 12_7f67f271](https://github.com/NurulWahdania/PROYEK-KELOMPOK-23-SEMESTER2-2024/assets/143946709/0e20a771-d072-4777-aaa0-7cc65d3cedab)
+
+Scene Karyawan
+![Gambar WhatsApp 2024-06-09 pukul 12 20 42_d68eb5cb](https://github.com/NurulWahdania/PROYEK-KELOMPOK-23-SEMESTER2-2024/assets/143946709/28d8c4e6-b4c3-4089-80b4-c90b8c03b380)
+
+Scene Transaksi
+![Gambar WhatsApp 2024-06-09 pukul 12 21 16_41c54e5e](https://github.com/NurulWahdania/PROYEK-KELOMPOK-23-SEMESTER2-2024/assets/143946709/a3925120-bfef-4ac2-9e75-aa6020cde749)
+
+Scene Riwayat
+![Gambar WhatsApp 2024-06-09 pukul 12 21 44_983e39d8](https://github.com/NurulWahdania/PROYEK-KELOMPOK-23-SEMESTER2-2024/assets/143946709/866b9c6b-55da-461a-8f86-4423e86fce2b)
 
 
 # Pengujian Pada Aplikasi
